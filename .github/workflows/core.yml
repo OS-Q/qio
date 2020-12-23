@@ -27,18 +27,5 @@ jobs:
         run: |
           tox -e lint
       - name: Integration Tests
-        env:
-          TEST_EMAIL_LOGIN: ${{ secrets.TEST_EMAIL_LOGIN }}
-          TEST_EMAIL_PASSWORD: ${{ secrets.TEST_EMAIL_PASSWORD }}
-          TEST_EMAIL_IMAP_SERVER: ${{ secrets.TEST_EMAIL_IMAP_SERVER }}
         run: |
           tox -e testcore
-
-      - name: Slack Notification
-        uses: homoluctus/slatify@master
-        if: failure()
-        with:
-          type: ${{ job.status }}
-          job_name: '*Core*'
-          commit: true
-          url: ${{ secrets.SLACK_BUILD_WEBHOOK }}
