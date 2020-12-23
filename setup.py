@@ -1,20 +1,7 @@
-# Copyright (c) 2014-present PlatformIO <contact@platformio.org>
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#    http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
+import sys
 from setuptools import find_packages, setup
 
-from platformio import (
+from qio import (
     __author__,
     __description__,
     __email__,
@@ -23,44 +10,50 @@ from platformio import (
     __url__,
     __version__,
 )
-from platformio.compat import PY2, WINDOWS
+
+PY36 = sys.version_info < (3, 7)
 
 
-install_requires = [
-    "bottle<0.13",
-    "click>=5,<8%s" % (",!=7.1,!=7.1.1" if WINDOWS else ""),
+minimal_requirements = [
+    "bottle==0.12.*",
+    "click%s" % ("==8.0.4" if PY36 else ">=8.0.4,<9"),
     "colorama",
-    "pyserial>=3,<4,!=3.3",
-    "requests>=2.4.0,<3",
-    "semantic_version>=2.8.1,<3",
-    "tabulate>=0.8.3,<1",
-    "pyelftools>=0.25,<1",
-    "marshmallow%s" % (">=2,<3" if PY2 else ">=2"),
+    "marshmallow==%s" % ("3.14.1" if PY36 else "3.*"),
+    "pyelftools>=0.27,<1",
+    "pyserial==3.5.*",  # keep in sync "device/monitor/terminal.py"
+    "requests==2.*",
+    "requests==%s" % ("2.27.1" if PY36 else "2.*"),
+    "semantic_version==2.10.*",
+    "tabulate==%s" % ("0.8.10" if PY36 else "0.9.*"),
 ]
 
+home_requirements = [
+    "aiofiles==%s" % ("0.8.0" if PY36 else "22.1.*"),
+    "ajsonrpc==1.*",
+    "starlette==%s" % ("0.19.1" if PY36 else "0.23.*"),
+    "uvicorn==%s" % ("0.16.0" if PY36 else "0.20.*"),
+    "wsproto==%s" % ("1.0.0" if PY36 else "1.2.*"),
+]
 
 setup(
     name=__title__,
     version=__version__,
     description=__description__,
-    long_description=open("README.rst").read(),
+    long_description=open("qio.rst").read(),
     author=__author__,
     author_email=__email__,
     url=__url__,
     license=__license__,
-    python_requires=", ".join(
-        [">=2.7", "!=3.0.*", "!=3.1.*", "!=3.2.*", "!=3.3.*", "!=3.4.*"]
-    ),
-    install_requires=install_requires,
-    packages=find_packages(exclude=["tests.*", "tests"]) + ["scripts"],
+    install_requires=minimal_requirements + home_requirements,
+    python_requires=">=3.6",
+    packages=find_packages(include=["platformio", "platformio.*"]),
     package_data={
         "platformio": [
-            "ide/tpls/*/.*.tpl",
-            "ide/tpls/*/*.tpl",
-            "ide/tpls/*/*/*.tpl",
-            "ide/tpls/*/.*/*.tpl",
-        ],
-        "scripts": ["99-platformio-udev.rules"],
+            "assets/system/99-platformio-udev.rules",
+            "assets/templates/ide-projects/*/*.tpl",
+            "assets/templates/ide-projects/*/.*.tpl",  # include hidden files
+            "assets/templates/ide-projects/*/.*/*.tpl",  # include hidden folders
+        ]
     },
     entry_points={
         "console_scripts": [
@@ -77,7 +70,6 @@ setup(
         "Operating System :: OS Independent",
         "Programming Language :: C",
         "Programming Language :: Python",
-        "Programming Language :: Python :: 2",
         "Programming Language :: Python :: 3",
         "Topic :: Software Development",
         "Topic :: Software Development :: Build Tools",

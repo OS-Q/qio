@@ -1,0 +1,130 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  # build:
+  #   name: tox
+  #   strategy:
+  #     fail-fast: false
+  #     matrix:
+  #       os: [ubuntu-16.04, windows-latest, macos-latest]
+
+  #   runs-on: ${{ matrix.os }}
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #       with:
+  #         submodules: "recursive"
+  #         fetch-depth: 1
+
+  #     - name: Set up Python
+  #       uses: actions/setup-python@v2
+  #       with:
+  #         python-version: 3.7
+
+  #     - name: Install dependencies
+  #       run: |
+  #         python -m pip install --upgrade pip
+  #         pip install tox
+
+  #     - name: Run on Linux
+  #       working-directory: qio
+  #       if: startsWith(matrix.os, 'ubuntu')
+  #       env:
+  #         PIO_INSTALL_DEVPLATFORMS_OWNERNAMES: "platformio"
+  #         PIO_INSTALL_DEVPLATFORMS_IGNORE: "ststm8,intel_mcs51"
+  #       run: |
+  #         sudo apt-get install libc6-i386
+  #         sudo apt clean
+  #         docker rmi $(docker image ls -aq)
+  #         df -h
+  #         tox -e lint
+
+  #     - name: Run on macOS
+  #       working-directory: qio
+  #       if: startsWith(matrix.os, 'macos')
+  #       env:
+  #         PIO_INSTALL_DEVPLATFORMS_OWNERNAMES: "platformio"
+  #         PIO_INSTALL_DEVPLATFORMS_IGNORE: "ststm8,lattice_ice40,gd32v"
+  #       run: |
+  #         df -h
+  #         tox -e testcore
+
+  #     - name: Run on Windows
+  #       working-directory: qio
+  #       if: startsWith(matrix.os, 'windows')
+  #       env:
+  #         PLATFORMIO_CORE_DIR: C:/pio
+  #         PLATFORMIO_WORKSPACE_DIR: C:/pio-workspace/$PROJECT_HASH
+  #         PIO_INSTALL_DEVPLATFORMS_OWNERNAMES: "platformio"
+  #         PIO_INSTALL_DEVPLATFORMS_IGNORE: "ststm8,intel_mcs51"
+  #       run: |
+  #         tox -e testexamples
+
+  platform:
+    name: platform
+    strategy:
+      fail-fast: false
+      matrix:
+        platform:
+          # - "211"
+          # - "511"
+          # - "111"
+        # template:
+        #   - "A"
+        #   - "B"
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.9
+
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -U https://github.com/OS-Q/QIO/archive/master.zip
+          pio platform install https://github.com/OS-Q/P${{ matrix.platform }}/archive/master.zip
+
+      # - name: Checkout
+      #   uses: actions/checkout@v2
+      #   with:
+      #     repository: OS-Q/T${{ matrix.platform }}${{ matrix.template }}
+      #     token: ${{ secrets.OSQ_REPO_TOKEN }}
+      #     path: T${{ matrix.platform }}${{ matrix.template }}
+
+      # - name: Build
+      #   working-directory: T${{ matrix.platform }}${{ matrix.template }}
+      #   if: success()
+      #   id: build
+      #   run: |
+      #     pio run -d .
+      #     echo "::set-output name=status::success"
+
+  # build_fail:
+  #   needs:
+  #     - templete
+  #   name: aftermath
+  #   if: failure()
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
+  #       with:
+  #         submodules: "recursive"
+
+  #     - name: notification
+  #       uses: Qful/mqtt-action@master
+  #       with:
+  #         protocol: mqtt
+  #         host: ${{secrets.MQTT_SERVER}}
+  #         port: 1883
+  #         username: ${{secrets.MQTT_USERNAME}}
+  #         password: ${{secrets.MQTT_PASSWORD}}
+  #         topic: ${{github.repository}}/${{github.workflow}}
+  #         message: "build fail"

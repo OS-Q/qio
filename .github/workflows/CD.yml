@@ -1,0 +1,271 @@
+name: CD
+
+on:
+  push:
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        platforms:
+          # - "511"
+          # - "52"
+          # - "21"
+        templates:
+          # - "A"
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: "recursive"
+          fetch-depth: 1
+
+      - name: Python 3.9
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.9
+
+      - name: Checkout platforms
+        uses: actions/checkout@v2
+        with:
+          repository: OS-Q/P${{ matrix.platforms }}
+          token: ${{ secrets.OSQ_REPO_TOKEN }}
+          path: P${{ matrix.platforms }}
+
+      - name: Checkout templates
+        uses: actions/checkout@v2
+        with:
+          repository: OS-Q/T${{ matrix.platforms }}${{ matrix.templates }}
+          token: ${{ secrets.OSQ_REPO_TOKEN }}
+          path: T${{ matrix.platforms }}${{ matrix.templates }}
+
+      - name: Install platforms
+        if: github.repository == 'OS-Q/QIO'
+        working-directory: P${{ matrix.platforms }}
+        run: |
+          python -m pip install --upgrade pip
+          pip install -U https://github.com/OS-Q/QIO/archive/master.zip
+          qio platform install file://.
+
+      - name: Build
+        working-directory: T${{ matrix.platforms }}${{ matrix.templates }}
+        if: success()
+        id: build
+        run: |
+          pio run -d .
+          echo "::set-output name=status::success"
+
+      # - name: notification
+      #   uses: Qful/mqtt-action@master
+      #   with:
+      #     protocol: mqtt
+      #     host: ${{secrets.MQTT_SERVER}}
+      #     port: 1883
+      #     username: ${{secrets.MQTT_USERNAME}}
+      #     password: ${{secrets.MQTT_PASSWORD}}
+      #     topic: ${{github.repository}}/${{github.workflow}}/${{ matrix.platforms }}/${{ matrix.templates }}
+      #     message: ${{steps.build.outputs.status}}
+
+      - name: delet tag
+        run: |
+          git fetch
+          git tag -d ${GITHUB_REF/refs\/tags\//}
+          git push origin :refs/tags/${GITHUB_REF/refs\/tags\//}
+
+
+  release:
+    needs:
+      - build
+    if: success() && startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    steps:
+      - name: clone
+        uses: actions/checkout@v2
+        with:
+          submodules: "recursive"
+          fetch-depth: 1
+
+      - name: Generate tag
+        id: tag
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          echo "::set-output name=release_tag::release_qio_$(date +"%Y.%m.%d")_${GITHUB_REF/refs\/tags\//}"
+          echo "::set-output name=status::success"
+
+      - name: Package Src
+        id: package
+        run: |
+          echo "QIO software :" >> log.txt
+          echo $(date +"%Y.%m.%d") >> log.txt
+          echo ${GITHUB_REF/refs\/tags\//} >> log.txt
+          echo -e "www.OS-Q.com\n" >> log.txt
+          git log --stat -1 >> log.txt
+          zip -r qio.zip qio scripts setup.py
+          echo "FIRMWARE=$PWD" >> $GITHUB_ENV
+          echo ${GITHUB_REF/refs\/tags\//} >> mail.md
+          echo "::set-output name=status::success"
+
+      - name: Upload Firmware
+        if: steps.package.outputs.status == 'success' && env.UPLOAD_BUILD
+        uses: actions/upload-artifact@v2
+        with:
+          name: M03
+          path: ${{ env.FIRMWARE }}/qio.zip
+
+      - name: Upload Release
+        id: upload-release
+        uses: Qful/release-action@master
+        if: steps.tag.outputs.status == 'success' && !cancelled()
+        env:
+          GITHUB_TOKEN: ${{ secrets.OSQ_REPO_TOKEN }}
+        with:
+          tag_name: ${{ steps.tag.outputs.release_tag }}
+          files: |
+            ${{ env.FIRMWARE }}/qio.zip
+            ${{ env.FIRMWARE }}/log.txt
+
+      - name: Setup OSS
+        uses: Qful/ossutil-action@master
+        with:
+          endpoint: ${{ secrets.OSS_ENDPOINT }}
+          access-key-id: ${{ secrets.OSS_ACCESS_KEY_ID }}
+          access-key-secret: ${{ secrets.OSS_ACCESS_KEY_SECRET }}
+
+      - name: Upload To OSS
+        id: OSS
+        run: |
+          ossutil cp ${{ env.FIRMWARE }}/qio.zip ${{ secrets.OSS_S_BUCKET }} -rf
+          echo "::set-output name=status::success"
+
+
+  release_fail:
+    needs:
+      - release
+    if: failure() && startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: "recursive"
+
+      - name: notification
+        uses: Qful/mqtt-action@master
+        with:
+          protocol: mqtt
+          host: ${{secrets.MQTT_SERVER}}
+          port: 1883
+          username: ${{secrets.MQTT_USERNAME}}
+          password: ${{secrets.MQTT_PASSWORD}}
+          topic: ${{github.repository}}/${{github.workflow}}/${GITHUB_REF/refs\/tags\//}
+          message: "release fail"
+
+      - name: Delet mark tag
+        run: |
+          git fetch
+          git tag -d ${GITHUB_REF/refs\/tags\//}
+          git push origin :refs/tags/${GITHUB_REF/refs\/tags\//}
+
+
+  check_release:
+    needs:
+      - release
+    if: success()
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        platforms:
+          - "51"
+          # - "52"
+          # - "21"
+        templates:
+          - "A"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: "recursive"
+
+      - name: Python 3.9
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.9
+
+      - name: Checkout platforms
+        uses: actions/checkout@v2
+        with:
+          repository: OS-Q/P${{ matrix.platforms }}
+          token: ${{ secrets.OSQ_REPO_TOKEN }}
+          path: P${{ matrix.platforms }}
+
+      - name: Checkout templates
+        uses: actions/checkout@v2
+        with:
+          repository: OS-Q/T${{ matrix.platforms }}${{ matrix.templates }}
+          token: ${{ secrets.OSQ_REPO_TOKEN }}
+          path: T${{ matrix.platforms }}${{ matrix.templates }}
+
+      - name: Install
+        working-directory: P${{ matrix.platforms }}
+        run: |
+          python -m pip install --upgrade pip
+          pip install -U https://github.com/OS-Q/QIO/releases/latest/download/qio.zip
+          qio platform install file://.
+
+      - name: Build
+        working-directory: T${{ matrix.platforms }}${{ matrix.templates }}
+        if: success()
+        id: build
+        run: |
+          pio run -d .
+          echo "::set-output name=status::success"
+
+      - name: notification
+        uses: Qful/mqtt-action@master
+        with:
+          protocol: mqtt
+          host: ${{secrets.MQTT_SERVER}}
+          port: 1883
+          username: ${{secrets.MQTT_USERNAME}}
+          password: ${{secrets.MQTT_PASSWORD}}
+          topic: ${{github.repository}}/${{github.workflow}}/${{ matrix.platforms }}/${{ matrix.templates }}
+          message: ${{steps.build.outputs.status}}
+
+      - name: delet tag
+        run: |
+          git fetch
+          git tag -d ${GITHUB_REF/refs\/tags\//}
+          git push origin :refs/tags/${GITHUB_REF/refs\/tags\//}
+
+  ckeck_fail:
+    needs:
+      - check_release
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: "recursive"
+
+      - name: notification
+        uses: Qful/mqtt-action@master
+        with:
+          protocol: mqtt
+          host: ${{secrets.MQTT_SERVER}}
+          port: 1883
+          username: ${{secrets.MQTT_USERNAME}}
+          password: ${{secrets.MQTT_PASSWORD}}
+          topic: ${{github.repository}}/${{github.workflow}}
+          message: "check release fail"
+
+      - name: delet tag
+        if: success()
+        run: |
+          git fetch
+          git tag -d ${{ steps.tag.outputs.release_tag }}
+          git push origin :refs/tags/${{ steps.tag.outputs.release_tag }}
