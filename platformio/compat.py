@@ -62,13 +62,14 @@ def ci_strings_are_equal(a, b):
 
 
 def ensure_python3(raise_exception=True):
-    if not raise_exception or not PY2:
-        return not PY2
+    compatible = sys.version_info >= (3, 6)
+    if not raise_exception or compatible:
+        return compatible
     raise UserSideException(
-        "Python 3.5 or later is required for this operation. \n"
-        "Please install the latest Python 3 and reinstall PlatformIO Core using "
-        "installation script:\n"
-        "https://docs.platformio.org/page/core/installation.html"
+        "Python 3.6 or later is required for this operation. \n"
+        "Please check a migration guide:\n"
+        "https://docs.platformio.org/en/latest/core/migration.html"
+        "#drop-support-for-python-2-and-3-5"
     )
 
 
@@ -76,6 +77,12 @@ if PY2:
     import imp
 
     string_types = (str, unicode)
+
+    def create_task(coro, name=None):
+        raise NotImplementedError
+
+    def get_running_loop():
+        raise NotImplementedError
 
     def is_bytes(x):
         return isinstance(x, (buffer, bytearray))
@@ -127,6 +134,12 @@ if PY2:
 else:
     import importlib.util
     from glob import escape as glob_escape
+
+    if sys.version_info >= (3, 7):
+        from asyncio import create_task, get_running_loop
+    else:
+        from asyncio import ensure_future as create_task
+        from asyncio import get_event_loop as get_running_loop
 
     string_types = (str,)
 
