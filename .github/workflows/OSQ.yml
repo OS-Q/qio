@@ -1,4 +1,4 @@
-name: Core
+name: S03
 
 on: [push, pull_request]
 
