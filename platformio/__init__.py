@@ -1,20 +1,6 @@
-# Copyright (c) 2014-present PlatformIO <contact@platformio.org>
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#    http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
 import sys
 
-VERSION = (5, 1, "1a1")
+VERSION = (5, 1, "1")
 __version__ = ".".join([str(s) for s in VERSION])
 
 __title__ = "platformio"
@@ -24,15 +10,10 @@ __description__ = (
     "Static Code Analyzer and Remote Unit Testing. "
     "Multi-platform and Multi-architecture Build System. "
     "Firmware File Explorer and Memory Inspection. "
-    "IoT, Arduino, CMSIS, ESP-IDF, FreeRTOS, libOpenCM3, mbedOS, Pulp OS, SPL, "
-    "STM32Cube, Zephyr RTOS, ARM, AVR, Espressif (ESP8266/ESP32), FPGA, "
-    "MCS-51 (8051), MSP430, Nordic (nRF51/nRF52), NXP i.MX RT, PIC32, RISC-V, "
-    "STMicroelectronics (STM8/STM32), Teensy"
 )
-__url__ = "https://platformio.org"
-
-__author__ = "PlatformIO Labs"
-__email__ = "contact@piolabs.com"
+__url__ = "https://www.OS-Q.com"
+__author__ = "OS-Q"
+__email__ = "qitas@qitas.cn"
 
 __license__ = "Apache Software License"
 __copyright__ = "Copyright 2014-present PlatformIO Labs"
