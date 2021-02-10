@@ -1,5 +1,3 @@
-imitations under the License.
-
 from os.path import isfile, join
 
 from platformio.commands.ci import cli as cmd_ci
