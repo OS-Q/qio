@@ -25,8 +25,8 @@ BASE_CONFIG = """
 [platformio]
 env_default = base, extra_2
 extra_configs =
-    extra_envs.ini
-    extra_debug.ini
+  extra_envs.ini
+  extra_debug.ini
 
 # global options per [env:*]
 [env]
