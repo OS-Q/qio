@@ -14,7 +14,7 @@
 
 import sys
 
-VERSION = (5, 1, 0)
+VERSION = (5, 1, "1a1")
 __version__ = ".".join([str(s) for s in VERSION])
 
 __title__ = "platformio"
@@ -24,9 +24,10 @@ __description__ = (
     "Static Code Analyzer and Remote Unit Testing. "
     "Multi-platform and Multi-architecture Build System. "
     "Firmware File Explorer and Memory Inspection. "
-    "IoT, Arduino, CMSIS, ESP-IDF, FreeRTOS, libOpenCM3, mbedOS, "
+    "IoT, Arduino, CMSIS, ESP-IDF, FreeRTOS, libOpenCM3, mbedOS, Pulp OS, SPL, "
     "STM32Cube, Zephyr RTOS, ARM, AVR, Espressif (ESP8266/ESP32), FPGA, "
-    "MCS-51 (8051), Nordic (nRF51/nRF52),STM8/STM32, RISC-V "
+    "MCS-51 (8051), MSP430, Nordic (nRF51/nRF52), NXP i.MX RT, PIC32, RISC-V, "
+    "STMicroelectronics (STM8/STM32), Teensy"
 )
 __url__ = "http://www.OS-Q.com"
 
@@ -34,7 +35,7 @@ __author__ = "OS-Q"
 __email__ = "qitas@qitas.cn"
 
 __license__ = "Apache Software License"
-__copyright__ = "Copyright OS-Q"
+__copyright__ = "Copyright 2021 OS-Q"
 
 __accounts_api__ = "https://api.accounts.platformio.org"
 __registry_api__ = [
@@ -57,7 +58,7 @@ __core_packages__ = {
 
 __check_internet_hosts__ = [
     "185.199.110.153",  # Github.com
-    "182.61.61.133",  #
+    "88.198.170.159",  # platformio.org
     "github.com",
     "platformio.org",
 ]
