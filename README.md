@@ -1,7 +1,6 @@
 ﻿# [S03](https://github.com/OS-Q/S03)
 
-[![sites](http://182.61.61.133/link/resources/OSQ.png)](http://www.OS-Q.com)
+[![Build Status](https://github.com/OS-Q/S03/workflows/S03/badge.svg)](https://github.com/OS-Q/S03/actions)
 
-[S03](https://github.com/OS-Q/S03) 源于 [PlatformIO](https://github.com/platformio/platformio-core)
-
+[S03](https://github.com/OS-Q/S03) 用于资源集成编译管理
 ### [Q = (OpenSource & OperatingSystem) ](http://www.OS-Q.com)

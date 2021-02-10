@@ -59,6 +59,7 @@ setup(
         "console_scripts": [
             "platformio = platformio.__main__:main",
             "pio = platformio.__main__:main",
+            "qio = platformio.__main__:main",
             "piodebuggdb = platformio.__main__:debug_gdb_main",
         ]
     },
