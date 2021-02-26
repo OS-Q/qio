@@ -189,33 +189,6 @@ def after_upgrade(ctx):
         else:
             raise exception.UpgradeError("Auto upgrading...")
 
-    # PlatformIO banner
-    click.echo("*" * terminal_width)
-    click.echo("If you like %s, please:" % (click.style("PlatformIO", fg="cyan")))
-    click.echo(
-        "- %s us on Twitter to stay up-to-date "
-        "on the latest project news > %s"
-        % (
-            click.style("follow", fg="cyan"),
-            click.style("https://twitter.com/PlatformIO_Org", fg="cyan"),
-        )
-    )
-    click.echo(
-        "- %s it on GitHub > %s"
-        % (
-            click.style("star", fg="cyan"),
-            click.style("https://github.com/platformio/platformio", fg="cyan"),
-        )
-    )
-    if not getenv("PLATFORMIO_IDE"):
-        click.echo(
-            "- %s PlatformIO IDE for embedded development > %s"
-            % (
-                click.style("try", fg="cyan"),
-                click.style("https://platformio.org/platformio-ide", fg="cyan"),
-            )
-        )
-
     click.echo("*" * terminal_width)
     click.echo("")
 
