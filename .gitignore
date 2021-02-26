@@ -10,3 +10,8 @@ coverage.xml
 .coverage
 htmlcov
 .pytest_cache
+*__pyc*/
+*.pio/
+*.vscode/
+*.html
+*.rst
