@@ -42,7 +42,7 @@ class MissingPackageManifestError(ManifestException):
 class UnknownPackageError(UserSideException):
 
     MESSAGE = (
-        "Could not find the package with '{0}' requirements for your system '%s'"
+        "Could not find '{0}' requirements for your system '%s'"
         % util.get_systype()
     )
 

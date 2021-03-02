@@ -184,7 +184,7 @@ def print_processing_header(env, config, verbose=False):
         if verbose or k in ("platform", "framework"):
             env_dump.append("%s: %s" % (k, ", ".join(v) if isinstance(v, list) else v))
     click.echo(
-        "Processing board %s (%s)"
+        "\nProcessing %s (%s)"
         % (click.style(env, fg="cyan", bold=True), "; ".join(env_dump))
     )
     terminal_width, _ = click.get_terminal_size()

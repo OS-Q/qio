@@ -168,7 +168,7 @@ def completion_install(shell, path):
     path = path or get_completion_install_path(shell)
     install_completion_code(shell, path)
     click.echo(
-        "PlatformIO CLI completion has been installed for %s shell to %s \n"
+        "QIO CLI completion has been installed for %s shell to %s \n"
         "Please restart a current shell session."
         % (click.style(shell, fg="cyan"), click.style(path, fg="blue"))
     )

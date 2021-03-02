@@ -71,7 +71,7 @@ def remove_unnecessary_core_packages(dry_run=False):
     for pkg in pm.get_installed():
         skip_conds = [
             os.path.isfile(os.path.join(pkg.path, ".piokeep")),
-            pkg.metadata.spec.owner != "platformio",
+            # pkg.metadata.spec.owner != "platformio",
             pkg.metadata.name not in best_pkg_versions,
             pkg.metadata.name in best_pkg_versions
             and pkg.metadata.version == best_pkg_versions[pkg.metadata.name],
