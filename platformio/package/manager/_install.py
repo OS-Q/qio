@@ -77,7 +77,7 @@ class PackageManagerInstallMixin(object):
 
         if not silent:
             self.print_message(
-                "Installing %s" % click.style(spec.humanize(), fg="cyan")
+                "Q installing %s" % click.style(spec.humanize(), fg="cyan")
             )
 
         if spec.external:

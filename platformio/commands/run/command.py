@@ -181,10 +181,10 @@ def process_env(
 def print_processing_header(env, config, verbose=False):
     env_dump = []
     for k, v in config.items(env=env):
-        if verbose or k in ("platform", "framework", "board"):
+        if verbose or k in ("platform", "framework"):
             env_dump.append("%s: %s" % (k, ", ".join(v) if isinstance(v, list) else v))
     click.echo(
-        "Processing %s (%s)"
+        "Processing board %s (%s)"
         % (click.style(env, fg="cyan", bold=True), "; ".join(env_dump))
     )
     terminal_width, _ = click.get_terminal_size()

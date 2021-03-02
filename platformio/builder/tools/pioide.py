@@ -167,7 +167,6 @@ def DumpIDEData(env, globalenv):
     data["extra"].update(env.get("IDE_EXTRA_DATA", {}))
 
     env_ = env.Clone()
-    # https://github.com/platformio/platformio-atom-ide/issues/34
     _new_defines = []
     for item in SCons.Defaults.processDefines(env_.get("CPPDEFINES", [])):
         item = item.replace('\\"', '"')
