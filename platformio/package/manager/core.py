@@ -27,7 +27,7 @@ def get_installed_core_packages():
 
 def get_core_package_dir(name, auto_install=True):
     if name not in __core_packages__:
-        raise exception.PlatformioException("Please upgrade PlatformIO Core")
+        raise exception.PlatformioException("Please upgrade Core")
     pm = ToolPackageManager()
     spec = PackageSpec(
         owner="platformio", name=name, requirements=__core_packages__[name]

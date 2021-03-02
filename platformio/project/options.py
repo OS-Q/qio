@@ -107,17 +107,17 @@ ProjectOptions = OrderedDict(
                 ),
                 oldnames=["home_dir"],
                 sysenvvar="PLATFORMIO_CORE_DIR",
-                default=os.path.join(fs.expanduser("~"), ".qitas"),
+                default=os.path.join(fs.expanduser("~"), ".qio"),
             ),
             ConfigPlatformioOption(
                 group="directory",
                 name="globallib_dir",
                 description=(
-                    "A library folder/storage where PlatformIO Library Dependency "
+                    "A library folder/storage where Library Dependency "
                     "Finder (LDF) looks for global libraries"
                 ),
                 sysenvvar="PLATFORMIO_GLOBALLIB_DIR",
-                default=os.path.join("$PROJECT_CORE_DIR", "lib"),
+                default=os.path.join("$PROJECT_CORE_DIR", "libs"),
             ),
             ConfigPlatformioOption(
                 group="directory",
@@ -168,7 +168,7 @@ ProjectOptions = OrderedDict(
                     "external library dependencies"
                 ),
                 sysenvvar="PLATFORMIO_WORKSPACE_DIR",
-                default=os.path.join("$PROJECT_DIR", ".pio"),
+                default=os.path.join("$PROJECT_DIR", ".qio"),
             ),
             ConfigPlatformioOption(
                 group="directory",

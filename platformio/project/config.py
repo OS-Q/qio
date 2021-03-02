@@ -352,7 +352,7 @@ class ProjectConfigDirsMixin(object):
         core_dir = self.get("platformio", "core_dir")
         win_core_dir = None
         if WINDOWS and core_dir == default:
-            win_core_dir = os.path.splitdrive(core_dir)[0] + "\\.qitas"
+            win_core_dir = os.path.splitdrive(core_dir)[0] + "\\.qio"
             if os.path.isdir(win_core_dir):
                 core_dir = win_core_dir
 
