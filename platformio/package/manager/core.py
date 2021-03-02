@@ -155,7 +155,7 @@ def build_contrib_pysite_package(target_dir, with_metadata=True):
                 )
                 if systype.startswith("linux_arm")
                 else systype,
-                description="Extra Python package for PlatformIO Core",
+                description="Extra Python package for QIO Core",
                 keywords=["platformio", "platformio-core"],
                 homepage="https://docs.OS-Q.com/page/core/index.html",
                 repository={
