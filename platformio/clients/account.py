@@ -13,7 +13,7 @@ class AccountError(PlatformioException):
 
 class AccountNotAuthorized(AccountError):
 
-    MESSAGE = "You are not authorized! Please log in to PlatformIO Account."
+    MESSAGE = "You are not authorized! Please log in to OS-Q Account."
 
 
 class AccountAlreadyAuthorized(AccountError):
