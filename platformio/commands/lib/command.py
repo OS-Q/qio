@@ -363,7 +363,7 @@ def lib_search(query, json_output, page, noninteractive, **filters):
             "For more examples and advanced search syntax, please use documentation:"
         )
         click.secho(
-            "https://docs.platformio.org/page/userguide/lib/cmd_search.html\n",
+            "https://docs.OS-Q.com/page/userguide/lib/cmd_search.html\n",
             fg="cyan",
         )
         return

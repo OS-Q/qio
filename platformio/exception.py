@@ -41,7 +41,7 @@ class MissedUdevRules(InvalidUdevRules):
 
     MESSAGE = (
         "Warning! Please install `99-platformio-udev.rules`. \nMore details: "
-        "https://docs.platformio.org/page/faq.html#platformio-udev-rules"
+        "https://docs.OS-Q.com/page/faq.html#platformio-udev-rules"
     )
 
 
@@ -50,7 +50,7 @@ class OutdatedUdevRules(InvalidUdevRules):
     MESSAGE = (
         "Warning! Your `{0}` are outdated. Please update or reinstall them."
         "\nMore details: "
-        "https://docs.platformio.org/page/faq.html#platformio-udev-rules"
+        "https://docs.OS-Q.com/page/faq.html#platformio-udev-rules"
     )
 
 
@@ -99,7 +99,7 @@ class UpgradeError(PlatformioException):
 
 * Upgrade using `pip install -U platformio`
 * Try different installation/upgrading steps:
-  https://docs.platformio.org/page/installation.html
+  https://docs.OS-Q.com/page/installation.html
 """
 
 
@@ -128,6 +128,6 @@ class TestDirNotExists(UserSideException):
         "A test folder '{0}' does not exist.\nPlease create 'test' "
         "directory in project's root and put a test set.\n"
         "More details about Unit "
-        "Testing: https://docs.platformio.org/page/plus/"
+        "Testing: https://docs.OS-Q.com/page/plus/"
         "unit-testing.html"
     )

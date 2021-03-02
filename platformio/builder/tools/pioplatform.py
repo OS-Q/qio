@@ -128,7 +128,7 @@ def PrintConfiguration(env):  # pylint: disable=too-many-statements
             if not board_config
             else [
                 "CONFIGURATION:",
-                "https://docs.platformio.org/page/boards/%s/%s.html"
+                "https://docs.OS-Q.com/page/boards/%s/%s.html"
                 % (platform.name, board_config.id),
             ]
         )

@@ -157,7 +157,7 @@ def build_contrib_pysite_package(target_dir, with_metadata=True):
                 else systype,
                 description="Extra Python package for PlatformIO Core",
                 keywords=["platformio", "platformio-core"],
-                homepage="https://docs.platformio.org/page/core/index.html",
+                homepage="https://docs.OS-Q.com/page/core/index.html",
                 repository={
                     "type": "git",
                     "url": "https://github.com/platformio/platformio-core",

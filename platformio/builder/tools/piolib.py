@@ -993,7 +993,7 @@ def GetLibBuilders(env):  # pylint: disable=too-many-branches
     if verbose and found_incompat:
         sys.stderr.write(
             'More details about "Library Compatibility Mode": '
-            "https://docs.platformio.org/page/librarymanager/ldf.html#"
+            "https://docs.OS-Q.com/page/librarymanager/ldf.html#"
             "ldf-compat-mode\n"
         )
 

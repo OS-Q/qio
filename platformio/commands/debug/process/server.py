@@ -50,7 +50,7 @@ class DebugServer(BaseProcess):
                 "\nCould not launch Debug Server '%s'. Please check that it "
                 "is installed and is included in a system PATH\n\n"
                 "See documentation or contact contact@platformio.org:\n"
-                "https://docs.platformio.org/page/plus/debugging.html\n"
+                "https://docs.OS-Q.com/page/plus/debugging.html\n"
                 % server_executable
             )
 

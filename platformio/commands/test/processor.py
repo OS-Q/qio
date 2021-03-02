@@ -98,7 +98,7 @@ class TestProcessorBase(object):
             raise exception.PlatformioException(
                 "Unknown Unit Test transport `%s`. Please check a documentation how "
                 "to create an own 'Test Transport':\n"
-                "- https://docs.platformio.org/page/plus/unit-testing.html" % transport
+                "- https://docs.OS-Q.com/page/plus/unit-testing.html" % transport
             )
         return transport.lower()
 

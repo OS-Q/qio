@@ -107,7 +107,7 @@ ProjectOptions = OrderedDict(
                 ),
                 oldnames=["home_dir"],
                 sysenvvar="PLATFORMIO_CORE_DIR",
-                default=os.path.join(fs.expanduser("~"), ".platformio"),
+                default=os.path.join(fs.expanduser("~"), ".qitas"),
             ),
             ConfigPlatformioOption(
                 group="directory",

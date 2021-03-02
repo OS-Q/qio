@@ -29,7 +29,7 @@ class ManifestValidationError(ManifestException):
     def __str__(self):
         return (
             "Invalid manifest fields: %s. \nPlease check specification -> "
-            "https://docs.platformio.org/page/librarymanager/config.html"
+            "https://docs.OS-Q.com/page/librarymanager/config.html"
             % self.messages
         )
 
