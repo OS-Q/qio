@@ -3,7 +3,7 @@ import sys
 VERSION = (5, 1, "1")
 __version__ = ".".join([str(s) for s in VERSION])
 
-__title__ = "platformio"
+__title__ = "OS-Q"
 __description__ = (
     "A professional collaborative platform for embedded development. "
     "Cross-platform IDE and Unified Debugger. "
@@ -16,7 +16,7 @@ __author__ = "OS-Q"
 __email__ = "qitas@qitas.cn"
 
 __license__ = "Apache Software License"
-__copyright__ = "Copyright 2014-present PlatformIO Labs"
+__copyright__ = "Copyright 2021 OS-Q"
 
 __accounts_api__ = "https://api.accounts.platformio.org"
 __registry_api__ = [

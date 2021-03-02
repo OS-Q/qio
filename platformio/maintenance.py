@@ -1,17 +1,3 @@
-# Copyright (c) 2014-present PlatformIO <contact@platformio.org>
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#    http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
 from os import getenv
 from os.path import join
 from time import time
@@ -165,7 +151,7 @@ def after_upgrade(ctx):
         click.secho("*" * terminal_width, fg="yellow")
         return
     else:
-        click.secho("Please wait while upgrading PlatformIO...", fg="yellow")
+        click.secho("Please wait while upgrading OS-Q...", fg="yellow")
         try:
             cleanup_content_cache("http")
         except:  # pylint: disable=bare-except
@@ -178,7 +164,7 @@ def after_upgrade(ctx):
         if u.run(ctx):
             app.set_state_item("last_version", __version__)
             click.secho(
-                "PlatformIO has been successfully upgraded to %s!\n" % __version__,
+                "OS-Q has been successfully upgraded to %s!\n" % __version__,
                 fg="green",
             )
             telemetry.send_event(
