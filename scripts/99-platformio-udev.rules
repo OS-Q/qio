@@ -12,14 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#####################################################################################
-#
-# INSTALLATION
-#
-# Please visit > https://docs.platformio.org/en/latest/faq.html#platformio-udev-rules
-#
-#####################################################################################
-
 #
 # Boards
 #
