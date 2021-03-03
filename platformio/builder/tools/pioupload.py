@@ -236,11 +236,11 @@ def CheckUploadSize(_, target, source, env):
     program_size = _calculate_size(output, env.get("SIZEPROGREGEXP"))
     data_size = _calculate_size(output, env.get("SIZEDATAREGEXP"))
 
-    print('Advanced Memory Usage is available via "PlatformIO Home > Project Inspect"')
+    print('Advanced Memory Usage is available via "QIO Home > Project Inspect"')
     if data_max_size and data_size > -1:
-        print("RAM:   %s" % _format_availale_bytes(data_size, data_max_size))
+        print("RAM: %s" % _format_availale_bytes(data_size, data_max_size))
     if program_size > -1:
-        print("Flash: %s" % _format_availale_bytes(program_size, program_max_size))
+        print("ROM: %s" % _format_availale_bytes(program_size, program_max_size))
     if int(ARGUMENTS.get("PIOVERBOSE", 0)):
         print(output)
 
