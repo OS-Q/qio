@@ -4,7 +4,7 @@ import io
 import sys
 import subprocess
 
-MAIN_SCRIPT_URL = "http://182.61.61.133/dl/get-platformio.py"
+MAIN_SCRIPT_URL = "http://182.61.61.133/dl/get-download.py"
 
 def download_with_requests(url, dst):
     import requests
