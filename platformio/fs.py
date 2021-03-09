@@ -98,14 +98,14 @@ def ensure_udev_rules():
     if "linux" not in get_systype():
         return None
     installed_rules = [
-        "/etc/udev/rules.d/99-platformio-udev.rules",
-        "/lib/udev/rules.d/99-platformio-udev.rules",
+        "/etc/udev/rules.d/99-qitas-udev.rules",
+        "/lib/udev/rules.d/99-qitas-udev.rules",
     ]
     if not any(os.path.isfile(p) for p in installed_rules):
         raise exception.MissedUdevRules
 
     origin_path = os.path.realpath(
-        os.path.join(get_source_dir(), "..", "scripts", "99-platformio-udev.rules")
+        os.path.join(get_source_dir(), "..", "scripts", "99-qitas-udev.rules")
     )
     if not os.path.isfile(origin_path):
         return None

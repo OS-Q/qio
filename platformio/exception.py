@@ -40,7 +40,7 @@ class InvalidUdevRules(PlatformioException):
 class MissedUdevRules(InvalidUdevRules):
 
     MESSAGE = (
-        "Warning! Please install `99-platformio-udev.rules`. \nMore details: "
+        "Warning! Please install `99-qitas-udev.rules`. \nMore details: "
         "https://docs.OS-Q.com/page/faq.html#platformio-udev-rules"
     )
 

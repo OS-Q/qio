@@ -53,7 +53,7 @@ setup(
             "ide/tpls/*/*/*.tpl",
             "ide/tpls/*/.*/*.tpl",
         ],
-        "scripts": ["99-platformio-udev.rules"],
+        "scripts": ["99-qitas-udev.rules"],
     },
     entry_points={
         "console_scripts": [
