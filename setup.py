@@ -29,7 +29,7 @@ if not PY2:
 
 home_requirements = [
     "aiofiles==0.6.*",
-    "json-rpc==1.13.*",
+    "ajsonrpc==1.1.*",
     "starlette==0.14.*",
     "uvicorn==0.13.*",
     "wsproto==1.0.*",
@@ -85,7 +85,7 @@ setup(
         "esp32",
         "fpga",
         "firmware",
-        # "continuous-integration",
+        "continuous-integration",
         "cloud-ide",
         "avr",
         "arm",
