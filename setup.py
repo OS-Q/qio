@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-from core import (
+from platformio import (
     __author__,
     __description__,
     __email__,
@@ -9,7 +9,7 @@ from core import (
     __url__,
     __version__,
 )
-from core.compat import PY2, WINDOWS
+from platformio.compat import PY2, WINDOWS
 
 
 minimal_requirements = [
@@ -57,10 +57,10 @@ setup(
     },
     entry_points={
         "console_scripts": [
-            "platformio = core.__main__:main",
-            "pio = core.__main__:main",
-            "qio = core.__main__:main",
-            "piodebuggdb = core.__main__:debug_gdb_main",
+            "platformio = platformio.__main__:main",
+            "pio = platformio.__main__:main",
+            "qio = platformio.__main__:main",
+            "piodebuggdb = platformio.__main__:debug_gdb_main",
         ]
     },
     classifiers=[
