@@ -9,7 +9,7 @@ class ProjectError(PlatformioException):
 class NotPlatformIOProjectError(ProjectError, UserSideException):
 
     MESSAGE = (
-        "Not a PlatformIO project. `platformio.ini` file has not been "
+        "Not a PlatformIO project. `platform111.ini` file has not been "
         "found in current working directory ({0}). To initialize new project "
         "please use `platformio project init` command"
     )
@@ -27,7 +27,7 @@ class UndefinedEnvPlatformError(ProjectError, UserSideException):
 
 class ProjectEnvsNotAvailableError(ProjectError, UserSideException):
 
-    MESSAGE = "Please setup environments in `platformio.ini` file"
+    MESSAGE = "Please setup environments in `platform111.ini` file"
 
 
 class UnknownEnvNamesError(ProjectError, UserSideException):

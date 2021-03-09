@@ -66,7 +66,7 @@ def get_board_hwids(project_dir, platform, board):
 def load_monitor_filter(path, options=None):
     name = os.path.basename(path)
     name = name[: name.find(".")]
-    module = load_python_module("platformio.commands.device.filters.%s" % name, path)
+    module = load_python_module("core.commands.device.filters.%s" % name, path)
     for cls in get_object_members(module).values():
         if (
             not inspect.isclass(cls)

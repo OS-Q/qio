@@ -1,4 +1,4 @@
-# Copyright (c) 2014-present PlatformIO <contact@platformio.org>
+# Copyright (c) 2014-present PlatformIO <contact@platform111.org>
 # Copyright 2020 MongoDB Inc.
 #
 # Permission is hereby granted, free of charge, to any person obtaining

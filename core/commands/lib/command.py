@@ -53,7 +53,7 @@ def get_project_global_lib_dir():
     multiple=True,
     help=(
         "Manage libraries for the specific project build environments "
-        "declared in `platformio.ini`"
+        "declared in `platform111.ini`"
     ),
 )
 @click.pass_context
@@ -95,7 +95,7 @@ def cli(ctx, **options):
             continue
         with fs.cd(storage_dir):
             config = ProjectConfig.get_instance(
-                os.path.join(storage_dir, "platformio.ini")
+                os.path.join(storage_dir, "platform111.ini")
             )
             config.validate(options["environment"], silent=in_silence)
             libdeps_dir = config.get_optional_dir("libdeps")
@@ -115,7 +115,7 @@ def cli(ctx, **options):
     "--save/--no-save",
     is_flag=True,
     default=True,
-    help="Save installed libraries into the `platformio.ini` dependency list"
+    help="Save installed libraries into the `platform111.ini` dependency list"
     " (enabled by default)",
 )
 @click.option("-s", "--silent", is_flag=True, help="Suppress progress reporting")
@@ -188,7 +188,7 @@ def _save_deps(ctx, pkgs, action="add"):
     "--save/--no-save",
     is_flag=True,
     default=True,
-    help="Remove libraries from the `platformio.ini` dependency list and save changes"
+    help="Remove libraries from the `platform111.ini` dependency list and save changes"
     " (enabled by default)",
 )
 @click.option("-s", "--silent", is_flag=True, help="Suppress progress reporting")
@@ -532,7 +532,7 @@ def lib_stats(json_output):
             (
                 click.style(item["name"], fg="cyan"),
                 time.strftime("%c", util.parse_date(item["date"])),
-                "https://platformio.org/lib/show/%s/%s"
+                "https://platform111.org/lib/show/%s/%s"
                 % (item["id"], quote(item["name"])),
             )
             for item in result.get(key, [])
@@ -548,7 +548,7 @@ def lib_stats(json_output):
         tabular_data = [
             (
                 click.style(name, fg="cyan"),
-                "https://platformio.org/lib/search?query=" + quote("keyword:%s" % name),
+                "https://platform111.org/lib/search?query=" + quote("keyword:%s" % name),
             )
             for name in result.get(key, [])
         ]
@@ -569,7 +569,7 @@ def lib_stats(json_output):
         tabular_data = [
             (
                 click.style(item["name"], fg="cyan"),
-                "https://platformio.org/lib/show/%s/%s"
+                "https://platform111.org/lib/show/%s/%s"
                 % (item["id"], quote(item["name"])),
             )
             for item in result.get(key, [])

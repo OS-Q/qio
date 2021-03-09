@@ -18,7 +18,7 @@ class PlatformFactory(object):
     @staticmethod
     def load_module(name, path):
         try:
-            return load_python_module("platformio.platform.%s" % name, path)
+            return load_python_module("core.platform.%s" % name, path)
         except ImportError:
             raise UnknownPlatform(name)
 

@@ -57,7 +57,7 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <None Include="platformio.ini" />
+    <None Include="platform111.ini" />
   </ItemGroup>
   % for file in src_files:
   <ItemGroup>

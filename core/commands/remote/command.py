@@ -298,7 +298,7 @@ def device_list(agents, json_output):
 @click.option(
     "-e",
     "--environment",
-    help="Load configuration from `platformio.ini` and specified environment",
+    help="Load configuration from `platform111.ini` and specified environment",
 )
 @click.option(
     "--sock",

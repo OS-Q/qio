@@ -62,7 +62,7 @@ def ignore_deps_by_specs(deps, specs):
 
 
 def save_project_libdeps(project_dir, specs, environments=None, action="add"):
-    config = ProjectConfig.get_instance(os.path.join(project_dir, "platformio.ini"))
+    config = ProjectConfig.get_instance(os.path.join(project_dir, "platform111.ini"))
     config.validate(environments)
     for env in config.envs():
         if environments and env not in environments:

@@ -126,8 +126,8 @@ class RemoteAgentService(RemoteClientBase):
     ):
         assert options and "project_id" in options
         project_dir = join(self.working_dir, "projects", options["project_id"])
-        origin_pio_ini = join(project_dir, "platformio.ini")
-        back_pio_ini = join(project_dir, "platformio.ini.bak")
+        origin_pio_ini = join(project_dir, "platform111.ini")
+        back_pio_ini = join(project_dir, "platform111.ini.bak")
 
         # remove insecure project options
         try:
