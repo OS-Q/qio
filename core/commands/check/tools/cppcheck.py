@@ -3,10 +3,10 @@ import os
 
 import click
 
-from platformio import proc
-from platformio.commands.check.defect import DefectItem
-from platformio.commands.check.tools.base import CheckToolBase
-from platformio.package.manager.core import get_core_package_dir
+from core import proc
+from core.commands.check.defect import DefectItem
+from core.commands.check.tools.base import CheckToolBase
+from core.package.manager.core import get_core_package_dir
 
 
 class CppcheckCheckTool(CheckToolBase):

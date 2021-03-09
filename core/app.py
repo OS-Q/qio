@@ -9,10 +9,10 @@ import socket
 import uuid
 from os.path import dirname, isdir, isfile, join, realpath
 
-from platformio import __version__, exception, fs, proc
-from platformio.compat import WINDOWS, dump_json_to_unicode, hashlib_encode_data
-from platformio.package.lockfile import LockFile
-from platformio.project.helpers import get_default_projects_dir, get_project_core_dir
+from core import __version__, exception, fs, proc
+from core.compat import WINDOWS, dump_json_to_unicode, hashlib_encode_data
+from core.package.lockfile import LockFile
+from core.project.helpers import get_default_projects_dir, get_project_core_dir
 
 
 def projects_dir_validate(projects_dir):
@@ -237,7 +237,7 @@ def is_disabled_progressbar():
 
 def get_cid():
     # pylint: disable=import-outside-toplevel
-    from platformio.clients.http import fetch_remote_content
+    from core.clients.http import fetch_remote_content
 
     cid = get_state_item("cid")
     if cid:

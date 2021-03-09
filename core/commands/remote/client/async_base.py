@@ -2,7 +2,7 @@
 import click
 from twisted.spread import pb  # pylint: disable=import-error
 
-from platformio.commands.remote.client.base import RemoteClientBase
+from core.commands.remote.client.base import RemoteClientBase
 
 
 class AsyncClientBase(RemoteClientBase):

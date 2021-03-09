@@ -1,7 +1,7 @@
-from platformio import __registry_api__, fs
-from platformio.clients.account import AccountClient
-from platformio.clients.http import HTTPClient, HTTPClientError
-from platformio.package.meta import PackageType
+from core import __registry_api__, fs
+from core.clients.account import AccountClient
+from core.clients.http import HTTPClient, HTTPClientError
+from core.package.meta import PackageType
 
 # pylint: disable=too-many-arguments
 

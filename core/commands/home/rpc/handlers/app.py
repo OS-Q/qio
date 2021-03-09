@@ -3,8 +3,8 @@ from __future__ import absolute_import
 
 from os.path import join
 
-from platformio import __version__, app, fs, util
-from platformio.project.helpers import get_project_core_dir, is_platformio_project
+from core import __version__, app, fs, util
+from core.project.helpers import get_project_core_dir, is_platformio_project
 
 
 class AppRPC:

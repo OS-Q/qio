@@ -15,11 +15,11 @@ from SCons.Script import DefaultEnvironment  # pylint: disable=import-error
 from SCons.Script import Import  # pylint: disable=import-error
 from SCons.Script import Variables  # pylint: disable=import-error
 
-from platformio import compat, fs
-from platformio.compat import dump_json_to_unicode
-from platformio.platform.base import PlatformBase
-from platformio.proc import get_pythonexe_path
-from platformio.project.helpers import get_project_dir
+from core import compat, fs
+from core.compat import dump_json_to_unicode
+from core.platform.base import PlatformBase
+from core.proc import get_pythonexe_path
+from core.project.helpers import get_project_dir
 
 AllowSubstExceptions(NameError)
 

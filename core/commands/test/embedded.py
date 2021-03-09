@@ -4,9 +4,9 @@ from time import sleep
 import click
 import serial
 
-from platformio import exception, util
-from platformio.commands.test.processor import TestProcessorBase
-from platformio.platform.factory import PlatformFactory
+from core import exception, util
+from core.commands.test.processor import TestProcessorBase
+from core.platform.factory import PlatformFactory
 
 
 class EmbeddedTestProcessor(TestProcessorBase):

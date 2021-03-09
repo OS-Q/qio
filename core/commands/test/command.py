@@ -9,10 +9,10 @@ from time import time
 import click
 from tabulate import tabulate
 
-from platformio import app, exception, fs, util
-from platformio.commands.test.embedded import EmbeddedTestProcessor
-from platformio.commands.test.native import NativeTestProcessor
-from platformio.project.config import ProjectConfig
+from core import app, exception, fs, util
+from core.commands.test.embedded import EmbeddedTestProcessor
+from core.commands.test.native import NativeTestProcessor
+from core.project.config import ProjectConfig
 
 
 @click.command("test", short_help="Unit testing")

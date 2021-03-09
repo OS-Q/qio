@@ -6,11 +6,11 @@ from os.path import isdir, isfile, join
 from twisted.internet import defer  # pylint: disable=import-error
 from twisted.internet import reactor  # pylint: disable=import-error
 
-from platformio import fs, util
-from platformio.commands.debug.exception import DebugInvalidOptionsError
-from platformio.commands.debug.helpers import escape_gdbmi_stream, is_gdbmi_mode
-from platformio.commands.debug.process.base import BaseProcess
-from platformio.proc import where_is_program
+from core import fs, util
+from core.commands.debug.exception import DebugInvalidOptionsError
+from core.commands.debug.helpers import escape_gdbmi_stream, is_gdbmi_mode
+from core.commands.debug.process.base import BaseProcess
+from core.proc import where_is_program
 
 
 class DebugServer(BaseProcess):

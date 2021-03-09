@@ -7,9 +7,9 @@ from os.path import dirname, isdir, isfile, join
 
 from click.testing import CliRunner
 
-from platformio import __version__, exception, fs
-from platformio.compat import WINDOWS, hashlib_encode_data
-from platformio.project.config import ProjectConfig
+from core import __version__, exception, fs
+from core.compat import WINDOWS, hashlib_encode_data
+from core.project.config import ProjectConfig
 
 
 def get_project_dir():
@@ -124,7 +124,7 @@ def compute_project_checksum(config):
 
 def load_project_ide_data(project_dir, env_or_envs):
     # pylint: disable=import-outside-toplevel
-    from platformio.commands.run.command import cli as cmd_run
+    from core.commands.run.command import cli as cmd_run
 
     assert env_or_envs
     envs = env_or_envs

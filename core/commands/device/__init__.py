@@ -1,2 +1,2 @@
 
-from platformio.commands.device.filters.base import DeviceMonitorFilter
+from core.commands.device.filters.base import DeviceMonitorFilter

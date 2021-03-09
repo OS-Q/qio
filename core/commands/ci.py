@@ -5,12 +5,12 @@ from tempfile import mkdtemp
 
 import click
 
-from platformio import app, compat, fs
-from platformio.commands.project import project_init as cmd_project_init
-from platformio.commands.project import validate_boards
-from platformio.commands.run.command import cli as cmd_run
-from platformio.exception import CIBuildEnvsEmpty
-from platformio.project.config import ProjectConfig
+from core import app, compat, fs
+from core.commands.project import project_init as cmd_project_init
+from core.commands.project import validate_boards
+from core.commands.run.command import cli as cmd_run
+from core.exception import CIBuildEnvsEmpty
+from core.project.config import ProjectConfig
 
 
 def validate_path(ctx, param, value):  # pylint: disable=unused-argument

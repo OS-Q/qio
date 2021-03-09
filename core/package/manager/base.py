@@ -5,25 +5,25 @@ from datetime import datetime
 import click
 import semantic_version
 
-from platformio import util
-from platformio.commands import PlatformioCLI
-from platformio.compat import ci_strings_are_equal
-from platformio.package.exception import ManifestException, MissingPackageManifestError
-from platformio.package.lockfile import LockFile
-from platformio.package.manager._download import PackageManagerDownloadMixin
-from platformio.package.manager._install import PackageManagerInstallMixin
-from platformio.package.manager._legacy import PackageManagerLegacyMixin
-from platformio.package.manager._registry import PackageManageRegistryMixin
-from platformio.package.manager._uninstall import PackageManagerUninstallMixin
-from platformio.package.manager._update import PackageManagerUpdateMixin
-from platformio.package.manifest.parser import ManifestParserFactory
-from platformio.package.meta import (
+from core import util
+from core.commands import PlatformioCLI
+from core.compat import ci_strings_are_equal
+from core.package.exception import ManifestException, MissingPackageManifestError
+from core.package.lockfile import LockFile
+from core.package.manager._download import PackageManagerDownloadMixin
+from core.package.manager._install import PackageManagerInstallMixin
+from core.package.manager._legacy import PackageManagerLegacyMixin
+from core.package.manager._registry import PackageManageRegistryMixin
+from core.package.manager._uninstall import PackageManagerUninstallMixin
+from core.package.manager._update import PackageManagerUpdateMixin
+from core.package.manifest.parser import ManifestParserFactory
+from core.package.meta import (
     PackageItem,
     PackageMetaData,
     PackageSpec,
     PackageType,
 )
-from platformio.project.helpers import get_project_cache_dir
+from core.project.helpers import get_project_cache_dir
 
 
 class BasePackageManager(  # pylint: disable=too-many-public-methods

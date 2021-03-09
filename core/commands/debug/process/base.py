@@ -5,10 +5,10 @@ import time
 import click
 from twisted.internet import protocol  # pylint: disable=import-error
 
-from platformio import fs
-from platformio.compat import string_types
-from platformio.proc import get_pythonexe_path
-from platformio.project.helpers import get_project_core_dir
+from core import fs
+from core.compat import string_types
+from core.proc import get_pythonexe_path
+from core.project.helpers import get_project_core_dir
 
 
 class BaseProcess(protocol.ProcessProtocol, object):

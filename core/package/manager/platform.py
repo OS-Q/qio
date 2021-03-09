@@ -1,16 +1,16 @@
 
 import os
 
-from platformio import util
-from platformio.clients.http import HTTPClientError, InternetIsOffline
-from platformio.package.exception import UnknownPackageError
-from platformio.package.manager.base import BasePackageManager
-from platformio.package.manager.core import get_installed_core_packages
-from platformio.package.manager.tool import ToolPackageManager
-from platformio.package.meta import PackageType
-from platformio.platform.exception import IncompatiblePlatform, UnknownBoard
-from platformio.platform.factory import PlatformFactory
-from platformio.project.config import ProjectConfig
+from core import util
+from core.clients.http import HTTPClientError, InternetIsOffline
+from core.package.exception import UnknownPackageError
+from core.package.manager.base import BasePackageManager
+from core.package.manager.core import get_installed_core_packages
+from core.package.manager.tool import ToolPackageManager
+from core.package.meta import PackageType
+from core.platform.exception import IncompatiblePlatform, UnknownBoard
+from core.platform.factory import PlatformFactory
+from core.project.config import ProjectConfig
 
 
 class PlatformPackageManager(BasePackageManager):  # pylint: disable=too-many-ancestors

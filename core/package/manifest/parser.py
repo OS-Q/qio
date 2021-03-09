@@ -6,11 +6,11 @@ import os
 import re
 import tarfile
 
-from platformio import util
-from platformio.clients.http import fetch_remote_content
-from platformio.compat import get_object_members, string_types
-from platformio.package.exception import ManifestParserError, UnknownManifestError
-from platformio.project.helpers import is_platformio_project
+from core import util
+from core.clients.http import fetch_remote_content
+from core.compat import get_object_members, string_types
+from core.package.exception import ManifestParserError, UnknownManifestError
+from core.project.helpers import is_platformio_project
 
 try:
     from urllib.parse import urlparse

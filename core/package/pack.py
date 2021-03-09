@@ -6,13 +6,13 @@ import shutil
 import tarfile
 import tempfile
 
-from platformio import fs
-from platformio.compat import WINDOWS, ensure_python3
-from platformio.package.exception import PackageException, UserSideException
-from platformio.package.manifest.parser import ManifestFileType, ManifestParserFactory
-from platformio.package.manifest.schema import ManifestSchema
-from platformio.package.meta import PackageItem
-from platformio.package.unpack import FileUnpacker
+from core import fs
+from core.compat import WINDOWS, ensure_python3
+from core.package.exception import PackageException, UserSideException
+from core.package.manifest.parser import ManifestFileType, ManifestParserFactory
+from core.package.manifest.schema import ManifestSchema
+from core.package.meta import PackageItem
+from core.package.unpack import FileUnpacker
 
 
 class PackagePacker(object):

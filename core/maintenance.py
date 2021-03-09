@@ -5,24 +5,24 @@ from time import time
 import click
 import semantic_version
 
-from platformio import __version__, app, exception, fs, telemetry
-from platformio.cache import cleanup_content_cache
-from platformio.clients import http
-from platformio.commands import PlatformioCLI
-from platformio.commands.lib.command import CTX_META_STORAGE_DIRS_KEY
-from platformio.commands.lib.command import lib_update as cmd_lib_update
-from platformio.commands.platform import platform_update as cmd_platform_update
-from platformio.commands.system.prune import calculate_unnecessary_system_data
-from platformio.commands.upgrade import get_latest_version
-from platformio.compat import ensure_python3
-from platformio.package.manager.core import update_core_packages
-from platformio.package.manager.library import LibraryPackageManager
-from platformio.package.manager.platform import PlatformPackageManager
-from platformio.package.manager.tool import ToolPackageManager
-from platformio.package.meta import PackageSpec
-from platformio.package.version import pepver_to_semver
-from platformio.platform.factory import PlatformFactory
-from platformio.proc import is_container
+from core import __version__, app, exception, fs, telemetry
+from core.cache import cleanup_content_cache
+from core.clients import http
+from core.commands import PlatformioCLI
+from core.commands.lib.command import CTX_META_STORAGE_DIRS_KEY
+from core.commands.lib.command import lib_update as cmd_lib_update
+from core.commands.platform import platform_update as cmd_platform_update
+from core.commands.system.prune import calculate_unnecessary_system_data
+from core.commands.upgrade import get_latest_version
+from core.compat import ensure_python3
+from core.package.manager.core import update_core_packages
+from core.package.manager.library import LibraryPackageManager
+from core.package.manager.platform import PlatformPackageManager
+from core.package.manager.tool import ToolPackageManager
+from core.package.meta import PackageSpec
+from core.package.version import pepver_to_semver
+from core.platform.factory import PlatformFactory
+from core.proc import is_container
 
 
 def on_platformio_start(ctx, force, caller):

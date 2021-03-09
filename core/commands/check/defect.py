@@ -3,7 +3,7 @@ import os
 
 import click
 
-from platformio.project.helpers import get_project_dir
+from core.project.helpers import get_project_dir
 
 # pylint: disable=too-many-instance-attributes, redefined-builtin
 # pylint: disable=too-many-arguments

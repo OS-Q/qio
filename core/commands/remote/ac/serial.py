@@ -4,7 +4,7 @@ from time import sleep
 from twisted.internet import protocol, reactor  # pylint: disable=import-error
 from twisted.internet.serialport import SerialPort  # pylint: disable=import-error
 
-from platformio.commands.remote.ac.base import AsyncCommandBase
+from core.commands.remote.ac.base import AsyncCommandBase
 
 
 class SerialPortAsyncCmd(protocol.Protocol, AsyncCommandBase):

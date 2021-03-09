@@ -1,7 +1,7 @@
 
 from serial.tools import miniterm
 
-from platformio.project.config import ProjectConfig
+from core.project.config import ProjectConfig
 
 
 class DeviceMonitorFilter(miniterm.Transform):

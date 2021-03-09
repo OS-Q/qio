@@ -7,9 +7,9 @@ from binascii import crc32
 
 import semantic_version
 
-from platformio.compat import get_object_members, hashlib_encode_data, string_types
-from platformio.package.manifest.parser import ManifestFileType
-from platformio.package.version import cast_version_to_semver
+from core.compat import get_object_members, hashlib_encode_data, string_types
+from core.package.manifest.parser import ManifestFileType
+from core.package.version import cast_version_to_semver
 
 try:
     from urllib.parse import urlparse

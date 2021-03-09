@@ -1,12 +1,12 @@
 
 import click
 
-from platformio.cache import cleanup_content_cache
-from platformio.commands.lib.command import CTX_META_STORAGE_DIRS_KEY
-from platformio.commands.lib.command import lib_update as cmd_lib_update
-from platformio.commands.platform import platform_update as cmd_platform_update
-from platformio.package.manager.core import update_core_packages
-from platformio.package.manager.library import LibraryPackageManager
+from core.cache import cleanup_content_cache
+from core.commands.lib.command import CTX_META_STORAGE_DIRS_KEY
+from core.commands.lib.command import lib_update as cmd_lib_update
+from core.commands.platform import platform_update as cmd_platform_update
+from core.package.manager.core import update_core_packages
+from core.package.manager.library import LibraryPackageManager
 
 
 @click.command(

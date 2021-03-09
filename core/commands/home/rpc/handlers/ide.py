@@ -3,7 +3,7 @@ import time
 
 import jsonrpc
 
-from platformio.compat import get_running_loop
+from core.compat import get_running_loop
 
 
 class IDERPC:

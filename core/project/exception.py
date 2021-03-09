@@ -1,5 +1,5 @@
 
-from platformio.exception import PlatformioException, UserSideException
+from core.exception import PlatformioException, UserSideException
 
 
 class ProjectError(PlatformioException):

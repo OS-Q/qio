@@ -6,11 +6,11 @@ from fnmatch import fnmatch
 import click
 from serial.tools import miniterm
 
-from platformio import exception, fs, util
-from platformio.commands.device import helpers as device_helpers
-from platformio.compat import dump_json_to_unicode
-from platformio.platform.factory import PlatformFactory
-from platformio.project.exception import NotPlatformIOProjectError
+from core import exception, fs, util
+from core.commands.device import helpers as device_helpers
+from core.compat import dump_json_to_unicode
+from core.platform.factory import PlatformFactory
+from core.project.exception import NotPlatformIOProjectError
 
 
 @click.group(short_help="Device manager & serial/socket monitor")

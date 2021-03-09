@@ -3,7 +3,7 @@ import json
 
 import click
 
-from platformio.commands.remote.client.base import RemoteClientBase
+from core.commands.remote.client.base import RemoteClientBase
 
 
 class DeviceListClient(RemoteClientBase):

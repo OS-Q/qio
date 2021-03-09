@@ -1,6 +1,6 @@
 
-from platformio import util
-from platformio.exception import PlatformioException, UserSideException
+from core import util
+from core.exception import PlatformioException, UserSideException
 
 
 class PackageException(PlatformioException):

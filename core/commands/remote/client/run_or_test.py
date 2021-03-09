@@ -7,11 +7,11 @@ from io import BytesIO
 
 from twisted.spread import pb  # pylint: disable=import-error
 
-from platformio import fs
-from platformio.commands.remote.client.async_base import AsyncClientBase
-from platformio.commands.remote.projectsync import PROJECT_SYNC_STAGE, ProjectSync
-from platformio.compat import hashlib_encode_data
-from platformio.project.config import ProjectConfig
+from core import fs
+from core.commands.remote.client.async_base import AsyncClientBase
+from core.commands.remote.projectsync import PROJECT_SYNC_STAGE, ProjectSync
+from core.compat import hashlib_encode_data
+from core.project.config import ProjectConfig
 
 
 class RunOrTestClient(AsyncClientBase):

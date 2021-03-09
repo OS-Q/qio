@@ -5,9 +5,9 @@ import sys
 
 import bottle
 
-from platformio import fs, util
-from platformio.proc import where_is_program
-from platformio.project.helpers import load_project_ide_data
+from core import fs, util
+from core.proc import where_is_program
+from core.project.helpers import load_project_ide_data
 
 
 class ProjectGenerator(object):

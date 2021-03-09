@@ -1,8 +1,8 @@
 
-from platformio import exception
-from platformio.commands.check.tools.clangtidy import ClangtidyCheckTool
-from platformio.commands.check.tools.cppcheck import CppcheckCheckTool
-from platformio.commands.check.tools.pvsstudio import PvsStudioCheckTool
+from core import exception
+from core.commands.check.tools.clangtidy import ClangtidyCheckTool
+from core.commands.check.tools.cppcheck import CppcheckCheckTool
+from core.commands.check.tools.pvsstudio import PvsStudioCheckTool
 
 
 class CheckToolFactory(object):

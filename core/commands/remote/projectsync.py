@@ -6,7 +6,7 @@ from os.path import getmtime, getsize, isdir, isfile, join
 
 from twisted.python import constants  # pylint: disable=import-error
 
-from platformio.compat import hashlib_encode_data
+from core.compat import hashlib_encode_data
 
 
 class PROJECT_SYNC_STAGE(constants.Flags):

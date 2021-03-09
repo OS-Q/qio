@@ -10,9 +10,9 @@ import click
 import jsonrpc
 from starlette.concurrency import run_in_threadpool
 
-from platformio import __main__, __version__, fs, proc
-from platformio.commands.home import helpers
-from platformio.compat import get_locale_encoding, is_bytes
+from core import __main__, __version__, fs, proc
+from core.commands.home import helpers
+from core.compat import get_locale_encoding, is_bytes
 
 try:
     from thread import get_ident as thread_get_ident

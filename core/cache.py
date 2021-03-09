@@ -3,10 +3,10 @@ import hashlib
 import os
 from time import time
 
-from platformio import app, fs
-from platformio.compat import hashlib_encode_data
-from platformio.package.lockfile import LockFile
-from platformio.project.helpers import get_project_cache_dir
+from core import app, fs
+from core.compat import hashlib_encode_data
+from core.package.lockfile import LockFile
+from core.project.helpers import get_project_cache_dir
 
 
 class ContentCache(object):

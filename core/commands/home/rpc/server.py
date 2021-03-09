@@ -6,8 +6,8 @@ import click
 import jsonrpc
 from starlette.endpoints import WebSocketEndpoint
 
-from platformio.compat import create_task, get_running_loop, is_bytes
-from platformio.proc import force_exit
+from core.compat import create_task, get_running_loop, is_bytes
+from core.proc import force_exit
 
 
 class JSONRPCServerFactoryBase:

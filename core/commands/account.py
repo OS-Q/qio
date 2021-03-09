@@ -7,7 +7,7 @@ import re
 import click
 from tabulate import tabulate
 
-from platformio.clients.account import AccountClient, AccountNotAuthorized
+from core.clients.account import AccountClient, AccountNotAuthorized
 
 
 @click.group("account", short_help="Manage OS-Q account")

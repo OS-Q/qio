@@ -6,12 +6,12 @@ import subprocess
 import sys
 from datetime import date
 
-from platformio import __core_packages__, exception, fs, util
-from platformio.compat import PY2
-from platformio.package.exception import UnknownPackageError
-from platformio.package.manager.tool import ToolPackageManager
-from platformio.package.meta import PackageItem, PackageSpec
-from platformio.proc import get_pythonexe_path
+from core import __core_packages__, exception, fs, util
+from core.compat import PY2
+from core.package.exception import UnknownPackageError
+from core.package.manager.tool import ToolPackageManager
+from core.package.meta import PackageItem, PackageSpec
+from core.proc import get_pythonexe_path
 
 
 def get_installed_core_packages():

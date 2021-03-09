@@ -6,11 +6,11 @@ from zipfile import ZipFile
 
 import click
 
-from platformio import VERSION, __version__, app, exception
-from platformio.clients.http import fetch_remote_content
-from platformio.compat import WINDOWS
-from platformio.proc import exec_command, get_pythonexe_path
-from platformio.project.helpers import get_project_cache_dir
+from core import VERSION, __version__, app, exception
+from core.clients.http import fetch_remote_content
+from core.compat import WINDOWS
+from core.proc import exec_command, get_pythonexe_path
+from core.project.helpers import get_project_cache_dir
 
 
 @click.command("upgrade", short_help="Upgrade PlatformIO to the latest version")

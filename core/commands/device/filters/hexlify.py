@@ -1,7 +1,7 @@
 
 import serial
 
-from platformio.commands.device import DeviceMonitorFilter
+from core.commands.device import DeviceMonitorFilter
 
 
 class Hexlify(DeviceMonitorFilter):

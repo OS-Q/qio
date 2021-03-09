@@ -1,5 +1,5 @@
 
-from platformio.exception import PlatformioException
+from core.exception import PlatformioException
 
 
 class PlatformException(PlatformioException):

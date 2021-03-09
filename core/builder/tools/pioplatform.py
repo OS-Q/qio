@@ -6,13 +6,13 @@ import sys
 from SCons.Script import ARGUMENTS  # pylint: disable=import-error
 from SCons.Script import COMMAND_LINE_TARGETS  # pylint: disable=import-error
 
-from platformio import fs, util
-from platformio.compat import WINDOWS
-from platformio.package.meta import PackageItem
-from platformio.package.version import get_original_version
-from platformio.platform.exception import UnknownBoard
-from platformio.platform.factory import PlatformFactory
-from platformio.project.config import ProjectOptions
+from core import fs, util
+from core.compat import WINDOWS
+from core.package.meta import PackageItem
+from core.package.version import get_original_version
+from core.platform.exception import UnknownBoard
+from core.platform.factory import PlatformFactory
+from core.project.config import ProjectOptions
 
 # pylint: disable=too-many-branches, too-many-locals
 

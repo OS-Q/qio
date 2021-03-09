@@ -4,10 +4,10 @@ import os
 
 from serial.tools import miniterm
 
-from platformio import fs
-from platformio.commands.device import DeviceMonitorFilter
-from platformio.compat import get_object_members, load_python_module
-from platformio.project.config import ProjectConfig
+from core import fs
+from core.commands.device import DeviceMonitorFilter
+from core.compat import get_object_members, load_python_module
+from core.project.config import ProjectConfig
 
 
 def apply_project_monitor_options(cli_options, project_options):

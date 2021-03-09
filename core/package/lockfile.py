@@ -2,7 +2,7 @@
 import os
 from time import sleep, time
 
-from platformio.exception import PlatformioException
+from core.exception import PlatformioException
 
 LOCKFILE_TIMEOUT = 3600  # in seconds, 1 hour
 LOCKFILE_DELAY = 0.2

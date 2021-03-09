@@ -6,8 +6,8 @@ from zipfile import ZipFile
 
 import click
 
-from platformio import fs
-from platformio.package.exception import PackageException
+from core import fs
+from core.package.exception import PackageException
 
 
 class ExtractArchiveItemError(PackageException):

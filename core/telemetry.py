@@ -12,11 +12,11 @@ from traceback import format_exc
 import click
 import requests
 
-from platformio import __version__, app, exception, util
-from platformio.commands import PlatformioCLI
-from platformio.compat import hashlib_encode_data, string_types
-from platformio.proc import is_ci, is_container
-from platformio.project.helpers import is_platformio_project
+from core import __version__, app, exception, util
+from core.commands import PlatformioCLI
+from core.compat import hashlib_encode_data, string_types
+from core.proc import is_ci, is_container
+from core.project.helpers import is_platformio_project
 
 try:
     import queue

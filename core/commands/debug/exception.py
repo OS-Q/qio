@@ -1,4 +1,4 @@
-from platformio.exception import PlatformioException, UserSideException
+from core.exception import PlatformioException, UserSideException
 
 
 class DebugError(PlatformioException):

@@ -1,5 +1,5 @@
 
-from platformio.commands.remote.client.async_base import AsyncClientBase
+from core.commands.remote.client.async_base import AsyncClientBase
 
 
 class UpdateCoreClient(AsyncClientBase):

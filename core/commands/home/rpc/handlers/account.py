@@ -1,7 +1,7 @@
 
 import jsonrpc
 
-from platformio.clients.account import AccountClient
+from core.clients.account import AccountClient
 
 
 class AccountRPC:

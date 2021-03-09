@@ -6,9 +6,9 @@ import socket
 import requests.adapters
 from requests.packages.urllib3.util.retry import Retry  # pylint:disable=import-error
 
-from platformio import __check_internet_hosts__, __default_requests_timeout__, app, util
-from platformio.cache import ContentCache
-from platformio.exception import PlatformioException, UserSideException
+from core import __check_internet_hosts__, __default_requests_timeout__, app, util
+from core.cache import ContentCache
+from core.exception import PlatformioException, UserSideException
 
 try:
     from urllib.parse import urljoin

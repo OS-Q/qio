@@ -12,9 +12,9 @@ from SCons.Script import DefaultEnvironment  # pylint: disable=import-error
 from SCons.Script import Export  # pylint: disable=import-error
 from SCons.Script import SConscript  # pylint: disable=import-error
 
-from platformio import __version__, fs
-from platformio.compat import MACOS, string_types
-from platformio.package.version import pepver_to_semver
+from core import __version__, fs
+from core.compat import MACOS, string_types
+from core.package.version import pepver_to_semver
 
 SRC_HEADER_EXT = ["h", "hpp"]
 SRC_ASM_EXT = ["S", "spp", "SPP", "sx", "s", "asm", "ASM"]

@@ -2,14 +2,14 @@ import os
 
 import click
 
-from platformio.cache import cleanup_content_cache
-from platformio.commands.boards import print_boards
-from platformio.compat import dump_json_to_unicode
-from platformio.package.manager.platform import PlatformPackageManager
-from platformio.package.meta import PackageItem, PackageSpec
-from platformio.package.version import get_original_version
-from platformio.platform.exception import UnknownPlatform
-from platformio.platform.factory import PlatformFactory
+from core.cache import cleanup_content_cache
+from core.commands.boards import print_boards
+from core.compat import dump_json_to_unicode
+from core.package.manager.platform import PlatformPackageManager
+from core.package.meta import PackageItem, PackageSpec
+from core.package.version import get_original_version
+from core.platform.exception import UnknownPlatform
+from core.platform.factory import PlatformFactory
 
 
 @click.group(short_help="Platform manager")

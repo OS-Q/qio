@@ -7,13 +7,13 @@ from hashlib import sha1
 from io import BytesIO
 from os.path import isfile
 
-from platformio import fs, util
-from platformio.commands import PlatformioCLI
-from platformio.commands.debug.exception import DebugInvalidOptionsError
-from platformio.commands.run.command import cli as cmd_run
-from platformio.compat import is_bytes
-from platformio.project.config import ProjectConfig
-from platformio.project.options import ProjectOptions
+from core import fs, util
+from core.commands import PlatformioCLI
+from core.commands.debug.exception import DebugInvalidOptionsError
+from core.commands.run.command import cli as cmd_run
+from core.compat import is_bytes
+from core.project.config import ProjectConfig
+from core.project.options import ProjectOptions
 
 
 class GDBMIConsoleStream(BytesIO):  # pylint: disable=too-few-public-methods

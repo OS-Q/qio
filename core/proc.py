@@ -5,8 +5,8 @@ import sys
 from contextlib import contextmanager
 from threading import Thread
 
-from platformio import exception
-from platformio.compat import (
+from core import exception
+from core.compat import (
     PY2,
     WINDOWS,
     get_filesystem_encoding,

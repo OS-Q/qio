@@ -4,8 +4,8 @@ from os.path import isdir, isfile, join
 
 import click
 
-from platformio import fs
-from platformio.project.helpers import compute_project_checksum, get_project_dir
+from core import fs
+from core.project.helpers import compute_project_checksum, get_project_dir
 
 
 def handle_legacy_libdeps(project_dir, config):

@@ -4,9 +4,9 @@ import shutil
 
 import click
 
-from platformio import fs
-from platformio.package.exception import UnknownPackageError
-from platformio.package.meta import PackageSpec
+from core import fs
+from core.package.exception import UnknownPackageError
+from core.package.meta import PackageSpec
 
 
 class PackageManagerUninstallMixin(object):

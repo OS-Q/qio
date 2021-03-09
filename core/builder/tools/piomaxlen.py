@@ -7,7 +7,7 @@ import re
 from SCons.Platform import TempFileMunge  # pylint: disable=import-error
 from SCons.Subst import quote_spaces  # pylint: disable=import-error
 
-from platformio.compat import WINDOWS, hashlib_encode_data
+from core.compat import WINDOWS, hashlib_encode_data
 
 # There are the next limits depending on a platform:
 # - Windows = 8192

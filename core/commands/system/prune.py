@@ -5,10 +5,10 @@ from operator import itemgetter
 import click
 from tabulate import tabulate
 
-from platformio import fs
-from platformio.package.manager.core import remove_unnecessary_core_packages
-from platformio.package.manager.platform import remove_unnecessary_platform_packages
-from platformio.project.helpers import get_project_cache_dir
+from core import fs
+from core.package.manager.core import remove_unnecessary_core_packages
+from core.package.manager.platform import remove_unnecessary_platform_packages
+from core.project.helpers import get_project_cache_dir
 
 
 def prune_cached_data(force=False, dry_run=False, silent=False):

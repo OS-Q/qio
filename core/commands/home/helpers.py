@@ -4,9 +4,9 @@ import socket
 import requests
 from starlette.concurrency import run_in_threadpool
 
-from platformio import util
-from platformio.compat import WINDOWS
-from platformio.proc import where_is_program
+from core import util
+from core.compat import WINDOWS
+from core.proc import where_is_program
 
 
 class AsyncSession(requests.Session):

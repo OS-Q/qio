@@ -2,9 +2,9 @@
 import json
 import time
 
-from platformio.cache import ContentCache
-from platformio.commands.home.rpc.handlers.os import OSRPC
-from platformio.compat import create_task
+from core.cache import ContentCache
+from core.commands.home.rpc.handlers.os import OSRPC
+from core.compat import create_task
 
 
 class MiscRPC:

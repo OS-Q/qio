@@ -13,15 +13,15 @@ from twisted.internet import reactor  # pylint: disable=import-error
 from twisted.internet import stdio  # pylint: disable=import-error
 from twisted.internet import task  # pylint: disable=import-error
 
-from platformio import fs, proc, telemetry, util
-from platformio.cache import ContentCache
-from platformio.commands.debug import helpers
-from platformio.commands.debug.exception import DebugInvalidOptionsError
-from platformio.commands.debug.initcfgs import get_gdb_init_config
-from platformio.commands.debug.process.base import BaseProcess
-from platformio.commands.debug.process.server import DebugServer
-from platformio.compat import hashlib_encode_data, is_bytes
-from platformio.project.helpers import get_project_cache_dir
+from core import fs, proc, telemetry, util
+from core.cache import ContentCache
+from core.commands.debug import helpers
+from core.commands.debug.exception import DebugInvalidOptionsError
+from core.commands.debug.initcfgs import get_gdb_init_config
+from core.commands.debug.process.base import BaseProcess
+from core.commands.debug.process.server import DebugServer
+from core.compat import hashlib_encode_data, is_bytes
+from core.project.helpers import get_project_cache_dir
 
 
 class GDBClient(BaseProcess):  # pylint: disable=too-many-instance-attributes

@@ -8,8 +8,8 @@
 % import os
 % import re
 %
-% from platformio.compat import WINDOWS
-% from platformio.project.helpers import (load_project_ide_data)
+% from core.compat import WINDOWS
+% from core.project.helpers import (load_project_ide_data)
 %
 % def _normalize_path(path):
 %   if project_dir in path:

@@ -3,7 +3,7 @@ import os
 
 from twisted.internet import protocol, reactor  # pylint: disable=import-error
 
-from platformio.commands.remote.ac.base import AsyncCommandBase
+from core.commands.remote.ac.base import AsyncCommandBase
 
 
 class ProcessAsyncCmd(protocol.ProcessProtocol, AsyncCommandBase):

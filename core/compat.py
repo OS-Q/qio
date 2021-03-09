@@ -9,7 +9,7 @@ import os
 import re
 import sys
 
-from platformio.exception import UserSideException
+from core.exception import UserSideException
 
 PY2 = sys.version_info[0] == 2
 CYGWIN = sys.platform.startswith("cygwin")

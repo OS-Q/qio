@@ -4,8 +4,8 @@ import re
 import subprocess
 import sys
 
-from platformio import proc
-from platformio.package.exception import (
+from core import proc
+from core.package.exception import (
     PackageException,
     PlatformioException,
     UserSideException,

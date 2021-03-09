@@ -2,11 +2,11 @@
 import os
 import re
 
-from platformio import fs
-from platformio.compat import load_python_module
-from platformio.package.meta import PackageItem
-from platformio.platform.base import PlatformBase
-from platformio.platform.exception import UnknownPlatform
+from core import fs
+from core.compat import load_python_module
+from core.package.meta import PackageItem
+from core.platform.base import PlatformBase
+from core.platform.exception import UnknownPlatform
 
 
 class PlatformFactory(object):
@@ -34,7 +34,7 @@ class PlatformFactory(object):
         elif os.path.isdir(pkg_or_spec):
             platform_dir = pkg_or_spec
         else:
-            from platformio.package.manager.platform import PlatformPackageManager
+            from core.package.manager.platform import PlatformPackageManager
 
             pkg = PlatformPackageManager().get_package(pkg_or_spec)
             if not pkg:

@@ -11,18 +11,18 @@ from starlette.routing import Mount, Route, WebSocketRoute
 from starlette.staticfiles import StaticFiles
 from starlette.status import HTTP_403_FORBIDDEN
 
-from platformio.commands.home.rpc.handlers.account import AccountRPC
-from platformio.commands.home.rpc.handlers.app import AppRPC
-from platformio.commands.home.rpc.handlers.ide import IDERPC
-from platformio.commands.home.rpc.handlers.misc import MiscRPC
-from platformio.commands.home.rpc.handlers.os import OSRPC
-from platformio.commands.home.rpc.handlers.piocore import PIOCoreRPC
-from platformio.commands.home.rpc.handlers.project import ProjectRPC
-from platformio.commands.home.rpc.server import WebSocketJSONRPCServerFactory
-from platformio.compat import get_running_loop
-from platformio.exception import PlatformioException
-from platformio.package.manager.core import get_core_package_dir
-from platformio.proc import force_exit
+from core.commands.home.rpc.handlers.account import AccountRPC
+from core.commands.home.rpc.handlers.app import AppRPC
+from core.commands.home.rpc.handlers.ide import IDERPC
+from core.commands.home.rpc.handlers.misc import MiscRPC
+from core.commands.home.rpc.handlers.os import OSRPC
+from core.commands.home.rpc.handlers.piocore import PIOCoreRPC
+from core.commands.home.rpc.handlers.project import ProjectRPC
+from core.commands.home.rpc.server import WebSocketJSONRPCServerFactory
+from core.compat import get_running_loop
+from core.exception import PlatformioException
+from core.package.manager.core import get_core_package_dir
+from core.proc import force_exit
 
 
 class ShutdownMiddleware:

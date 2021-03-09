@@ -1,8 +1,8 @@
 import click
 from tabulate import tabulate
 
-from platformio import app
-from platformio.compat import string_types
+from core import app
+from core.compat import string_types
 
 
 def format_value(raw):

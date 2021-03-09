@@ -1,7 +1,7 @@
 
-from platformio.package.manager.base import BasePackageManager
-from platformio.package.meta import PackageType
-from platformio.project.config import ProjectConfig
+from core.package.manager.base import BasePackageManager
+from core.package.meta import PackageType
+from core.project.config import ProjectConfig
 
 
 class ToolPackageManager(BasePackageManager):  # pylint: disable=too-many-ancestors

@@ -2,13 +2,13 @@
 import json
 import os
 
-from platformio.package.exception import (
+from core.package.exception import (
     MissingPackageManifestError,
     UnknownPackageError,
 )
-from platformio.package.manager.base import BasePackageManager
-from platformio.package.meta import PackageItem, PackageSpec, PackageType
-from platformio.project.helpers import get_project_global_lib_dir
+from core.package.manager.base import BasePackageManager
+from core.package.meta import PackageItem, PackageSpec, PackageType
+from core.project.helpers import get_project_global_lib_dir
 
 
 class LibraryPackageManager(BasePackageManager):  # pylint: disable=too-many-ancestors
@@ -74,7 +74,7 @@ class LibraryPackageManager(BasePackageManager):  # pylint: disable=too-many-anc
             )
         except UnknownPackageError as e:
             # pylint: disable=import-outside-toplevel
-            from platformio.commands.lib.helpers import is_builtin_lib
+            from core.commands.lib.helpers import is_builtin_lib
 
             spec = self.ensure_spec(spec)
             if is_builtin_lib(spec.name):

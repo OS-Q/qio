@@ -6,7 +6,7 @@ from collections import OrderedDict
 
 import click
 
-from platformio import fs
+from core import fs
 
 
 class ConfigOption(object):  # pylint: disable=too-many-instance-attributes

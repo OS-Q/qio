@@ -9,10 +9,10 @@ from functools import cmp_to_key
 
 import click
 
-from platformio import __default_requests_timeout__, fs, util
-from platformio.cache import ContentCache
-from platformio.clients.http import ensure_internet_on
-from platformio.commands.home import helpers
+from core import __default_requests_timeout__, fs, util
+from core.cache import ContentCache
+from core.clients.http import ensure_internet_on
+from core.commands.home import helpers
 
 
 class OSRPC:

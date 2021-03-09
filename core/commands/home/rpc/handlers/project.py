@@ -7,15 +7,15 @@ import time
 
 import jsonrpc
 
-from platformio import exception, fs
-from platformio.commands.home.rpc.handlers.app import AppRPC
-from platformio.commands.home.rpc.handlers.piocore import PIOCoreRPC
-from platformio.ide.projectgenerator import ProjectGenerator
-from platformio.package.manager.platform import PlatformPackageManager
-from platformio.project.config import ProjectConfig
-from platformio.project.exception import ProjectError
-from platformio.project.helpers import get_project_dir, is_platformio_project
-from platformio.project.options import get_config_options_schema
+from core import exception, fs
+from core.commands.home.rpc.handlers.app import AppRPC
+from core.commands.home.rpc.handlers.piocore import PIOCoreRPC
+from core.ide.projectgenerator import ProjectGenerator
+from core.package.manager.platform import PlatformPackageManager
+from core.project.config import ProjectConfig
+from core.project.exception import ProjectError
+from core.project.helpers import get_project_dir, is_platformio_project
+from core.project.options import get_config_options_schema
 
 
 class ProjectRPC:

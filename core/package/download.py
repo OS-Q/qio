@@ -8,8 +8,8 @@ from time import mktime
 import click
 import requests
 
-from platformio import __default_requests_timeout__, app, fs
-from platformio.package.exception import PackageException
+from core import __default_requests_timeout__, app, fs
+from core.package.exception import PackageException
 
 
 class FileDownloader(object):

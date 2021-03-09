@@ -3,7 +3,7 @@ import io
 import os.path
 from datetime import datetime
 
-from platformio.commands.device import DeviceMonitorFilter
+from core.commands.device import DeviceMonitorFilter
 
 
 class LogToFile(DeviceMonitorFilter):

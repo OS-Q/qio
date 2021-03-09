@@ -7,16 +7,16 @@ import time
 import click
 from tabulate import tabulate
 
-from platformio import exception, fs, util
-from platformio.commands import PlatformioCLI
-from platformio.commands.lib.helpers import get_builtin_libs, save_project_libdeps
-from platformio.compat import dump_json_to_unicode
-from platformio.package.exception import NotGlobalLibDir, UnknownPackageError
-from platformio.package.manager.library import LibraryPackageManager
-from platformio.package.meta import PackageItem, PackageSpec
-from platformio.proc import is_ci
-from platformio.project.config import ProjectConfig
-from platformio.project.helpers import get_project_dir, is_platformio_project
+from core import exception, fs, util
+from core.commands import PlatformioCLI
+from core.commands.lib.helpers import get_builtin_libs, save_project_libdeps
+from core.compat import dump_json_to_unicode
+from core.package.exception import NotGlobalLibDir, UnknownPackageError
+from core.package.manager.library import LibraryPackageManager
+from core.package.meta import PackageItem, PackageSpec
+from core.proc import is_ci
+from core.project.config import ProjectConfig
+from core.project.helpers import get_project_dir, is_platformio_project
 
 try:
     from urllib.parse import quote

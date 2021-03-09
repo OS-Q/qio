@@ -10,12 +10,12 @@ from time import time
 import click
 from tabulate import tabulate
 
-from platformio import app, exception, fs, util
-from platformio.commands.check.defect import DefectItem
-from platformio.commands.check.tools import CheckToolFactory
-from platformio.compat import dump_json_to_unicode
-from platformio.project.config import ProjectConfig
-from platformio.project.helpers import find_project_dir_above, get_project_dir
+from core import app, exception, fs, util
+from core.commands.check.defect import DefectItem
+from core.commands.check.tools import CheckToolFactory
+from core.compat import dump_json_to_unicode
+from core.project.config import ProjectConfig
+from core.project.helpers import find_project_dir_above, get_project_dir
 
 
 @click.command("check", short_help="Static code analysis")

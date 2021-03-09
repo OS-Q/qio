@@ -12,9 +12,9 @@ from time import sleep
 from SCons.Script import ARGUMENTS  # pylint: disable=import-error
 from serial import Serial, SerialException
 
-from platformio import exception, fs, util
-from platformio.compat import WINDOWS
-from platformio.proc import exec_command
+from core import exception, fs, util
+from core.compat import WINDOWS
+from core.proc import exec_command
 
 # pylint: disable=unused-argument
 

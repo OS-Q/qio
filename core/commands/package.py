@@ -4,12 +4,12 @@ from datetime import datetime
 
 import click
 
-from platformio import fs
-from platformio.clients.registry import RegistryClient
-from platformio.compat import ensure_python3
-from platformio.package.meta import PackageSpec, PackageType
-from platformio.package.pack import PackagePacker
-from platformio.package.unpack import FileUnpacker, TARArchiver
+from core import fs
+from core.clients.registry import RegistryClient
+from core.compat import ensure_python3
+from core.package.meta import PackageSpec, PackageType
+from core.package.pack import PackagePacker
+from core.package.unpack import FileUnpacker, TARArchiver
 
 
 def validate_datetime(ctx, param, value):  # pylint: disable=unused-argument

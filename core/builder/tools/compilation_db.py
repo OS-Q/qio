@@ -31,8 +31,8 @@ import os
 
 import SCons
 
-from platformio.builder.tools.platformio import SRC_ASM_EXT, SRC_C_EXT, SRC_CXX_EXT
-from platformio.proc import where_is_program
+from core.builder.tools.platformio import SRC_ASM_EXT, SRC_C_EXT, SRC_CXX_EXT
+from core.proc import where_is_program
 
 # Implements the ability for SCons to emit a compilation database for the MongoDB project. See
 # http://clang.llvm.org/docs/JSONCompilationDatabase.html for details on what a compilation

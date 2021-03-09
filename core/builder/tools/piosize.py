@@ -10,9 +10,9 @@ from os.path import isdir, join, splitdrive
 from elftools.elf.descriptions import describe_sh_flags
 from elftools.elf.elffile import ELFFile
 
-from platformio.compat import dump_json_to_unicode
-from platformio.proc import exec_command
-from platformio.util import get_systype
+from core.compat import dump_json_to_unicode
+from core.proc import exec_command
+from core.util import get_systype
 
 
 def _run_tool(cmd, env, tool_args):

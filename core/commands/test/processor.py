@@ -6,7 +6,7 @@ from string import Template
 
 import click
 
-from platformio import exception
+from core import exception
 
 TRANSPORT_OPTIONS = {
     "arduino": {
@@ -120,7 +120,7 @@ class TestProcessorBase(object):
 
         try:
             # pylint: disable=import-outside-toplevel
-            from platformio.commands.run.command import cli as cmd_run
+            from core.commands.run.command import cli as cmd_run
 
             return self.cmd_ctx.invoke(
                 cmd_run,

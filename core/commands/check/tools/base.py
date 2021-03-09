@@ -4,9 +4,9 @@ from tempfile import NamedTemporaryFile
 
 import click
 
-from platformio import compat, fs, proc
-from platformio.commands.check.defect import DefectItem
-from platformio.project.helpers import load_project_ide_data
+from core import compat, fs, proc
+from core.commands.check.defect import DefectItem
+from core.project.helpers import load_project_ide_data
 
 
 class CheckToolBase(object):  # pylint: disable=too-many-instance-attributes

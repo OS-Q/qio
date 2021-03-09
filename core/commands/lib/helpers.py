@@ -1,17 +1,17 @@
 
 import os
 
-from platformio.compat import ci_strings_are_equal
-from platformio.package.manager.platform import PlatformPackageManager
-from platformio.package.meta import PackageSpec
-from platformio.platform.factory import PlatformFactory
-from platformio.project.config import ProjectConfig
-from platformio.project.exception import InvalidProjectConfError
+from core.compat import ci_strings_are_equal
+from core.package.manager.platform import PlatformPackageManager
+from core.package.meta import PackageSpec
+from core.platform.factory import PlatformFactory
+from core.project.config import ProjectConfig
+from core.project.exception import InvalidProjectConfError
 
 
 def get_builtin_libs(storage_names=None):
     # pylint: disable=import-outside-toplevel
-    from platformio.package.manager.library import LibraryPackageManager
+    from core.package.manager.library import LibraryPackageManager
 
     items = []
     storage_names = storage_names or []

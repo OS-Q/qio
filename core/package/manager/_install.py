@@ -6,11 +6,11 @@ import tempfile
 
 import click
 
-from platformio import app, compat, fs, util
-from platformio.package.exception import PackageException
-from platformio.package.meta import PackageItem
-from platformio.package.unpack import FileUnpacker
-from platformio.package.vcsclient import VCSClientFactory
+from core import app, compat, fs, util
+from core.package.exception import PackageException
+from core.package.meta import PackageItem
+from core.package.unpack import FileUnpacker
+from core.package.vcsclient import VCSClientFactory
 
 
 class PackageManagerInstallMixin(object):

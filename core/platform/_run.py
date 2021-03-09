@@ -6,10 +6,10 @@ import sys
 
 import click
 
-from platformio import app, fs, proc, telemetry
-from platformio.compat import PY2, hashlib_encode_data, is_bytes
-from platformio.package.manager.core import get_core_package_dir
-from platformio.platform.exception import BuildScriptNotFound
+from core import app, fs, proc, telemetry
+from core.compat import PY2, hashlib_encode_data, is_bytes
+from core.package.manager.core import get_core_package_dir
+from core.platform.exception import BuildScriptNotFound
 
 try:
     from urllib.parse import quote

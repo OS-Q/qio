@@ -1,5 +1,5 @@
 
-from platformio.commands.device import DeviceMonitorFilter
+from core.commands.device import DeviceMonitorFilter
 
 
 class SendOnEnter(DeviceMonitorFilter):

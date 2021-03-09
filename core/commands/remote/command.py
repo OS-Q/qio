@@ -10,14 +10,14 @@ from time import sleep
 
 import click
 
-from platformio import fs, proc
-from platformio.commands.device import helpers as device_helpers
-from platformio.commands.device.command import device_monitor as cmd_device_monitor
-from platformio.commands.run.command import cli as cmd_run
-from platformio.commands.test.command import cli as cmd_test
-from platformio.compat import ensure_python3
-from platformio.package.manager.core import inject_contrib_pysite
-from platformio.project.exception import NotPlatformIOProjectError
+from core import fs, proc
+from core.commands.device import helpers as device_helpers
+from core.commands.device.command import device_monitor as cmd_device_monitor
+from core.commands.run.command import cli as cmd_run
+from core.commands.test.command import cli as cmd_test
+from core.compat import ensure_python3
+from core.package.manager.core import inject_contrib_pysite
+from core.project.exception import NotPlatformIOProjectError
 
 
 @click.group("remote", short_help="Remote development")
@@ -44,14 +44,14 @@ def remote_agent():
     type=click.Path(file_okay=False, dir_okay=True, writable=True, resolve_path=True),
 )
 def remote_agent_start(name, share, working_dir):
-    from platformio.commands.remote.client.agent_service import RemoteAgentService
+    from core.commands.remote.client.agent_service import RemoteAgentService
 
     RemoteAgentService(name, share, working_dir).connect()
 
 
 @remote_agent.command("list", short_help="List active agents")
 def remote_agent_list():
-    from platformio.commands.remote.client.agent_list import AgentListClient
+    from core.commands.remote.client.agent_list import AgentListClient
 
     AgentListClient().connect()
 
@@ -68,7 +68,7 @@ def remote_agent_list():
 )
 @click.pass_obj
 def remote_update(agents, only_check, dry_run):
-    from platformio.commands.remote.client.update_core import UpdateCoreClient
+    from core.commands.remote.client.update_core import UpdateCoreClient
 
     UpdateCoreClient("update", agents, dict(only_check=only_check or dry_run)).connect()
 
@@ -104,7 +104,7 @@ def remote_run(
     verbose,
 ):
 
-    from platformio.commands.remote.client.run_or_test import RunOrTestClient
+    from core.commands.remote.client.run_or_test import RunOrTestClient
 
     cr = RunOrTestClient(
         "run",
@@ -183,7 +183,7 @@ def remote_test(
     verbose,
 ):
 
-    from platformio.commands.remote.client.run_or_test import RunOrTestClient
+    from core.commands.remote.client.run_or_test import RunOrTestClient
 
     cr = RunOrTestClient(
         "test",
@@ -231,7 +231,7 @@ def remote_device():
 @click.option("--json-output", is_flag=True)
 @click.pass_obj
 def device_list(agents, json_output):
-    from platformio.commands.remote.client.device_list import DeviceListClient
+    from core.commands.remote.client.device_list import DeviceListClient
 
     DeviceListClient(agents, json_output).connect()
 
@@ -309,7 +309,7 @@ def device_list(agents, json_output):
 @click.pass_obj
 @click.pass_context
 def device_monitor(ctx, agents, **kwargs):
-    from platformio.commands.remote.client.device_monitor import DeviceMonitorClient
+    from core.commands.remote.client.device_monitor import DeviceMonitorClient
 
     if kwargs["sock"]:
         return DeviceMonitorClient(agents, **kwargs).connect()

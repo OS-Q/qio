@@ -5,14 +5,14 @@ from os.path import getatime, getmtime, isdir, isfile, join
 from twisted.logger import LogLevel  # pylint: disable=import-error
 from twisted.spread import pb  # pylint: disable=import-error
 
-from platformio import proc, util
-from platformio.commands.remote.ac.process import ProcessAsyncCmd
-from platformio.commands.remote.ac.psync import ProjectSyncAsyncCmd
-from platformio.commands.remote.ac.serial import SerialPortAsyncCmd
-from platformio.commands.remote.client.base import RemoteClientBase
-from platformio.project.config import ProjectConfig
-from platformio.project.exception import NotPlatformIOProjectError
-from platformio.project.helpers import get_project_core_dir
+from core import proc, util
+from core.commands.remote.ac.process import ProcessAsyncCmd
+from core.commands.remote.ac.psync import ProjectSyncAsyncCmd
+from core.commands.remote.ac.serial import SerialPortAsyncCmd
+from core.commands.remote.client.base import RemoteClientBase
+from core.project.config import ProjectConfig
+from core.project.exception import NotPlatformIOProjectError
+from core.project.helpers import get_project_core_dir
 
 
 class RemoteAgentService(RemoteClientBase):

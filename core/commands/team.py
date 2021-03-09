@@ -6,7 +6,7 @@ import re
 import click
 from tabulate import tabulate
 
-from platformio.clients.account import AccountClient
+from core.clients.account import AccountClient
 
 
 def validate_orgname_teamname(value, teamname_validate=False):

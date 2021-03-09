@@ -1,6 +1,6 @@
 
-from platformio.package.exception import UnknownPackageError
-from platformio.package.meta import PackageSpec
+from core.package.exception import UnknownPackageError
+from core.package.meta import PackageSpec
 
 
 class PlatformPackagesMixin(object):

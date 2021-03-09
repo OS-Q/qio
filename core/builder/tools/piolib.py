@@ -12,18 +12,18 @@ from SCons.Script import ARGUMENTS  # pylint: disable=import-error
 from SCons.Script import COMMAND_LINE_TARGETS  # pylint: disable=import-error
 from SCons.Script import DefaultEnvironment  # pylint: disable=import-error
 
-from platformio import exception, fs, util
-from platformio.builder.tools import platformio as piotool
-from platformio.clients.http import InternetIsOffline
-from platformio.compat import WINDOWS, hashlib_encode_data, string_types
-from platformio.package.exception import UnknownPackageError
-from platformio.package.manager.library import LibraryPackageManager
-from platformio.package.manifest.parser import (
+from core import exception, fs, util
+from core.builder.tools import platformio as piotool
+from core.clients.http import InternetIsOffline
+from core.compat import WINDOWS, hashlib_encode_data, string_types
+from core.package.exception import UnknownPackageError
+from core.package.manager.library import LibraryPackageManager
+from core.package.manifest.parser import (
     ManifestParserError,
     ManifestParserFactory,
 )
-from platformio.package.meta import PackageItem
-from platformio.project.options import ProjectOptions
+from core.package.meta import PackageItem
+from core.project.options import ProjectOptions
 
 
 class LibBuilderFactory(object):

@@ -1,9 +1,9 @@
 
-from platformio.commands.platform import platform_install as cmd_platform_install
-from platformio.commands.test.processor import CTX_META_TEST_RUNNING_NAME
-from platformio.platform.exception import UnknownPlatform
-from platformio.platform.factory import PlatformFactory
-from platformio.project.exception import UndefinedEnvPlatformError
+from core.commands.platform import platform_install as cmd_platform_install
+from core.commands.test.processor import CTX_META_TEST_RUNNING_NAME
+from core.platform.exception import UnknownPlatform
+from core.platform.factory import PlatformFactory
+from core.project.exception import UndefinedEnvPlatformError
 
 # pylint: disable=too-many-instance-attributes
 

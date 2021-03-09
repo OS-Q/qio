@@ -5,14 +5,14 @@ import subprocess
 import click
 import semantic_version
 
-from platformio import __version__, fs, proc
-from platformio.package.manager.tool import ToolPackageManager
-from platformio.package.version import pepver_to_semver
-from platformio.platform._packages import PlatformPackagesMixin
-from platformio.platform._run import PlatformRunMixin
-from platformio.platform.board import PlatformBoardConfig
-from platformio.platform.exception import IncompatiblePlatform, UnknownBoard
-from platformio.project.config import ProjectConfig
+from core import __version__, fs, proc
+from core.package.manager.tool import ToolPackageManager
+from core.package.version import pepver_to_semver
+from core.platform._packages import PlatformPackagesMixin
+from core.platform._run import PlatformRunMixin
+from core.platform.board import PlatformBoardConfig
+from core.platform.exception import IncompatiblePlatform, UnknownBoard
+from core.project.config import ProjectConfig
 
 
 class PlatformBase(  # pylint: disable=too-many-instance-attributes,too-many-public-methods

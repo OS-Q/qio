@@ -3,8 +3,8 @@ import mimetypes
 
 import click
 
-from platformio.commands.home.helpers import is_port_used
-from platformio.compat import ensure_python3
+from core.commands.home.helpers import is_port_used
+from core.compat import ensure_python3
 
 
 @click.command("home", short_help="GUI to manage PlatformIO")
@@ -75,7 +75,7 @@ def cli(port, host, no_open, shutdown_timeout, session_id):
         return
 
     # pylint: disable=import-outside-toplevel
-    from platformio.commands.home.run import run_server
+    from core.commands.home.run import run_server
 
     run_server(
         host=host,

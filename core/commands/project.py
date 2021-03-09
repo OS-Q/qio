@@ -6,14 +6,14 @@ import os
 import click
 from tabulate import tabulate
 
-from platformio import fs
-from platformio.commands.platform import platform_install as cli_platform_install
-from platformio.ide.projectgenerator import ProjectGenerator
-from platformio.package.manager.platform import PlatformPackageManager
-from platformio.platform.exception import UnknownBoard
-from platformio.project.config import ProjectConfig
-from platformio.project.exception import NotPlatformIOProjectError
-from platformio.project.helpers import is_platformio_project, load_project_ide_data
+from core import fs
+from core.commands.platform import platform_install as cli_platform_install
+from core.ide.projectgenerator import ProjectGenerator
+from core.package.manager.platform import PlatformPackageManager
+from core.platform.exception import UnknownBoard
+from core.project.config import ProjectConfig
+from core.project.exception import NotPlatformIOProjectError
+from core.project.helpers import is_platformio_project, load_project_ide_data
 
 
 @click.group(short_help="Project manager")

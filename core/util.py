@@ -11,10 +11,10 @@ from glob import glob
 
 import click
 
-from platformio import __version__, compat, exception, proc
-from platformio.compat import PY2, WINDOWS
-from platformio.fs import cd, load_json  # pylint: disable=unused-import
-from platformio.proc import exec_command  # pylint: disable=unused-import
+from core import __version__, compat, exception, proc
+from core.compat import PY2, WINDOWS
+from core.fs import cd, load_json  # pylint: disable=unused-import
+from core.proc import exec_command  # pylint: disable=unused-import
 
 
 class memoized(object):

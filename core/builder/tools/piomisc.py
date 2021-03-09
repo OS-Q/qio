@@ -9,10 +9,10 @@ from tempfile import mkstemp
 
 import click
 
-from platformio import fs, util
-from platformio.compat import get_filesystem_encoding, get_locale_encoding, glob_escape
-from platformio.package.manager.core import get_core_package_dir
-from platformio.proc import exec_command
+from core import fs, util
+from core.compat import get_filesystem_encoding, get_locale_encoding, glob_escape
+from core.package.manager.core import get_core_package_dir
+from core.proc import exec_command
 
 
 class InoToCPPConverter(object):

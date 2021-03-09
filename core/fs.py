@@ -9,8 +9,8 @@ import sys
 
 import click
 
-from platformio import exception
-from platformio.compat import WINDOWS, glob_escape, glob_recursive
+from core import exception
+from core.compat import WINDOWS, glob_escape, glob_recursive
 
 
 class cd(object):
@@ -83,7 +83,7 @@ def calculate_folder_size(path):
 
 
 def ensure_udev_rules():
-    from platformio.util import get_systype  # pylint: disable=import-outside-toplevel
+    from core.util import get_systype  # pylint: disable=import-outside-toplevel
 
     def _rules_to_set(rules_path):
         result = set()

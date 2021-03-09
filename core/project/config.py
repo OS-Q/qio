@@ -6,16 +6,16 @@ from hashlib import sha1
 
 import click
 
-from platformio import fs
-from platformio.compat import (
+from core import fs
+from core.compat import (
     PY2,
     WINDOWS,
     glob_recursive,
     hashlib_encode_data,
     string_types,
 )
-from platformio.project import exception
-from platformio.project.options import ProjectOptions
+from core.project import exception
+from core.project.options import ProjectOptions
 
 try:
     import ConfigParser as ConfigParser
@@ -68,7 +68,7 @@ class ProjectConfigBase(object):
 
     @staticmethod
     def get_default_path():
-        from platformio import app  # pylint: disable=import-outside-toplevel
+        from core import app  # pylint: disable=import-outside-toplevel
 
         return app.get_session_var("custom_project_conf") or os.path.join(
             os.getcwd(), "platformio.ini"

@@ -8,16 +8,16 @@ from os.path import isfile
 
 import click
 
-from platformio import app, exception, fs, proc
-from platformio.commands.debug import helpers
-from platformio.commands.debug.exception import DebugInvalidOptionsError
-from platformio.commands.platform import platform_install as cmd_platform_install
-from platformio.package.manager.core import inject_contrib_pysite
-from platformio.platform.exception import UnknownPlatform
-from platformio.platform.factory import PlatformFactory
-from platformio.project.config import ProjectConfig
-from platformio.project.exception import ProjectEnvsNotAvailableError
-from platformio.project.helpers import is_platformio_project, load_project_ide_data
+from core import app, exception, fs, proc
+from core.commands.debug import helpers
+from core.commands.debug.exception import DebugInvalidOptionsError
+from core.commands.platform import platform_install as cmd_platform_install
+from core.package.manager.core import inject_contrib_pysite
+from core.platform.exception import UnknownPlatform
+from core.platform.factory import PlatformFactory
+from core.project.config import ProjectConfig
+from core.project.exception import ProjectEnvsNotAvailableError
+from core.project.helpers import is_platformio_project, load_project_ide_data
 
 
 @click.command(
@@ -151,7 +151,7 @@ def cli(ctx, project_dir, project_conf, environment, verbose, interface, __unpro
     inject_contrib_pysite()
 
     # pylint: disable=import-outside-toplevel
-    from platformio.commands.debug.process.client import GDBClient, reactor
+    from core.commands.debug.process.client import GDBClient, reactor
 
     client = GDBClient(project_dir, __unprocessed, debug_options, env_options)
     client.spawn(ide_data["gdb_path"], ide_data["prog_path"])

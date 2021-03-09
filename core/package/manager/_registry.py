@@ -3,11 +3,11 @@ import time
 
 import click
 
-from platformio.clients.http import HTTPClient
-from platformio.clients.registry import RegistryClient
-from platformio.package.exception import UnknownPackageError
-from platformio.package.meta import PackageSpec
-from platformio.package.version import cast_version_to_semver
+from core.clients.http import HTTPClient
+from core.clients.registry import RegistryClient
+from core.package.exception import UnknownPackageError
+from core.package.meta import PackageSpec
+from core.package.version import cast_version_to_semver
 
 try:
     from urllib.parse import urlparse

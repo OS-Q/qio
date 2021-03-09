@@ -4,9 +4,9 @@ from traceback import format_exc
 
 import click
 
-from platformio import __version__, exception, maintenance, util
-from platformio.commands import PlatformioCLI
-from platformio.compat import CYGWIN
+from core import __version__, exception, maintenance, util
+from core.commands import PlatformioCLI
+from core.compat import CYGWIN
 
 try:
     import click_completion  # pylint: disable=import-error

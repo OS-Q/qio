@@ -4,9 +4,9 @@ import os
 import tempfile
 import time
 
-from platformio import app, compat
-from platformio.package.download import FileDownloader
-from platformio.package.lockfile import LockFile
+from core import app, compat
+from core.package.download import FileDownloader
+from core.package.lockfile import LockFile
 
 
 class PackageManagerDownloadMixin(object):

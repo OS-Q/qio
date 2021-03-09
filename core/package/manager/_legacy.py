@@ -1,8 +1,8 @@
 
 import os
 
-from platformio import fs
-from platformio.package.meta import PackageItem, PackageSpec
+from core import fs
+from core.package.meta import PackageItem, PackageSpec
 
 
 class PackageManagerLegacyMixin(object):

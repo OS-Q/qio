@@ -4,9 +4,9 @@ import json
 import click
 from tabulate import tabulate
 
-from platformio import fs
-from platformio.compat import dump_json_to_unicode
-from platformio.package.manager.platform import PlatformPackageManager
+from core import fs
+from core.compat import dump_json_to_unicode
+from core.package.manager.platform import PlatformPackageManager
 
 
 @click.command("boards", short_help="Embedded board explorer")

@@ -6,7 +6,7 @@ import click
 from twisted.internet import protocol, reactor, task  # pylint: disable=import-error
 from twisted.spread import pb  # pylint: disable=import-error
 
-from platformio.commands.remote.client.base import RemoteClientBase
+from core.commands.remote.client.base import RemoteClientBase
 
 
 class SMBridgeProtocol(protocol.Protocol):  # pylint: disable=no-init

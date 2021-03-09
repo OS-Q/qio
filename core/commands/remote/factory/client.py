@@ -3,8 +3,8 @@ from twisted.cred import credentials  # pylint: disable=import-error
 from twisted.internet import defer, protocol, reactor  # pylint: disable=import-error
 from twisted.spread import pb  # pylint: disable=import-error
 
-from platformio.app import get_host_id
-from platformio.clients.account import AccountClient
+from core.app import get_host_id
+from core.clients.account import AccountClient
 
 
 class RemoteClientFactory(pb.PBClientFactory, protocol.ReconnectingClientFactory):
