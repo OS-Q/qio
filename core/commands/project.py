@@ -157,7 +157,7 @@ def project_init(
         )
         click.echo("%s - Put project source files here" % click.style("src", fg="cyan"))
         click.echo(
-            "%s - Project Configuration File" % click.style("platform111.ini", fg="cyan")
+            "%s - Project Configuration File" % click.style("platformio.ini", fg="cyan")
         )
 
     is_new_project = not is_platformio_project(project_dir)
@@ -174,7 +174,7 @@ def project_init(
     if ide:
         with fs.cd(project_dir):
             config = ProjectConfig.get_instance(
-                os.path.join(project_dir, "platform111.ini")
+                os.path.join(project_dir, "platformio.ini")
             )
         config.validate()
         pg = ProjectGenerator(
@@ -299,7 +299,7 @@ For example, see a structure of the following two libraries `Foo` and `Bar`:
 |  |
 |  |- README --> THIS FILE
 |
-|- platform111.ini
+|- platformio.ini
 |--src
    |- main.c
 
@@ -354,7 +354,7 @@ def update_board_envs(
     ctx, project_dir, board_ids, project_option, env_prefix, force_download
 ):
     config = ProjectConfig(
-        os.path.join(project_dir, "platform111.ini"), parse_extra=False
+        os.path.join(project_dir, "platformio.ini"), parse_extra=False
     )
     used_boards = []
     for section in config.sections():
@@ -413,7 +413,7 @@ def update_project_env(project_dir, environment, project_option):
     if not project_option:
         return
     config = ProjectConfig(
-        os.path.join(project_dir, "platform111.ini"), parse_extra=False
+        os.path.join(project_dir, "platformio.ini"), parse_extra=False
     )
 
     section = "env:%s" % environment

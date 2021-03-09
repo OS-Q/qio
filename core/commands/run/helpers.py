@@ -21,7 +21,7 @@ def handle_legacy_libdeps(project_dir, config):
     config.set("env", "lib_extra_dirs", lib_extra_dirs)
     click.secho(
         "DEPRECATED! A legacy library storage `{0}` has been found in a "
-        "project. \nPlease declare project dependencies in `platform111.ini`"
+        "project. \nPlease declare project dependencies in `platformio.ini`"
         " file using `lib_deps` option and remove `{0}` folder."
         "\nMore details -> https://docs.OS-Q.com/page/projectconf/"
         "section_env_library.html#lib-deps".format(legacy_libdeps_dir),

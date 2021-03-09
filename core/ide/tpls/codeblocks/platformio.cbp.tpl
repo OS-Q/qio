@@ -56,7 +56,7 @@
 			<Add directory="{{include}}"/>
 			% end
 		</Compiler>
-		<Unit filename="platform111.ini" />
+		<Unit filename="platformio.ini" />
 		% for file in src_files:
 		<Unit filename="{{file}}"></Unit>
 		% end

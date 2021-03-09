@@ -18,12 +18,12 @@ __email__ = "qitas@qitas.cn"
 __license__ = "Apache Software License"
 __copyright__ = "Copyright 2021 OS-Q"
 
-__accounts_api__ = "https://api.accounts.platform111.org"
+__accounts_api__ = "https://api.accounts.platformio.org"
 __registry_api__ = [
-    "https://api.registry.platform111.org",
-    "https://api.registry.ns1.platform111.org",
+    "https://api.registry.platformio.org",
+    "https://api.registry.ns1.platformio.org",
 ]
-__pioremote_endpoint__ = "ssl:host=remote.platform111.org:port=4413"
+__pioremote_endpoint__ = "ssl:host=remote.platformio.org:port=4413"
 
 __default_requests_timeout__ = (10, None)  # (connect, read)
 
@@ -39,7 +39,7 @@ __core_packages__ = {
 
 __check_internet_hosts__ = [
     "185.199.110.153",  # Github.com
-    "88.198.170.159",  # platform111.org
+    "88.198.170.159",  # platformio.org
     "github.com",
-    "platform111.org",
+    "platformio.org",
 ]

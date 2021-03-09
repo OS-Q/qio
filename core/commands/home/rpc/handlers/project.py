@@ -143,7 +143,7 @@ class ProjectRPC:
             for project_dir, _, __ in os.walk(examples_dir):
                 project_description = None
                 try:
-                    config = ProjectConfig(os.path.join(project_dir, "platform111.ini"))
+                    config = ProjectConfig(os.path.join(project_dir, "platformio.ini"))
                     config.validate(silent=True)
                     project_description = config.get("platformio", "description")
                 except ProjectError:
