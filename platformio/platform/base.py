@@ -133,7 +133,7 @@ class PlatformBase(  # pylint: disable=too-many-instance-attributes,too-many-pub
 
         bdirs = [
             self.config.get_optional_dir("boards"),
-            os.path.join(self.config.get_optional_dir("platformio"), "boards"),
+            os.path.join(self.config.get_optional_dir("core"), "boards"),
             os.path.join(self.get_dir(), "boards"),
         ]
 
