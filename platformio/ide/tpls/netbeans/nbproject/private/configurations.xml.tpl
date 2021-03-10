@@ -6,7 +6,7 @@
       </df>
       <df name="src">
       </df>
-      <in>platformio.ini</in>
+      <in>link.ini</in>
     </df>
   </logicalFolder>
   <projectmakefile></projectmakefile>

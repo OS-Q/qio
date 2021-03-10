@@ -158,7 +158,7 @@ def device_list(  # pylint: disable=too-many-branches
 @click.option(
     "-e",
     "--environment",
-    help="Load configuration from `platformio.ini` and specified environment",
+    help="Load configuration from `link.ini` and specified environment",
 )
 def device_monitor(**kwargs):  # pylint: disable=too-many-branches
     # load default monitor filters

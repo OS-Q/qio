@@ -71,7 +71,7 @@ class ProjectConfigBase(object):
         from platformio import app  # pylint: disable=import-outside-toplevel
 
         return app.get_session_var("custom_project_conf") or os.path.join(
-            os.getcwd(), "platformio.ini"
+            os.getcwd(), "link.ini"
         )
 
     def __init__(self, path=None, parse_extra=True, expand_interpolations=True):

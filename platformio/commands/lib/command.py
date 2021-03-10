@@ -53,7 +53,7 @@ def get_project_global_lib_dir():
     multiple=True,
     help=(
         "Manage libraries for the specific project build environments "
-        "declared in `platformio.ini`"
+        "declared in `link.ini`"
     ),
 )
 @click.pass_context
@@ -95,7 +95,7 @@ def cli(ctx, **options):
             continue
         with fs.cd(storage_dir):
             config = ProjectConfig.get_instance(
-                os.path.join(storage_dir, "platformio.ini")
+                os.path.join(storage_dir, "link.ini")
             )
             config.validate(options["environment"], silent=in_silence)
             libdeps_dir = config.get_optional_dir("libdeps")
@@ -115,7 +115,7 @@ def cli(ctx, **options):
     "--save/--no-save",
     is_flag=True,
     default=True,
-    help="Save installed libraries into the `platformio.ini` dependency list"
+    help="Save installed libraries into the `link.ini` dependency list"
     " (enabled by default)",
 )
 @click.option("-s", "--silent", is_flag=True, help="Suppress progress reporting")
@@ -188,7 +188,7 @@ def _save_deps(ctx, pkgs, action="add"):
     "--save/--no-save",
     is_flag=True,
     default=True,
-    help="Remove libraries from the `platformio.ini` dependency list and save changes"
+    help="Remove libraries from the `link.ini` dependency list and save changes"
     " (enabled by default)",
 )
 @click.option("-s", "--silent", is_flag=True, help="Suppress progress reporting")
