@@ -522,7 +522,7 @@ class ArduinoLibBuilder(LibBuilderBase):
         return "chain+"
 
     def is_frameworks_compatible(self, frameworks):
-        return util.items_in_list(frameworks, ["arduino", "energia"])
+        return util.items_in_list(frameworks, ["arduino", "ino", "energia"])
 
     def is_platforms_compatible(self, platforms):
         return util.items_in_list(platforms, self._manifest.get("platforms") or ["*"])
