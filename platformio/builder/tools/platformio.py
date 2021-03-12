@@ -318,7 +318,7 @@ def BuildFrameworks(env, frameworks):
             env.Exit(1)
 
     for f in frameworks:
-        if f == "arduino":
+        if f == "arduino" or f == "ino":
             # Arduino IDE appends .o the end of filename
             Builder.match_splitext = scons_patched_match_splitext
             if "nobuild" not in COMMAND_LINE_TARGETS:
