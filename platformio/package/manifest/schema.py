@@ -197,7 +197,7 @@ class ManifestSchema(BaseSchema):
         )
     )
 
-    # platform.json specific
+    # link.json specific
     title = fields.Str(validate=validate.Length(min=1, max=100))
 
     # package.json specific

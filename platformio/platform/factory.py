@@ -43,12 +43,12 @@ class PlatformFactory(object):
             platform_name = pkg.metadata.name
 
         if not platform_dir or not os.path.isfile(
-            os.path.join(platform_dir, "platform.json")
+            os.path.join(platform_dir, "link.json")
         ):
             raise UnknownPlatform(pkg_or_spec)
 
         if not platform_name:
-            platform_name = fs.load_json(os.path.join(platform_dir, "platform.json"))[
+            platform_name = fs.load_json(os.path.join(platform_dir, "link.json"))[
                 "name"
             ]
 
@@ -65,6 +65,6 @@ class PlatformFactory(object):
                 str(cls.get_clsname(platform_name)), (PlatformBase,), {}
             )
 
-        _instance = platform_cls(os.path.join(platform_dir, "platform.json"))
+        _instance = platform_cls(os.path.join(platform_dir, "link.json"))
         assert isinstance(_instance, PlatformBase)
         return _instance

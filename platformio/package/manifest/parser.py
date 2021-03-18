@@ -19,7 +19,7 @@ except ImportError:
 
 
 class ManifestFileType(object):
-    PLATFORM_JSON = "platform.json"
+    PLATFORM_JSON = "link.json"
     LIBRARY_JSON = "library.json"
     LIBRARY_PROPERTIES = "library.properties"
     MODULE_JSON = "module.json"
