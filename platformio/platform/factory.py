@@ -53,10 +53,10 @@ class PlatformFactory(object):
             ]
 
         platform_cls = None
-        if os.path.isfile(os.path.join(platform_dir, "platform.py")):
+        if os.path.isfile(os.path.join(platform_dir, "link.py")):
             platform_cls = getattr(
                 cls.load_module(
-                    platform_name, os.path.join(platform_dir, "platform.py")
+                    platform_name, os.path.join(platform_dir, "link.py")
                 ),
                 cls.get_clsname(platform_name),
             )

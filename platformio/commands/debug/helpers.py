@@ -172,7 +172,7 @@ def configure_initial_debug_options(platform, env_options):
 def configure_esp32_load_cmds(debug_options, configuration):
     """
     DEPRECATED: Moved to ESP32 dev-platform
-    See platform.py::configure_debug_options
+    See link.py::configure_debug_options
     """
     flash_images = configuration.get("extra", {}).get("flash_images")
     ignore_conds = [
