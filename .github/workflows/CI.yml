@@ -42,3 +42,10 @@ jobs:
         if: success()
         run: |
           pio run -d .
+
+      - name: Checkout PIO
+        uses: actions/checkout@v2
+        with:
+          repository: platformio/platformio-core
+          token: ${{ secrets.OSQ_REPO_TOKEN }}
+          path: PIO
