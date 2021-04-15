@@ -6,7 +6,9 @@ on:
       - master
     paths-ignore:
       - '**.md'
-
+      - 'CD.yml'
+      - 'check.yml'
+      - 'nightly.yml'
 env:
   UPLOAD_BUILD: true
 
