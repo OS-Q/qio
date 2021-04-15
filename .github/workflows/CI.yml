@@ -27,8 +27,8 @@ jobs:
       - name: TEST P51
         run: |
           python -m pip install --upgrade pip
-          pip install -U file://.
-          qio platform install https://github.com/OS-Q/P51/releases/latest/download/P51.zip
+          pip install -U https://github.com/OS-Q/S03/archive/master.zip
+          pio platform install https://github.com/OS-Q/P51/releases/latest/download/P51.zip
 
       - name: Checkout
         uses: actions/checkout@v2
