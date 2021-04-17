@@ -44,12 +44,12 @@ jobs:
           token: ${{ secrets.OSQ_REPO_TOKEN }}
           path: T${{ matrix.platforms }}${{ matrix.templates }}
 
-      - name: Install
+      - name: Install platforms
         if: github.repository == 'OS-Q/S03'
         working-directory: P${{ matrix.platforms }}
         run: |
           python -m pip install --upgrade pip
-          pip install -U file://.
+          pip install -U https://github.com/OS-Q/S03/archive/master.zip
           qio platform install file://.
 
       - name: Build

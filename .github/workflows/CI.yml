@@ -8,20 +8,17 @@ on:
       - '**.md'
       # - '**.yml'
 
-env:
-  UPLOAD_BUILD: true
-
 jobs:
   check:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
-        python: [3.9]
         platform:
           - "51"
         template:
           - "A"
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python: [3.7,3.9]
 
     runs-on: ${{ matrix.os }}
     steps:
