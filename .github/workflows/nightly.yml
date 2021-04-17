@@ -2,23 +2,25 @@ name: nightly
 
 on:
   schedule:
-    - cron: '0 14 * * *'
+    - cron: '0 3 * * *'
+
+env:
+  UPLOAD_BUILD: true
 
 jobs:
   build:
-    if: github.repository == 'OS-Q/S03'
     strategy:
       fail-fast: false
       matrix:
+        platform:
+          - "51"
+          # - "52"
+          # - "68"
         os: [ubuntu-latest, windows-latest, macos-latest]
         python: [3.7,3.8,3.9]
-        tool:
-          - "PIO"
-          - "QIO"
-        examples:
-          - "examples/arduino"
-          - "examples/native"
-          - "examples/simba"
+        package:
+          - "release"
+          - "latest"
 
     runs-on: ${{ matrix.os }}
 
@@ -33,16 +35,39 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
 
-      - name: Install PIO
-        if: matrix.tool == 'PIO'
+      - name: Install release
+        if: matrix.package == 'release'
         run: |
           python -m pip install --upgrade pip
-          pip install -U https://github.com/platformio/platformio/archive/develop.zip
-          pio platform install file://.
+          pip install -U file://.
+          pio platform install https://github.com/OS-Q/P${{ matrix.platform }}/releases/latest/download/P${{ matrix.platform }}.zip
 
-      - name: Install QIO
-        if: matrix.tool == 'QIO'
+      - name: Install latest
+        if: matrix.package == 'latest' && github.repository == 'OS-Q/S03'
         run: |
           python -m pip install --upgrade pip
-          pip install -U https://github.com/OS-Q/S03/archive/master.zip
-          qio platform install file://.
+          pip install -U file://.
+          pio platform install https://github.com/OS-Q/P${{ matrix.platform }}/archive/master.zip
+
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          repository: OSQ/T${{ matrix.platform }}A
+          token: ${{ secrets.OSQ_REPO_TOKEN }}
+          path: T${{ matrix.platform }}
+
+      - name: Build
+        id: build
+        working-directory: T${{ matrix.platform }}
+        if: success()
+        run: |
+          mkdir build
+          pio run -d . > build/log.txt
+          echo "::set-output name=status::success"
+
+      - name: Upload
+        if: steps.build.outputs.status == 'success' && env.UPLOAD_BUILD
+        uses: actions/upload-artifact@v2
+        with:
+          name: T${{ matrix.platform }}_${{ matrix.os }}_${{ matrix.python }}_${{ matrix.package }}
+          path: T${{ matrix.platform }}/build
