@@ -11,7 +11,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="link.ini" />
+    <None Include="platformio.ini" />
   </ItemGroup>
   % for file in src_files:
   <ItemGroup>

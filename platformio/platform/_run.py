@@ -1,3 +1,16 @@
+# Copyright (c) 2014-present PlatformIO <contact@platformio.org>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 import base64
 import os
@@ -90,7 +103,7 @@ class PlatformRunMixin(object):
             "--jobs",
             str(jobs),
             "--sconstruct",
-            os.path.join(fs.get_source_dir(), "extend", "main.py"),
+            os.path.join(fs.get_source_dir(), "builder", "main.py"),
         ]
         args.append("PIOVERBOSE=%d" % (1 if self.verbose else 0))
         # pylint: disable=protected-access
@@ -121,7 +134,9 @@ class PlatformRunMixin(object):
                 args,
                 stdout=proc.BuildAsyncPipe(
                     line_callback=self._on_stdout_line,
-                    data_callback=lambda data: _write_and_flush(sys.stdout, data),
+                    data_callback=lambda data: None
+                    if self.silent
+                    else _write_and_flush(sys.stdout, data),
                 ),
                 stderr=proc.BuildAsyncPipe(
                     line_callback=self._on_stderr_line,

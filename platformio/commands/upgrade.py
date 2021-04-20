@@ -1,3 +1,16 @@
+# Copyright (c) 2014-present PlatformIO <contact@platformio.org>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 import json
 import os
@@ -51,7 +64,7 @@ def cli(dev):
             fg="green",
         )
         click.echo("Release notes: ", nl=False)
-        click.secho("https://docs.OS-Q.com/en/latest/history.html", fg="cyan")
+        click.secho("https://docs.platformio.org/en/latest/history.html", fg="cyan")
         if app.get_session_var("caller_id"):
             click.secho(
                 "Warning! Please restart IDE to affect PIO Home changes", fg="yellow"
@@ -84,7 +97,7 @@ WARNING! Don't use `sudo` for the rest PlatformIO commands.
 def get_pip_package(to_develop):
     if not to_develop:
         return "platformio"
-    dl_url = "https://github.com/OS-Q/S03/archive/master.zip"
+    dl_url = "https://github.com/platformio/platformio-core/archive/develop.zip"
     cache_dir = get_project_cache_dir()
     if not os.path.isdir(cache_dir):
         os.makedirs(cache_dir)

@@ -1,3 +1,17 @@
+# Copyright (c) 2014-present PlatformIO <contact@platformio.org>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 from os import getenv
 from os.path import join
 from time import time
@@ -144,14 +158,14 @@ def after_upgrade(ctx):
         )
         click.secho("Please remove multiple PIO Cores from a system:", fg="yellow")
         click.secho(
-            "https://docs.OS-Q.com/page/faq.html"
+            "https://docs.platformio.org/page/faq.html"
             "#multiple-platformio-cores-in-a-system",
             fg="cyan",
         )
         click.secho("*" * terminal_width, fg="yellow")
         return
     else:
-        click.secho("Please wait while upgrading OS-Q...", fg="yellow")
+        click.secho("Please wait while upgrading PlatformIO...", fg="yellow")
         try:
             cleanup_content_cache("http")
         except:  # pylint: disable=bare-except
@@ -164,7 +178,7 @@ def after_upgrade(ctx):
         if u.run(ctx):
             app.set_state_item("last_version", __version__)
             click.secho(
-                "OS-Q has been successfully upgraded to %s!\n" % __version__,
+                "PlatformIO has been successfully upgraded to %s!\n" % __version__,
                 fg="green",
             )
             telemetry.send_event(
@@ -174,6 +188,33 @@ def after_upgrade(ctx):
             )
         else:
             raise exception.UpgradeError("Auto upgrading...")
+
+    # PlatformIO banner
+    click.echo("*" * terminal_width)
+    click.echo("If you like %s, please:" % (click.style("PlatformIO", fg="cyan")))
+    click.echo(
+        "- %s us on Twitter to stay up-to-date "
+        "on the latest project news > %s"
+        % (
+            click.style("follow", fg="cyan"),
+            click.style("https://twitter.com/PlatformIO_Org", fg="cyan"),
+        )
+    )
+    click.echo(
+        "- %s it on GitHub > %s"
+        % (
+            click.style("star", fg="cyan"),
+            click.style("https://github.com/platformio/platformio", fg="cyan"),
+        )
+    )
+    if not getenv("PLATFORMIO_IDE"):
+        click.echo(
+            "- %s PlatformIO IDE for embedded development > %s"
+            % (
+                click.style("try", fg="cyan"),
+                click.style("https://platformio.org/platformio-ide", fg="cyan"),
+            )
+        )
 
     click.echo("*" * terminal_width)
     click.echo("")
@@ -219,7 +260,7 @@ def check_platformio_upgrade():
         click.secho("pip install -U platformio", fg="cyan", nl=False)
         click.secho("` command.", fg="yellow")
     click.secho("Changes: ", fg="yellow", nl=False)
-    click.secho("https://docs.OS-Q.com/en/latest/history.html", fg="cyan")
+    click.secho("https://docs.platformio.org/en/latest/history.html", fg="cyan")
     click.echo("*" * terminal_width)
     click.echo("")
 
@@ -308,8 +349,8 @@ def check_prune_system():
     if threshold_mb <= 0:
         return
 
-    unnecessary_mb = calculate_unnecessary_system_data() / 1024
-    if unnecessary_mb < threshold_mb:
+    unnecessary_size = calculate_unnecessary_system_data()
+    if (unnecessary_size / 1024) < threshold_mb:
         return
 
     terminal_width, _ = click.get_terminal_size()
@@ -319,6 +360,6 @@ def check_prune_system():
         "We found %s of unnecessary PlatformIO system data (temporary files, "
         "unnecessary packages, etc.).\nUse `pio system prune --dry-run` to list "
         "them or `pio system prune` to save disk space."
-        % fs.humanize_file_size(unnecessary_mb),
+        % fs.humanize_file_size(unnecessary_size),
         fg="yellow",
     )

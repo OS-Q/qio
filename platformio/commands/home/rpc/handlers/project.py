@@ -1,3 +1,16 @@
+# Copyright (c) 2014-present PlatformIO <contact@platformio.org>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 from __future__ import absolute_import
 
@@ -5,7 +18,7 @@ import os
 import shutil
 import time
 
-import jsonrpc
+from ajsonrpc.core import JSONRPC20DispatchException
 
 from platformio import exception, fs
 from platformio.commands.home.rpc.handlers.app import AppRPC
@@ -143,7 +156,7 @@ class ProjectRPC:
             for project_dir, _, __ in os.walk(examples_dir):
                 project_description = None
                 try:
-                    config = ProjectConfig(os.path.join(project_dir, "link.ini"))
+                    config = ProjectConfig(os.path.join(project_dir, "platformio.ini"))
                     config.validate(silent=True)
                     project_description = config.get("platformio", "description")
                 except ProjectError:
@@ -244,18 +257,16 @@ class ProjectRPC:
             return arduino_project_dir
 
         is_arduino_project = any(
-            [
-                os.path.isfile(
-                    os.path.join(
-                        arduino_project_dir,
-                        "%s.%s" % (os.path.basename(arduino_project_dir), ext),
-                    )
+            os.path.isfile(
+                os.path.join(
+                    arduino_project_dir,
+                    "%s.%s" % (os.path.basename(arduino_project_dir), ext),
                 )
-                for ext in ("ino", "pde")
-            ]
+            )
+            for ext in ("ino", "pde")
         )
         if not is_arduino_project:
-            raise jsonrpc.exceptions.JSONRPCDispatchException(
+            raise JSONRPC20DispatchException(
                 code=4000, message="Not an Arduino project: %s" % arduino_project_dir
             )
 
@@ -290,7 +301,7 @@ class ProjectRPC:
     @staticmethod
     async def import_pio(project_dir):
         if not project_dir or not is_platformio_project(project_dir):
-            raise jsonrpc.exceptions.JSONRPCDispatchException(
+            raise JSONRPC20DispatchException(
                 code=4001, message="Not an PlatformIO project: %s" % project_dir
             )
         new_project_dir = os.path.join(

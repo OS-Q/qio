@@ -1,3 +1,16 @@
+# Copyright (c) 2014-present PlatformIO <contact@platformio.org>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 import json
 import os
@@ -27,7 +40,7 @@ def get_installed_core_packages():
 
 def get_core_package_dir(name, auto_install=True):
     if name not in __core_packages__:
-        raise exception.PlatformioException("Please upgrade Core")
+        raise exception.PlatformioException("Please upgrade PlatformIO Core")
     pm = ToolPackageManager()
     spec = PackageSpec(
         owner="platformio", name=name, requirements=__core_packages__[name]
@@ -71,7 +84,7 @@ def remove_unnecessary_core_packages(dry_run=False):
     for pkg in pm.get_installed():
         skip_conds = [
             os.path.isfile(os.path.join(pkg.path, ".piokeep")),
-            # pkg.metadata.spec.owner != "platformio",
+            pkg.metadata.spec.owner != "platformio",
             pkg.metadata.name not in best_pkg_versions,
             pkg.metadata.name in best_pkg_versions
             and pkg.metadata.version == best_pkg_versions[pkg.metadata.name],
@@ -124,6 +137,9 @@ def build_contrib_pysite_package(target_dir, with_metadata=True):
         fs.rmtree(target_dir)
     os.makedirs(target_dir)
 
+    # issue 3865: There is no "rustup" in "Raspbian GNU/Linux 10 (buster)"
+    os.environ["CRYPTOGRAPHY_DONT_BUILD_RUST"] = "1"
+
     # build dependencies
     args = [
         get_pythonexe_path(),
@@ -155,9 +171,9 @@ def build_contrib_pysite_package(target_dir, with_metadata=True):
                 )
                 if systype.startswith("linux_arm")
                 else systype,
-                description="Extra Python package for QIO Core",
+                description="Extra Python package for PlatformIO Core",
                 keywords=["platformio", "platformio-core"],
-                homepage="https://docs.OS-Q.com/page/core/index.html",
+                homepage="https://docs.platformio.org/page/core/index.html",
                 repository={
                     "type": "git",
                     "url": "https://github.com/platformio/platformio-core",

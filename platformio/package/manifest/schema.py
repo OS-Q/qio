@@ -1,3 +1,16 @@
+# Copyright (c) 2014-present PlatformIO <contact@platformio.org>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 # pylint: disable=too-many-ancestors
 
@@ -197,7 +210,7 @@ class ManifestSchema(BaseSchema):
         )
     )
 
-    # link.json specific
+    # platform.json specific
     title = fields.Str(validate=validate.Length(min=1, max=100))
 
     # package.json specific
@@ -240,5 +253,9 @@ class ManifestSchema(BaseSchema):
     @staticmethod
     @memoized(expire="1h")
     def load_spdx_licenses():
-        spdx_data_url = "https://dl.bintray.com/platformio/dl-misc/spdx-licenses-3.json"
+        version = "3.12"
+        spdx_data_url = (
+            "https://raw.githubusercontent.com/spdx/license-list-data/"
+            "v%s/json/licenses.json" % version
+        )
         return json.loads(fetch_remote_content(spdx_data_url))

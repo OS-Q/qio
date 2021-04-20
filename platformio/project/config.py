@@ -1,3 +1,16 @@
+# Copyright (c) 2014-present PlatformIO <contact@platformio.org>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 import json
 import os
@@ -31,7 +44,7 @@ CONFIG_HEADER = """
 ;   Advanced options: extra scripting
 ;
 ; Please visit documentation for the other options and examples
-; https://docs.OS-Q.com/page/projectconf.html
+; https://docs.platformio.org/page/projectconf.html
 """
 
 
@@ -71,7 +84,7 @@ class ProjectConfigBase(object):
         from platformio import app  # pylint: disable=import-outside-toplevel
 
         return app.get_session_var("custom_project_conf") or os.path.join(
-            os.getcwd(), "link.ini"
+            os.getcwd(), "platformio.ini"
         )
 
     def __init__(self, path=None, parse_extra=True, expand_interpolations=True):
@@ -352,7 +365,7 @@ class ProjectConfigDirsMixin(object):
         core_dir = self.get("platformio", "core_dir")
         win_core_dir = None
         if WINDOWS and core_dir == default:
-            win_core_dir = os.path.splitdrive(core_dir)[0] + "\\.qio"
+            win_core_dir = os.path.splitdrive(core_dir)[0] + "\\.platformio"
             if os.path.isdir(win_core_dir):
                 core_dir = win_core_dir
 

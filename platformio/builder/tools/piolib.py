@@ -1,3 +1,21 @@
+# Copyright (c) 2014-present PlatformIO <contact@platformio.org>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# pylint: disable=no-self-use, unused-argument, too-many-lines
+# pylint: disable=too-many-instance-attributes, too-many-public-methods
+# pylint: disable=assignment-from-no-return
+
 from __future__ import absolute_import
 
 import hashlib
@@ -522,7 +540,7 @@ class ArduinoLibBuilder(LibBuilderBase):
         return "chain+"
 
     def is_frameworks_compatible(self, frameworks):
-        return util.items_in_list(frameworks, ["arduino", "ino", "energia"])
+        return util.items_in_list(frameworks, ["arduino", "energia"])
 
     def is_platforms_compatible(self, platforms):
         return util.items_in_list(platforms, self._manifest.get("platforms") or ["*"])
@@ -993,7 +1011,7 @@ def GetLibBuilders(env):  # pylint: disable=too-many-branches
     if verbose and found_incompat:
         sys.stderr.write(
             'More details about "Library Compatibility Mode": '
-            "https://docs.OS-Q.com/page/librarymanager/ldf.html#"
+            "https://docs.platformio.org/page/librarymanager/ldf.html#"
             "ldf-compat-mode\n"
         )
 
@@ -1035,7 +1053,7 @@ def ConfigureProjectLibBuilder(env):
     project = ProjectAsLibBuilder(env, "$PROJECT_DIR")
     ldf_mode = LibBuilderBase.lib_ldf_mode.fget(project)  # pylint: disable=no-member
 
-    # click.echo("LDF: Library Dependency Finder -> http://bit.ly/configure-pio-ldf")
+    click.echo("LDF: Library Dependency Finder -> http://bit.ly/configure-pio-ldf")
     click.echo(
         "LDF Modes: Finder ~ %s, Compatibility ~ %s"
         % (ldf_mode, project.lib_compat_mode)

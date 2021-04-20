@@ -1,3 +1,16 @@
+# Copyright (c) 2014-present PlatformIO <contact@platformio.org>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 from os import makedirs
 from os.path import isdir, isfile, join
@@ -21,9 +34,9 @@ def handle_legacy_libdeps(project_dir, config):
     config.set("env", "lib_extra_dirs", lib_extra_dirs)
     click.secho(
         "DEPRECATED! A legacy library storage `{0}` has been found in a "
-        "project. \nPlease declare project dependencies in `link.ini`"
+        "project. \nPlease declare project dependencies in `platformio.ini`"
         " file using `lib_deps` option and remove `{0}` folder."
-        "\nMore details -> https://docs.OS-Q.com/page/projectconf/"
+        "\nMore details -> https://docs.platformio.org/page/projectconf/"
         "section_env_library.html#lib-deps".format(legacy_libdeps_dir),
         fg="yellow",
     )

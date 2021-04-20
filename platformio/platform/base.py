@@ -1,3 +1,16 @@
+# Copyright (c) 2014-present PlatformIO <contact@platformio.org>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 import os
 import subprocess
@@ -110,7 +123,7 @@ class PlatformBase(  # pylint: disable=too-many-instance-attributes,too-many-pub
         return os.path.dirname(self.manifest_path)
 
     def get_build_script(self):
-        main_script = os.path.join(self.get_dir(), "extend", "main.py")
+        main_script = os.path.join(self.get_dir(), "builder", "main.py")
         if os.path.isfile(main_script):
             return main_script
         raise NotImplementedError()
@@ -239,6 +252,7 @@ class PlatformBase(  # pylint: disable=too-many-instance-attributes,too-many-pub
             click.secho(
                 "Could not install Python packages -> %s" % e, fg="red", err=True
             )
+        return None
 
     def uninstall_python_packages(self):
         if not self.python_packages:

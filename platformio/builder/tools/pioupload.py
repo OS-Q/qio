@@ -1,3 +1,16 @@
+# Copyright (c) 2014-present PlatformIO <contact@platformio.org>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 from __future__ import absolute_import
 
@@ -236,11 +249,11 @@ def CheckUploadSize(_, target, source, env):
     program_size = _calculate_size(output, env.get("SIZEPROGREGEXP"))
     data_size = _calculate_size(output, env.get("SIZEDATAREGEXP"))
 
-    print('Advanced Memory Usage is available via "QIO Home > Project Inspect"')
+    print('Advanced Memory Usage is available via "PlatformIO Home > Project Inspect"')
     if data_max_size and data_size > -1:
-        print("RAM: %s" % _format_availale_bytes(data_size, data_max_size))
+        print("RAM:   %s" % _format_availale_bytes(data_size, data_max_size))
     if program_size > -1:
-        print("ROM: %s" % _format_availale_bytes(program_size, program_max_size))
+        print("Flash: %s" % _format_availale_bytes(program_size, program_max_size))
     if int(ARGUMENTS.get("PIOVERBOSE", 0)):
         print(output)
 

@@ -28,7 +28,7 @@ INCLUDEPATH += "{{include}}"
 DEFINES += "{{tokens[0].strip()}}"
 % end
 
-OTHER_FILES += link.ini
+OTHER_FILES += platformio.ini
 
 % for file in src_files:
 % if file.endswith((".h", ".hpp")):

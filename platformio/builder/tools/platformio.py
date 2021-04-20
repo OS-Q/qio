@@ -1,3 +1,17 @@
+# Copyright (c) 2014-present PlatformIO <contact@platformio.org>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 from __future__ import absolute_import
 
 import fnmatch
@@ -140,7 +154,7 @@ def ProcessProjectDeps(env):
 
     # CPPPATH from dependencies
     projenv.PrependUnique(CPPPATH=project_lib_builder.env.get("CPPPATH"))
-    # extra build flags from `link.ini`
+    # extra build flags from `platformio.ini`
     projenv.ProcessFlags(env.get("SRC_BUILD_FLAGS"))
 
     is_test = "__test" in COMMAND_LINE_TARGETS
@@ -304,7 +318,7 @@ def BuildFrameworks(env, frameworks):
 
     if "BOARD" not in env:
         sys.stderr.write(
-            "Please specify `board` in `link.ini` to use "
+            "Please specify `board` in `platformio.ini` to use "
             "with '%s' framework\n" % ", ".join(frameworks)
         )
         env.Exit(1)
@@ -314,11 +328,11 @@ def BuildFrameworks(env, frameworks):
         if board_frameworks:
             frameworks.insert(0, board_frameworks[0])
         else:
-            sys.stderr.write("Error: Please specify `board` in `link.ini`\n")
+            sys.stderr.write("Error: Please specify `board` in `platformio.ini`\n")
             env.Exit(1)
 
     for f in frameworks:
-        if f == "arduino" or f == "ino":
+        if f == "arduino":
             # Arduino IDE appends .o the end of filename
             Builder.match_splitext = scons_patched_match_splitext
             if "nobuild" not in COMMAND_LINE_TARGETS:

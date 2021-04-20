@@ -1,3 +1,17 @@
+# Copyright (c) 2014-present PlatformIO <contact@platformio.org>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 # pylint: disable=unused-import, no-name-in-module, import-error,
 # pylint: disable=no-member, undefined-variable, unexpected-keyword-arg
 
@@ -54,7 +68,7 @@ def ensure_python3(raise_exception=True):
     raise UserSideException(
         "Python 3.6 or later is required for this operation. \n"
         "Please check a migration guide:\n"
-        "https://docs.OS-Q.com/en/latest/core/migration.html"
+        "https://docs.platformio.org/en/latest/core/migration.html"
         "#drop-support-for-python-2-and-3-5"
     )
 

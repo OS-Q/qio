@@ -1,3 +1,17 @@
+# Copyright (c) 2014-present PlatformIO <contact@platformio.org>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 # pylint: disable=too-many-arguments,too-many-locals,too-many-branches,line-too-long
 
 import json
@@ -157,7 +171,7 @@ def project_init(
         )
         click.echo("%s - Put project source files here" % click.style("src", fg="cyan"))
         click.echo(
-            "%s - Project Configuration File" % click.style("link.ini", fg="cyan")
+            "%s - Project Configuration File" % click.style("platformio.ini", fg="cyan")
         )
 
     is_new_project = not is_platformio_project(project_dir)
@@ -174,7 +188,7 @@ def project_init(
     if ide:
         with fs.cd(project_dir):
             config = ProjectConfig.get_instance(
-                os.path.join(project_dir, "link.ini")
+                os.path.join(project_dir, "platformio.ini")
             )
         config.validate()
         pg = ProjectGenerator(
@@ -291,7 +305,7 @@ For example, see a structure of the following two libraries `Foo` and `Bar`:
 |  |  |--src
 |  |     |- Bar.c
 |  |     |- Bar.h
-|  |  |- library.json (optional, custom build options, etc) https://docs.OS-Q.com/page/librarymanager/config.html
+|  |  |- library.json (optional, custom build options, etc) https://docs.platformio.org/page/librarymanager/config.html
 |  |
 |  |--Foo
 |  |  |- Foo.c
@@ -299,7 +313,7 @@ For example, see a structure of the following two libraries `Foo` and `Bar`:
 |  |
 |  |- README --> THIS FILE
 |
-|- link.ini
+|- platformio.ini
 |--src
    |- main.c
 
@@ -319,7 +333,7 @@ PlatformIO Library Dependency Finder will find automatically dependent
 libraries scanning project source files.
 
 More information about PlatformIO Library Dependency Finder
-- https://docs.OS-Q.com/page/librarymanager/ldf.html
+- https://docs.platformio.org/page/librarymanager/ldf.html
 """,
         )
 
@@ -337,7 +351,7 @@ determine whether they are fit for use. Unit testing finds problems early
 in the development cycle.
 
 More information about PlatformIO Unit Testing:
-- https://docs.OS-Q.com/page/plus/unit-testing.html
+- https://docs.platformio.org/page/plus/unit-testing.html
 """,
         )
 
@@ -354,7 +368,7 @@ def update_board_envs(
     ctx, project_dir, board_ids, project_option, env_prefix, force_download
 ):
     config = ProjectConfig(
-        os.path.join(project_dir, "link.ini"), parse_extra=False
+        os.path.join(project_dir, "platformio.ini"), parse_extra=False
     )
     used_boards = []
     for section in config.sections():
@@ -413,7 +427,7 @@ def update_project_env(project_dir, environment, project_option):
     if not project_option:
         return
     config = ProjectConfig(
-        os.path.join(project_dir, "link.ini"), parse_extra=False
+        os.path.join(project_dir, "platformio.ini"), parse_extra=False
     )
 
     section = "env:%s" % environment

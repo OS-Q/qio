@@ -1,3 +1,16 @@
+# Copyright (c) 2014-present PlatformIO <contact@platformio.org>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 # pylint: disable=too-many-branches, too-many-locals
 
@@ -53,7 +66,7 @@ def get_project_global_lib_dir():
     multiple=True,
     help=(
         "Manage libraries for the specific project build environments "
-        "declared in `link.ini`"
+        "declared in `platformio.ini`"
     ),
 )
 @click.pass_context
@@ -95,7 +108,7 @@ def cli(ctx, **options):
             continue
         with fs.cd(storage_dir):
             config = ProjectConfig.get_instance(
-                os.path.join(storage_dir, "link.ini")
+                os.path.join(storage_dir, "platformio.ini")
             )
             config.validate(options["environment"], silent=in_silence)
             libdeps_dir = config.get_optional_dir("libdeps")
@@ -115,7 +128,7 @@ def cli(ctx, **options):
     "--save/--no-save",
     is_flag=True,
     default=True,
-    help="Save installed libraries into the `link.ini` dependency list"
+    help="Save installed libraries into the `platformio.ini` dependency list"
     " (enabled by default)",
 )
 @click.option("-s", "--silent", is_flag=True, help="Suppress progress reporting")
@@ -188,7 +201,7 @@ def _save_deps(ctx, pkgs, action="add"):
     "--save/--no-save",
     is_flag=True,
     default=True,
-    help="Remove libraries from the `link.ini` dependency list and save changes"
+    help="Remove libraries from the `platformio.ini` dependency list and save changes"
     " (enabled by default)",
 )
 @click.option("-s", "--silent", is_flag=True, help="Suppress progress reporting")
@@ -363,7 +376,7 @@ def lib_search(query, json_output, page, noninteractive, **filters):
             "For more examples and advanced search syntax, please use documentation:"
         )
         click.secho(
-            "https://docs.OS-Q.com/page/userguide/lib/cmd_search.html\n",
+            "https://docs.platformio.org/page/userguide/lib/cmd_search.html\n",
             fg="cyan",
         )
         return

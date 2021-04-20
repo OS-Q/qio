@@ -1,7 +1,20 @@
+# Copyright (c) 2014-present PlatformIO <contact@platformio.org>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 import time
 
-import jsonrpc
+from ajsonrpc.core import JSONRPC20DispatchException
 
 from platformio.compat import get_running_loop
 
@@ -12,7 +25,7 @@ class IDERPC:
 
     def send_command(self, sid, command, params):
         if not self._queue.get(sid):
-            raise jsonrpc.exceptions.JSONRPCDispatchException(
+            raise JSONRPC20DispatchException(
                 code=4005, message="PIO Home IDE agent is not started"
             )
         while self._queue[sid]:
@@ -20,11 +33,11 @@ class IDERPC:
                 {"id": time.time(), "method": command, "params": params}
             )
 
-    def listen_commands(self, sid=0):
+    async def listen_commands(self, sid=0):
         if sid not in self._queue:
             self._queue[sid] = []
         self._queue[sid].append(get_running_loop().create_future())
-        return self._queue[sid][-1]
+        return await self._queue[sid][-1]
 
     def open_project(self, sid, project_dir):
         return self.send_command(sid, "open_project", project_dir)

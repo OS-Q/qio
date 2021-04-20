@@ -1,3 +1,17 @@
+# Copyright (c) 2014-present PlatformIO <contact@platformio.org>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 import hashlib
 import io
 import json
@@ -98,14 +112,14 @@ def ensure_udev_rules():
     if "linux" not in get_systype():
         return None
     installed_rules = [
-        "/etc/udev/rules.d/99-qitas-udev.rules",
-        "/lib/udev/rules.d/99-qitas-udev.rules",
+        "/etc/udev/rules.d/99-platformio-udev.rules",
+        "/lib/udev/rules.d/99-platformio-udev.rules",
     ]
     if not any(os.path.isfile(p) for p in installed_rules):
         raise exception.MissedUdevRules
 
     origin_path = os.path.realpath(
-        os.path.join(get_source_dir(), "..", "scripts", "99-qitas-udev.rules")
+        os.path.join(get_source_dir(), "..", "scripts", "99-platformio-udev.rules")
     )
     if not os.path.isfile(origin_path):
         return None

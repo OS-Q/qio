@@ -1,3 +1,16 @@
+# Copyright (c) 2014-present PlatformIO <contact@platformio.org>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 import os
 import re
@@ -43,20 +56,20 @@ class PlatformFactory(object):
             platform_name = pkg.metadata.name
 
         if not platform_dir or not os.path.isfile(
-            os.path.join(platform_dir, "link.json")
+            os.path.join(platform_dir, "platform.json")
         ):
             raise UnknownPlatform(pkg_or_spec)
 
         if not platform_name:
-            platform_name = fs.load_json(os.path.join(platform_dir, "link.json"))[
+            platform_name = fs.load_json(os.path.join(platform_dir, "platform.json"))[
                 "name"
             ]
 
         platform_cls = None
-        if os.path.isfile(os.path.join(platform_dir, "link.py")):
+        if os.path.isfile(os.path.join(platform_dir, "platform.py")):
             platform_cls = getattr(
                 cls.load_module(
-                    platform_name, os.path.join(platform_dir, "link.py")
+                    platform_name, os.path.join(platform_dir, "platform.py")
                 ),
                 cls.get_clsname(platform_name),
             )
@@ -65,6 +78,6 @@ class PlatformFactory(object):
                 str(cls.get_clsname(platform_name)), (PlatformBase,), {}
             )
 
-        _instance = platform_cls(os.path.join(platform_dir, "link.json"))
+        _instance = platform_cls(os.path.join(platform_dir, "platform.json"))
         assert isinstance(_instance, PlatformBase)
         return _instance

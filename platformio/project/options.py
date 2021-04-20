@@ -1,3 +1,16 @@
+# Copyright (c) 2014-present PlatformIO <contact@platformio.org>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 # pylint: disable=redefined-builtin, too-many-arguments
 
@@ -107,17 +120,17 @@ ProjectOptions = OrderedDict(
                 ),
                 oldnames=["home_dir"],
                 sysenvvar="PLATFORMIO_CORE_DIR",
-                default=os.path.join(fs.expanduser("~"), ".qio"),
+                default=os.path.join(fs.expanduser("~"), ".platformio"),
             ),
             ConfigPlatformioOption(
                 group="directory",
                 name="globallib_dir",
                 description=(
-                    "A library folder/storage where Library Dependency "
+                    "A library folder/storage where PlatformIO Library Dependency "
                     "Finder (LDF) looks for global libraries"
                 ),
                 sysenvvar="PLATFORMIO_GLOBALLIB_DIR",
-                default=os.path.join("$PROJECT_CORE_DIR", "libs"),
+                default=os.path.join("$PROJECT_CORE_DIR", "lib"),
             ),
             ConfigPlatformioOption(
                 group="directory",
@@ -168,7 +181,7 @@ ProjectOptions = OrderedDict(
                     "external library dependencies"
                 ),
                 sysenvvar="PLATFORMIO_WORKSPACE_DIR",
-                default=os.path.join("$PROJECT_DIR", ".qio"),
+                default=os.path.join("$PROJECT_DIR", ".pio"),
             ),
             ConfigPlatformioOption(
                 group="directory",

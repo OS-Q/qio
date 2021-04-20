@@ -1,3 +1,18 @@
+# Copyright (c) 2014-present PlatformIO <contact@platformio.org>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
 class PlatformioException(Exception):
 
     MESSAGE = None
@@ -40,8 +55,8 @@ class InvalidUdevRules(PlatformioException):
 class MissedUdevRules(InvalidUdevRules):
 
     MESSAGE = (
-        "Warning! Please install `99-qitas-udev.rules`. \nMore details: "
-        "https://docs.OS-Q.com/page/faq.html#platformio-udev-rules"
+        "Warning! Please install `99-platformio-udev.rules`. \nMore details: "
+        "https://docs.platformio.org/page/faq.html#platformio-udev-rules"
     )
 
 
@@ -50,7 +65,7 @@ class OutdatedUdevRules(InvalidUdevRules):
     MESSAGE = (
         "Warning! Your `{0}` are outdated. Please update or reinstall them."
         "\nMore details: "
-        "https://docs.OS-Q.com/page/faq.html#platformio-udev-rules"
+        "https://docs.platformio.org/page/faq.html#platformio-udev-rules"
     )
 
 
@@ -88,7 +103,7 @@ class CIBuildEnvsEmpty(UserSideException):
 
     MESSAGE = (
         "Can't find PlatformIO build environments.\n"
-        "Please specify `--board` or path to `link.ini` with "
+        "Please specify `--board` or path to `platformio.ini` with "
         "predefined environments using `--project-conf` option"
     )
 
@@ -99,7 +114,7 @@ class UpgradeError(PlatformioException):
 
 * Upgrade using `pip install -U platformio`
 * Try different installation/upgrading steps:
-  https://docs.OS-Q.com/page/installation.html
+  https://docs.platformio.org/page/installation.html
 """
 
 
@@ -128,6 +143,6 @@ class TestDirNotExists(UserSideException):
         "A test folder '{0}' does not exist.\nPlease create 'test' "
         "directory in project's root and put a test set.\n"
         "More details about Unit "
-        "Testing: https://docs.OS-Q.com/page/plus/"
+        "Testing: https://docs.platformio.org/page/plus/"
         "unit-testing.html"
     )

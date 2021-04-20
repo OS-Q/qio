@@ -1,3 +1,16 @@
+# Copyright (c) 2014-present PlatformIO <contact@platformio.org>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 # pylint: disable=too-many-arguments, too-many-locals, too-many-branches
 
@@ -12,6 +25,7 @@ from tabulate import tabulate
 from platformio import app, exception, fs, util
 from platformio.commands.test.embedded import EmbeddedTestProcessor
 from platformio.commands.test.native import NativeTestProcessor
+from platformio.platform.factory import PlatformFactory
 from platformio.project.config import ProjectConfig
 
 
@@ -115,9 +129,9 @@ def cli(  # pylint: disable=redefined-builtin
                     not environment and default_envs and envname not in default_envs,
                     testname != "*"
                     and patterns["filter"]
-                    and not any([fnmatch(testname, p) for p in patterns["filter"]]),
+                    and not any(fnmatch(testname, p) for p in patterns["filter"]),
                     testname != "*"
-                    and any([fnmatch(testname, p) for p in patterns["ignore"]]),
+                    and any(fnmatch(testname, p) for p in patterns["ignore"]),
                 ]
                 if any(skip_conditions):
                     results.append({"env": envname, "test": testname})
@@ -127,9 +141,9 @@ def cli(  # pylint: disable=redefined-builtin
                 print_processing_header(testname, envname)
 
                 cls = (
-                    NativeTestProcessor
-                    if config.get(section, "platform") == "native"
-                    else EmbeddedTestProcessor
+                    EmbeddedTestProcessor
+                    if is_embedded_platform(config.get(section, "platform"))
+                    else NativeTestProcessor
                 )
                 tp = cls(
                     ctx,
@@ -179,6 +193,12 @@ def get_test_names(test_dir):
     if not names:
         names = ["*"]
     return names
+
+
+def is_embedded_platform(name):
+    if not name:
+        return False
+    return PlatformFactory.new(name).is_embedded()
 
 
 def print_processing_header(test, env):
