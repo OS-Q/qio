@@ -536,6 +536,10 @@ class LibraryPropertiesManifestParser(BaseManifestParser):
             "esp32": "espressif32",
             "arc32": "intel_arc32",
             "stm32": "ststm32",
+            "avr": "P11",
+            "stm32": "P21",
+            "esp8266": "P51",
+            "esp32": "P52",
         }
         for arch in properties.get("architectures", "").split(","):
             if "particle-" in arch:

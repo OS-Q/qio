@@ -19,7 +19,7 @@ jobs:
         platform:
           - "51"
           - "52"
-          # - "68"
+          - "21"
         os: [ubuntu-latest, windows-latest, macos-latest]
         python: [3.7,3.9]
         package:
@@ -55,7 +55,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          repository: OSQ/T${{ matrix.platform }}A
+          repository: OS-Q/T${{ matrix.platform }}A
           token: ${{ secrets.OSQ_REPO_TOKEN }}
           path: T${{ matrix.platform }}
 
