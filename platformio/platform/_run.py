@@ -103,7 +103,7 @@ class PlatformRunMixin(object):
             "--jobs",
             str(jobs),
             "--sconstruct",
-            os.path.join(fs.get_source_dir(), "extend", "main.py"),
+            os.path.join(fs.get_source_dir(), "builder", "main.py"),
         ]
         args.append("PIOVERBOSE=%d" % (1 if self.verbose else 0))
         # pylint: disable=protected-access

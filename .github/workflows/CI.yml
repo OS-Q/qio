@@ -13,6 +13,21 @@ env:
 
 jobs:
   check:
+    name: check
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out
+      uses: actions/checkout@v2
+      with:
+        submodules: "recursive"
+
+    - name: python lint
+      uses: ricardochaves/python-lint@master
+      with:
+        python-root-list: "platformio"
+
+  build:
+    name: build
     if: github.repository == 'OS-Q/S03'
     strategy:
       fail-fast: false
@@ -53,9 +68,10 @@ jobs:
           pio run -d .
           echo "::set-output name=status::success"
 
-  check_fail:
+  build_fail:
     needs:
-      - check
+      - build
+    name: aftermath
     if: failure()
     runs-on: ubuntu-latest
     steps:
@@ -73,4 +89,4 @@ jobs:
           username: ${{secrets.MQTT_USERNAME}}
           password: ${{secrets.MQTT_PASSWORD}}
           topic: ${{github.repository}}/${{github.workflow}}
-          message: "check build fail"
+          message: "build fail"

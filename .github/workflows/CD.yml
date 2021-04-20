@@ -62,16 +62,16 @@ jobs:
           pio run -d .
           echo "::set-output name=status::success"
 
-      - name: notification
-        uses: Qful/mqtt-action@master
-        with:
-          protocol: mqtt
-          host: ${{secrets.MQTT_SERVER}}
-          port: 1883
-          username: ${{secrets.MQTT_USERNAME}}
-          password: ${{secrets.MQTT_PASSWORD}}
-          topic: ${{github.repository}}/${{github.workflow}}/${{ matrix.platforms }}/${{ matrix.templates }}
-          message: ${{steps.build.outputs.status}}
+      # - name: notification
+      #   uses: Qful/mqtt-action@master
+      #   with:
+      #     protocol: mqtt
+      #     host: ${{secrets.MQTT_SERVER}}
+      #     port: 1883
+      #     username: ${{secrets.MQTT_USERNAME}}
+      #     password: ${{secrets.MQTT_PASSWORD}}
+      #     topic: ${{github.repository}}/${{github.workflow}}/${{ matrix.platforms }}/${{ matrix.templates }}
+      #     message: ${{steps.build.outputs.status}}
 
       - name: delet tag
         run: |
