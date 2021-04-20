@@ -15,7 +15,7 @@ jobs:
         platforms:
           - "51"
           - "52"
-          # - "68"
+          - "21"
         templates:
           - "A"
 
@@ -121,23 +121,24 @@ jobs:
         id: tag
         if: startsWith(github.ref, 'refs/tags/')
         run: |
-          echo "::set-output name=release_tag::release_package_$(date +"%Y.%m.%d")_${GITHUB_REF/refs\/tags\//}"
+          echo "::set-output name=release_tag::release_qio_$(date +"%Y.%m.%d")_${GITHUB_REF/refs\/tags\//}"
           echo "::set-output name=status::success"
 
       - name: Package Src
         id: package
         run: |
-          echo "Platform S03 for GSM SoC" >> README.txt
-          echo $(date +"%Y.%m.%d") >> README.txt
-          echo ${GITHUB_REF/refs\/tags\//} >> README.txt
-          echo -e "www.OS-Q.com\n" >> README.txt
-          git log --stat -1 >> README.txt
+          echo "QIO software :" >> log.txt
+          echo $(date +"%Y.%m.%d") >> log.txt
+          echo ${GITHUB_REF/refs\/tags\//} >> log.txt
+          echo -e "www.OS-Q.com\n" >> log.txt
+          git log --stat -1 >> log.txt
           zip -r S03.zip platformio scripts setup.py
           echo "FIRMWARE=$PWD" >> $GITHUB_ENV
+          echo ${GITHUB_REF/refs\/tags\//} >> mail.md
           echo "::set-output name=status::success"
 
       - name: Upload Firmware
-        if: steps.package.outputs.status == 'success' && !cancelled()
+        if: steps.package.outputs.status == 'success' && && env.UPLOAD_BUILD
         uses: actions/upload-artifact@v2
         with:
           name: S03
@@ -153,7 +154,7 @@ jobs:
           tag_name: ${{ steps.tag.outputs.release_tag }}
           files: |
             ${{ env.FIRMWARE }}/S03.zip
-            ${{ env.FIRMWARE }}/README.txt
+            ${{ env.FIRMWARE }}/log.txt
 
       - name: Setup OSS
         uses: Qful/ossutil-action@master
@@ -169,21 +170,21 @@ jobs:
           echo "::set-output name=status::success"
 
       - name: Send Mail
-        if: steps.rebuild.outputs.status == 'success' && !cancelled()
+        if: steps.OSS.outputs.status == 'success' && !cancelled()
         uses: Qful/mail-action@master
         with:
           server_address:  smtp.gmail.com
           server_port: 465
           username: ${{secrets.MAIL_USERNAME}}
           password: ${{secrets.MAIL_PASSWORD}}
-          subject: OS-Q S03 released
+          subject: QIO released new version
           to: ${{secrets.MAIL_TO}}
           from: Qitas
           cc: ${{github.event.pusher.email}}
           content_type: text/html
           convert_markdown: true
-          attachments: S03.zip
-          body: file://README.md
+          attachments: log.txt
+          body: file://mail.md
 
   release_fail:
     needs:
@@ -207,7 +208,7 @@ jobs:
           topic: ${{github.repository}}/${{github.workflow}}/${GITHUB_REF/refs\/tags\//}
           message: "release fail"
 
-      - name: Delet tag
+      - name: Delet mark tag
         run: |
           git fetch
           git tag -d ${GITHUB_REF/refs\/tags\//}

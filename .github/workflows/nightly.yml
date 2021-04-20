@@ -1,8 +1,12 @@
 name: nightly
 
+# on:
+#   schedule:
+#     - cron: '0 9 * * *'
 on:
-  schedule:
-    - cron: '0 9 * * *'
+  push:
+    branches:
+      - master
 
 env:
   UPLOAD_BUILD: true

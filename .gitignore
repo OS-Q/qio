@@ -24,3 +24,5 @@ LICENSE*
 *.png
 *.jpg
 # !README.rst
+Makefile*
+MANIFEST*
