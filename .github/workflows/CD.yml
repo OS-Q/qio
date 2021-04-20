@@ -5,6 +5,8 @@ on:
     tags:
       - "v[0-9]+.[0-9]+.[0-9]+*"
 
+env:
+  UPLOAD_BUILD: false
 
 jobs:
   build:
@@ -138,7 +140,7 @@ jobs:
           echo "::set-output name=status::success"
 
       - name: Upload Firmware
-        if: steps.package.outputs.status == 'success' && && env.UPLOAD_BUILD
+        if: steps.package.outputs.status == 'success' && env.UPLOAD_BUILD
         uses: actions/upload-artifact@v2
         with:
           name: S03
@@ -213,3 +215,103 @@ jobs:
           git fetch
           git tag -d ${GITHUB_REF/refs\/tags\//}
           git push origin :refs/tags/${GITHUB_REF/refs\/tags\//}
+
+
+  check_release:
+    needs:
+      - release
+    if: success()
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        platforms:
+          - "51"
+          - "52"
+          - "21"
+        templates:
+          - "A"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: "recursive"
+
+      - name: Python 3.9
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.9
+
+      - name: Checkout platforms
+        uses: actions/checkout@v2
+        with:
+          repository: OS-Q/P${{ matrix.platforms }}
+          token: ${{ secrets.OSQ_REPO_TOKEN }}
+          path: P${{ matrix.platforms }}
+
+      - name: Checkout templates
+        uses: actions/checkout@v2
+        with:
+          repository: OS-Q/T${{ matrix.platforms }}${{ matrix.templates }}
+          token: ${{ secrets.OSQ_REPO_TOKEN }}
+          path: T${{ matrix.platforms }}${{ matrix.templates }}
+
+      - name: Install
+        working-directory: P${{ matrix.platforms }}
+        run: |
+          python -m pip install --upgrade pip
+          pip install -U https://github.com/OS-Q/S03/releases/latest/download/S03.zip
+          qio platform install file://.
+
+      - name: Build
+        working-directory: T${{ matrix.platforms }}${{ matrix.templates }}
+        if: success()
+        id: build
+        run: |
+          pio run -d .
+          echo "::set-output name=status::success"
+
+      - name: notification
+        uses: Qful/mqtt-action@master
+        with:
+          protocol: mqtt
+          host: ${{secrets.MQTT_SERVER}}
+          port: 1883
+          username: ${{secrets.MQTT_USERNAME}}
+          password: ${{secrets.MQTT_PASSWORD}}
+          topic: ${{github.repository}}/${{github.workflow}}/${{ matrix.platforms }}/${{ matrix.templates }}
+          message: ${{steps.build.outputs.status}}
+
+      - name: delet tag
+        run: |
+          git fetch
+          git tag -d ${GITHUB_REF/refs\/tags\//}
+          git push origin :refs/tags/${GITHUB_REF/refs\/tags\//}
+
+  ckeck_fail:
+    needs:
+      - check_release
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: "recursive"
+
+      - name: notification
+        uses: Qful/mqtt-action@master
+        with:
+          protocol: mqtt
+          host: ${{secrets.MQTT_SERVER}}
+          port: 1883
+          username: ${{secrets.MQTT_USERNAME}}
+          password: ${{secrets.MQTT_PASSWORD}}
+          topic: ${{github.repository}}/${{github.workflow}}
+          message: "check release fail"
+
+      - name: delet tag
+        if: success()
+        run: |
+          git fetch
+          git tag -d ${{ steps.tag.outputs.release_tag }}
+          git push origin :refs/tags/${{ steps.tag.outputs.release_tag }}
