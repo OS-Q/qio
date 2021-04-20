@@ -108,7 +108,7 @@ def cli(ctx, **options):
             continue
         with fs.cd(storage_dir):
             config = ProjectConfig.get_instance(
-                os.path.join(storage_dir, "platformio.ini")
+                os.path.join(storage_dir, "link.ini")
             )
             config.validate(options["environment"], silent=in_silence)
             libdeps_dir = config.get_optional_dir("libdeps")

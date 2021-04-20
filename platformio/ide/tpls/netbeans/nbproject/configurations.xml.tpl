@@ -66,7 +66,7 @@
           <preBuildCommand></preBuildCommand>
         </preBuild>
       </makefileType>
-      <item path="platformio.ini" ex="false" tool="3" flavor2="0">
+      <item path="link.ini" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
   </confs>

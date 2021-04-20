@@ -66,9 +66,9 @@ class RunOrTestClient(AsyncClientBase):
     def add_project_items(self, psync):
         with fs.cd(self.options["project_dir"]):
             cfg = ProjectConfig.get_instance(
-                os.path.join(self.options["project_dir"], "platformio.ini")
+                os.path.join(self.options["project_dir"], "link.ini")
             )
-            psync.add_item(cfg.path, "platformio.ini")
+            psync.add_item(cfg.path, "link.ini")
             psync.add_item(cfg.get_optional_dir("shared"), "shared")
             psync.add_item(cfg.get_optional_dir("boards"), "boards")
 

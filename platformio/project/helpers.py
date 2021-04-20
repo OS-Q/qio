@@ -32,7 +32,7 @@ def get_project_dir():
 def is_platformio_project(project_dir=None):
     if not project_dir:
         project_dir = get_project_dir()
-    return isfile(join(project_dir, "platformio.ini"))
+    return isfile(join(project_dir, "link.ini"))
 
 
 def find_project_dir_above(path):
@@ -48,14 +48,14 @@ def find_project_dir_above(path):
 def get_project_core_dir():
     """ Deprecated, use ProjectConfig.get_optional_dir("core") instead """
     return ProjectConfig.get_instance(
-        join(get_project_dir(), "platformio.ini")
+        join(get_project_dir(), "link.ini")
     ).get_optional_dir("core", exists=True)
 
 
 def get_project_cache_dir():
     """ Deprecated, use ProjectConfig.get_optional_dir("cache") instead """
     return ProjectConfig.get_instance(
-        join(get_project_dir(), "platformio.ini")
+        join(get_project_dir(), "link.ini")
     ).get_optional_dir("cache")
 
 
@@ -65,7 +65,7 @@ def get_project_global_lib_dir():
     "platformio-node-helpers" depends on it
     """
     return ProjectConfig.get_instance(
-        join(get_project_dir(), "platformio.ini")
+        join(get_project_dir(), "link.ini")
     ).get_optional_dir("globallib")
 
 
@@ -75,7 +75,7 @@ def get_project_lib_dir():
     "platformio-node-helpers" depends on it
     """
     return ProjectConfig.get_instance(
-        join(get_project_dir(), "platformio.ini")
+        join(get_project_dir(), "link.ini")
     ).get_optional_dir("lib")
 
 
@@ -85,7 +85,7 @@ def get_project_libdeps_dir():
     "platformio-node-helpers" depends on it
     """
     return ProjectConfig.get_instance(
-        join(get_project_dir(), "platformio.ini")
+        join(get_project_dir(), "link.ini")
     ).get_optional_dir("libdeps")
 
 

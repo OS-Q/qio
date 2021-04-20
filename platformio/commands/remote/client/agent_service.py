@@ -139,7 +139,7 @@ class RemoteAgentService(RemoteClientBase):
     ):
         assert options and "project_id" in options
         project_dir = join(self.working_dir, "projects", options["project_id"])
-        origin_pio_ini = join(project_dir, "platformio.ini")
+        origin_pio_ini = join(project_dir, "link.ini")
         back_pio_ini = join(project_dir, "platformio.ini.bak")
 
         # remove insecure project options

@@ -171,7 +171,7 @@ def project_init(
         )
         click.echo("%s - Put project source files here" % click.style("src", fg="cyan"))
         click.echo(
-            "%s - Project Configuration File" % click.style("platformio.ini", fg="cyan")
+            "%s - Project Configuration File" % click.style("link.ini", fg="cyan")
         )
 
     is_new_project = not is_platformio_project(project_dir)
@@ -188,7 +188,7 @@ def project_init(
     if ide:
         with fs.cd(project_dir):
             config = ProjectConfig.get_instance(
-                os.path.join(project_dir, "platformio.ini")
+                os.path.join(project_dir, "link.ini")
             )
         config.validate()
         pg = ProjectGenerator(
@@ -368,7 +368,7 @@ def update_board_envs(
     ctx, project_dir, board_ids, project_option, env_prefix, force_download
 ):
     config = ProjectConfig(
-        os.path.join(project_dir, "platformio.ini"), parse_extra=False
+        os.path.join(project_dir, "link.ini"), parse_extra=False
     )
     used_boards = []
     for section in config.sections():
@@ -427,7 +427,7 @@ def update_project_env(project_dir, environment, project_option):
     if not project_option:
         return
     config = ProjectConfig(
-        os.path.join(project_dir, "platformio.ini"), parse_extra=False
+        os.path.join(project_dir, "link.ini"), parse_extra=False
     )
 
     section = "env:%s" % environment

@@ -23,4 +23,4 @@ LICENSE*
 **/*README*
 *.png
 *.jpg
-!README.rst
+# !README.rst
