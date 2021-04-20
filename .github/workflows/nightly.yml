@@ -1,12 +1,12 @@
 name: nightly
 
-# on:
-#   schedule:
-#     - cron: '0 9 * * *'
 on:
-  push:
-    branches:
-      - master
+  schedule:
+    - cron: '0 9 * * *'
+# on:
+#   push:
+#     branches:
+#       - master
 
 env:
   UPLOAD_BUILD: true
@@ -64,8 +64,8 @@ jobs:
         working-directory: T${{ matrix.platform }}
         if: success()
         run: |
-          mkdir build
-          pio run -d . > build/log.txt
+          mkdir TEST_DIR
+          pio run -d . > TEST_DIR/log.txt
           echo "::set-output name=status::success"
 
       - name: Upload
@@ -73,4 +73,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: T${{ matrix.platform }}_${{ matrix.os }}_${{ matrix.python }}_${{ matrix.package }}
-          path: T${{ matrix.platform }}/build
+          path: T${{ matrix.platform }}/TEST_DIR
