@@ -12,19 +12,19 @@ env:
   UPLOAD_BUILD: false
 
 jobs:
-  check:
-    name: check
-    runs-on: ubuntu-latest
-    steps:
-    - name: Check out
-      uses: actions/checkout@v2
-      with:
-        submodules: "recursive"
+  # check:
+  #   name: check
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - name: Check out
+  #     uses: actions/checkout@v2
+  #     with:
+  #       submodules: "recursive"
 
-    - name: python lint
-      uses: ricardochaves/python-lint@master
-      with:
-        python-root-list: "platformio"
+  #   - name: python lint
+  #     uses: ricardochaves/python-lint@master
+  #     with:
+  #       python-root-list: "platformio"
 
   build:
     name: build
