@@ -71,6 +71,40 @@ jobs:
           topic: ${{github.repository}}/${{github.workflow}}/${{ matrix.platforms }}/${{ matrix.templates }}
           message: ${{steps.build.outputs.status}}
 
+      - name: delet tag
+        run: |
+          git fetch
+          git tag -d ${GITHUB_REF/refs\/tags\//}
+          git push origin :refs/tags/${GITHUB_REF/refs\/tags\//}
+
+  build_fail:
+    needs:
+      - build
+    if: failure() && startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: "recursive"
+
+      - name: notification
+        uses: Qful/mqtt-action@master
+        with:
+          protocol: mqtt
+          host: ${{secrets.MQTT_SERVER}}
+          port: 1883
+          username: ${{secrets.MQTT_USERNAME}}
+          password: ${{secrets.MQTT_PASSWORD}}
+          topic: ${{github.repository}}/${{github.workflow}}/${GITHUB_REF/refs\/tags\//}
+          message: "build fail"
+
+      - name: Delet tag
+        run: |
+          git fetch
+          git tag -d ${GITHUB_REF/refs\/tags\//}
+          git push origin :refs/tags/${GITHUB_REF/refs\/tags\//}
+
   release:
     needs:
       - build
@@ -150,3 +184,31 @@ jobs:
           convert_markdown: true
           attachments: S03.zip
           body: file://README.md
+
+  release_fail:
+    needs:
+      - release
+    if: failure() && startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: "recursive"
+
+      - name: notification
+        uses: Qful/mqtt-action@master
+        with:
+          protocol: mqtt
+          host: ${{secrets.MQTT_SERVER}}
+          port: 1883
+          username: ${{secrets.MQTT_USERNAME}}
+          password: ${{secrets.MQTT_PASSWORD}}
+          topic: ${{github.repository}}/${{github.workflow}}/${GITHUB_REF/refs\/tags\//}
+          message: "release fail"
+
+      - name: Delet tag
+        run: |
+          git fetch
+          git tag -d ${GITHUB_REF/refs\/tags\//}
+          git push origin :refs/tags/${GITHUB_REF/refs\/tags\//}
