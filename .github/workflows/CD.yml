@@ -14,7 +14,7 @@ jobs:
       matrix:
         platforms:
           - "51"
-          # - "52"
+          - "52"
           # - "68"
         templates:
           - "A"
@@ -61,7 +61,7 @@ jobs:
           echo "::set-output name=status::success"
 
       - name: notification
-        uses: stopstopstop/mqtt-action@master
+        uses: Qful/mqtt-action@master
         with:
           protocol: mqtt
           host: ${{secrets.MQTT_SERVER}}
@@ -111,7 +111,7 @@ jobs:
 
       - name: Upload Release
         id: upload-release
-        uses: stopstopstop/release-action@master
+        uses: Qful/release-action@master
         if: steps.tag.outputs.status == 'success' && !cancelled()
         env:
           GITHUB_TOKEN: ${{ secrets.OSQ_REPO_TOKEN }}
@@ -122,7 +122,7 @@ jobs:
             ${{ env.FIRMWARE }}/README.txt
 
       - name: Setup OSS
-        uses: stopstopstop/ossutil-action@master
+        uses: Qful/ossutil-action@master
         with:
           endpoint: ${{ secrets.OSS_ENDPOINT }}
           access-key-id: ${{ secrets.OSS_ACCESS_KEY_ID }}
@@ -131,12 +131,12 @@ jobs:
       - name: Upload To OSS
         id: OSS
         run: |
-          ossutil cp ${{ env.FIRMWARE }}/S03.zip ${{ secrets.OSS_BUCKET }} -rf
+          ossutil cp ${{ env.FIRMWARE }}/S03.zip ${{ secrets.OSS_S_BUCKET }} -rf
           echo "::set-output name=status::success"
 
       - name: Send Mail
         if: steps.rebuild.outputs.status == 'success' && !cancelled()
-        uses: stopstopstop/mail-action@master
+        uses: Qful/mail-action@master
         with:
           server_address:  smtp.gmail.com
           server_port: 465

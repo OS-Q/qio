@@ -71,7 +71,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: notification
-        uses: stopstopstop/mqtt-action@master
+        uses: Qful/mqtt-action@master
         with:
           protocol: mqtt
           host: ${{secrets.MQTT_SERVER}}

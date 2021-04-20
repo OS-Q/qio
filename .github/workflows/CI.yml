@@ -8,8 +8,12 @@ on:
       - '**.md'
       # - '**.yml'
 
+env:
+  UPLOAD_BUILD: false
+
 jobs:
   check:
+    if: github.repository == 'OS-Q/S03'
     strategy:
       fail-fast: false
       matrix:
@@ -48,3 +52,25 @@ jobs:
         run: |
           pio run -d .
           echo "::set-output name=status::success"
+
+  check_fail:
+    needs:
+      - check
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: "recursive"
+
+      - name: notification
+        uses: Qful/mqtt-action@master
+        with:
+          protocol: mqtt
+          host: ${{secrets.MQTT_SERVER}}
+          port: 1883
+          username: ${{secrets.MQTT_USERNAME}}
+          password: ${{secrets.MQTT_PASSWORD}}
+          topic: ${{github.repository}}/${{github.workflow}}
+          message: "check build fail"
