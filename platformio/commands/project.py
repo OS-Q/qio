@@ -313,7 +313,7 @@ For example, see a structure of the following two libraries `Foo` and `Bar`:
 |  |
 |  |- README --> THIS FILE
 |
-|- platformio.ini
+|- link.ini
 |--src
    |- main.c
 

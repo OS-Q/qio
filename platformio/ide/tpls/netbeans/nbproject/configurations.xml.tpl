@@ -2,7 +2,7 @@
 <configurationDescriptor version="97">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <df root="." name="0">
-      <in>platformio.ini</in>
+      <in>link.ini</in>
     </df>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

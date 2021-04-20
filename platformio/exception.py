@@ -103,7 +103,7 @@ class CIBuildEnvsEmpty(UserSideException):
 
     MESSAGE = (
         "Can't find PlatformIO build environments.\n"
-        "Please specify `--board` or path to `platformio.ini` with "
+        "Please specify `--board` or path to `link.ini` with "
         "predefined environments using `--project-conf` option"
     )
 

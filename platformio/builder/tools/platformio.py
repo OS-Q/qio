@@ -154,7 +154,7 @@ def ProcessProjectDeps(env):
 
     # CPPPATH from dependencies
     projenv.PrependUnique(CPPPATH=project_lib_builder.env.get("CPPPATH"))
-    # extra build flags from `platformio.ini`
+    # extra build flags from `link.ini`
     projenv.ProcessFlags(env.get("SRC_BUILD_FLAGS"))
 
     is_test = "__test" in COMMAND_LINE_TARGETS
@@ -318,7 +318,7 @@ def BuildFrameworks(env, frameworks):
 
     if "BOARD" not in env:
         sys.stderr.write(
-            "Please specify `board` in `platformio.ini` to use "
+            "Please specify `board` in `link.ini` to use "
             "with '%s' framework\n" % ", ".join(frameworks)
         )
         env.Exit(1)
@@ -328,7 +328,7 @@ def BuildFrameworks(env, frameworks):
         if board_frameworks:
             frameworks.insert(0, board_frameworks[0])
         else:
-            sys.stderr.write("Error: Please specify `board` in `platformio.ini`\n")
+            sys.stderr.write("Error: Please specify `board` in `link.ini`\n")
             env.Exit(1)
 
     for f in frameworks:
