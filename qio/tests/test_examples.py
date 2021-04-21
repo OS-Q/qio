@@ -46,7 +46,7 @@ def pytest_generate_tests(metafunc):
     for examples_dir in examples_dirs:
         candidates = {}
         for root, _, files in os.walk(examples_dir):
-            if "platformio.ini" not in files or ".skiptest" in files:
+            if "link.ini" not in files or ".skiptest" in files:
                 continue
             if "zephyr-" in root and PY2:
                 continue

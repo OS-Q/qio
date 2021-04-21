@@ -40,7 +40,7 @@ def test_local_env():
 def test_multiple_env_build(clirunner, validate_cliresult, tmpdir):
 
     project_dir = tmpdir.mkdir("project")
-    project_dir.join("platformio.ini").write(
+    project_dir.join("link.ini").write(
         """
 [env:teensy31]
 platform = teensy
@@ -86,7 +86,7 @@ void loop() {}
 def test_setup_teardown_are_compilable(clirunner, validate_cliresult, tmpdir):
 
     project_dir = tmpdir.mkdir("project")
-    project_dir.join("platformio.ini").write(
+    project_dir.join("link.ini").write(
         """
 [env:embedded]
 platform = ststm32

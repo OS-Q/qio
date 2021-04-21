@@ -51,7 +51,7 @@ def test_ci_build_dir(clirunner, tmpdir_factory, validate_cliresult):
         ],
     )
     validate_cliresult(result)
-    assert not isfile(join(build_dir, "platformio.ini"))
+    assert not isfile(join(build_dir, "link.ini"))
 
 
 def test_ci_keep_build_dir(clirunner, tmpdir_factory, validate_cliresult):
@@ -68,7 +68,7 @@ def test_ci_keep_build_dir(clirunner, tmpdir_factory, validate_cliresult):
         ],
     )
     validate_cliresult(result)
-    assert isfile(join(build_dir, "platformio.ini"))
+    assert isfile(join(build_dir, "link.ini"))
 
     # 2nd attempt
     result = clirunner.invoke(
@@ -95,7 +95,7 @@ def test_ci_project_conf(clirunner, validate_cliresult):
         [
             join(project_dir, "src", "main.cpp"),
             "--project-conf",
-            join(project_dir, "platformio.ini"),
+            join(project_dir, "link.ini"),
         ],
     )
     validate_cliresult(result)

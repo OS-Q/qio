@@ -23,7 +23,7 @@ from platformio.project.exception import ProjectEnvsNotAvailableError
 
 
 def validate_pioproject(pioproject_dir):
-    pioconf_path = join(pioproject_dir, "platformio.ini")
+    pioconf_path = join(pioproject_dir, "link.ini")
     assert isfile(pioconf_path) and getsize(pioconf_path) > 0
     assert isdir(join(pioproject_dir, "src")) and isdir(join(pioproject_dir, "lib"))
 
@@ -50,7 +50,7 @@ def test_init_duplicated_boards(clirunner, validate_cliresult, tmpdir):
             result = clirunner.invoke(cmd_init, ["-b", "uno", "-b", "uno"])
             validate_cliresult(result)
             validate_pioproject(str(tmpdir))
-        config = ProjectConfig(join(getcwd(), "platformio.ini"))
+        config = ProjectConfig(join(getcwd(), "link.ini"))
         config.validate()
         assert set(config.sections()) == set(["env:uno"])
 
@@ -124,7 +124,7 @@ def test_init_special_board(clirunner, validate_cliresult):
         validate_cliresult(result)
         boards = json.loads(result.output)
 
-        config = ProjectConfig(join(getcwd(), "platformio.ini"))
+        config = ProjectConfig(join(getcwd(), "link.ini"))
         config.validate()
 
         expected_result = dict(
@@ -145,7 +145,7 @@ def test_init_enable_auto_uploading(clirunner, validate_cliresult):
         )
         validate_cliresult(result)
         validate_pioproject(getcwd())
-        config = ProjectConfig(join(getcwd(), "platformio.ini"))
+        config = ProjectConfig(join(getcwd(), "link.ini"))
         config.validate()
         expected_result = dict(
             targets=["upload"], platform="atmelavr", board="uno", framework=["arduino"]
@@ -163,7 +163,7 @@ def test_init_custom_framework(clirunner, validate_cliresult):
         )
         validate_cliresult(result)
         validate_pioproject(getcwd())
-        config = ProjectConfig(join(getcwd(), "platformio.ini"))
+        config = ProjectConfig(join(getcwd(), "link.ini"))
         config.validate()
         expected_result = dict(platform="teensy", board="teensy31", framework=["mbed"])
         assert config.has_section("env:teensy31")

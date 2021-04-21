@@ -22,7 +22,7 @@ def test_build_flags(clirunner, validate_cliresult, tmpdir):
         ('-DTEST_STR_SPACE="Andrew Smith"', '"-DTEST_STR_SPACE=Andrew Smith"'),
     ]
 
-    tmpdir.join("platformio.ini").write(
+    tmpdir.join("link.ini").write(
         """
 [env:native]
 platform = native
@@ -73,7 +73,7 @@ int main() {
 
 
 def test_build_unflags(clirunner, validate_cliresult, tmpdir):
-    tmpdir.join("platformio.ini").write(
+    tmpdir.join("link.ini").write(
         """
 [env:native]
 platform = native
@@ -115,7 +115,7 @@ int main() {
 
 
 def test_debug_default_build_flags(clirunner, validate_cliresult, tmpdir):
-    tmpdir.join("platformio.ini").write(
+    tmpdir.join("link.ini").write(
         """
 [env:native]
 platform = native
@@ -147,7 +147,7 @@ int main() {
 def test_debug_custom_build_flags(clirunner, validate_cliresult, tmpdir):
     custom_debug_build_flags = ("-O3", "-g3", "-ggdb3")
 
-    tmpdir.join("platformio.ini").write(
+    tmpdir.join("link.ini").write(
         """
 [env:native]
 platform = native

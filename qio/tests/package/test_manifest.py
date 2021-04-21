@@ -1,17 +1,3 @@
-# Copyright (c) 2014-present PlatformIO <contact@platformio.org>
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#    http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
 import os
 import re
 import tarfile
@@ -713,10 +699,10 @@ def test_examples_from_dir(tmpdir_factory):
     # PlatformIO project #1
     pio_dir = examples_dir.mkdir("PlatformIO").mkdir("hello")
     pio_dir.join(".vimrc").write("")
-    pio_ini = pio_dir.join("platformio.ini")
+    pio_ini = pio_dir.join("link.ini")
     pio_ini.write("")
     if not WINDOWS:
-        pio_dir.join("platformio.ini.copy").mksymlinkto(pio_ini)
+        pio_dir.join("link.ini.copy").mksymlinkto(pio_ini)
     pio_dir.mkdir("include").join("main.h").write("")
     pio_dir.mkdir("src").join("main.cpp").write("")
 
@@ -733,7 +719,7 @@ def test_examples_from_dir(tmpdir_factory):
 
     # PlatformIO project #2
     pio_dir = examples_dir.mkdir("world")
-    pio_dir.join("platformio.ini").write("")
+    pio_dir.join("link.ini").write("")
     pio_dir.join("README").write("")
     pio_dir.join("extra.py").write("")
     pio_dir.mkdir("include").join("world.h").write("")
@@ -776,7 +762,7 @@ def test_examples_from_dir(tmpdir_factory):
                         "name": "PlatformIO/hello",
                         "base": os.path.join("examples", "PlatformIO", "hello"),
                         "files": [
-                            "platformio.ini",
+                            "link.ini",
                             os.path.join("include", "main.h"),
                             os.path.join("src", "main.cpp"),
                         ],
@@ -800,7 +786,7 @@ def test_examples_from_dir(tmpdir_factory):
                         "name": "world",
                         "base": "examples/world",
                         "files": [
-                            "platformio.ini",
+                            "link.ini",
                             os.path.join("include", "world.h"),
                             os.path.join("src", "world.c"),
                             "README",

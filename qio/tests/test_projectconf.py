@@ -1,19 +1,3 @@
-# Copyright (c) 2014-present PlatformIO <contact@platformio.org>
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#    http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
-# pylint: disable=redefined-outer-name
-
 import os
 
 import pytest
@@ -94,15 +78,15 @@ build_flags = -Og
 @pytest.fixture(scope="module")
 def config(tmpdir_factory):
     tmpdir = tmpdir_factory.mktemp("project")
-    tmpdir.join("platformio.ini").write(BASE_CONFIG)
+    tmpdir.join("link.ini").write(BASE_CONFIG)
     tmpdir.join("extra_envs.ini").write(EXTRA_ENVS_CONFIG)
     tmpdir.join("extra_debug.ini").write(EXTRA_DEBUG_CONFIG)
     with tmpdir.as_cwd():
-        return ProjectConfig(tmpdir.join("platformio.ini").strpath)
+        return ProjectConfig(tmpdir.join("link.ini").strpath)
 
 
 def test_empty_config():
-    config = ProjectConfig("/non/existing/platformio.ini")
+    config = ProjectConfig("/non/existing/link.ini")
     # unknown section
     with pytest.raises(InvalidProjectConfError):
         config.get("unknown_section", "unknown_option")
@@ -327,7 +311,7 @@ def test_items(config):
 
 def test_update_and_save(tmpdir_factory):
     tmpdir = tmpdir_factory.mktemp("project")
-    tmpdir.join("platformio.ini").write(
+    tmpdir.join("link.ini").write(
         """
 [platformio]
 extra_configs = a.ini, b.ini
@@ -336,7 +320,7 @@ extra_configs = a.ini, b.ini
 board = myboard
     """
     )
-    config = ProjectConfig(tmpdir.join("platformio.ini").strpath)
+    config = ProjectConfig(tmpdir.join("link.ini").strpath)
     assert config.envs() == ["myenv"]
     assert config.as_tuple()[0][1][0][1] == ["a.ini", "b.ini"]
 
@@ -355,7 +339,7 @@ board = myboard
     ]
 
     config.save()
-    contents = tmpdir.join("platformio.ini").read()
+    contents = tmpdir.join("link.ini").read()
     assert contents[-4:] == "yes\n"
     lines = [
         line.strip()
@@ -376,7 +360,7 @@ board = myboard
 
 def test_update_and_clear(tmpdir_factory):
     tmpdir = tmpdir_factory.mktemp("project")
-    tmpdir.join("platformio.ini").write(
+    tmpdir.join("link.ini").write(
         """
 [platformio]
 extra_configs = a.ini, b.ini
@@ -385,7 +369,7 @@ extra_configs = a.ini, b.ini
 board = myboard
     """
     )
-    config = ProjectConfig(tmpdir.join("platformio.ini").strpath)
+    config = ProjectConfig(tmpdir.join("link.ini").strpath)
     assert config.sections() == ["platformio", "env:myenv"]
     config.update([["mysection", [("opt1", "value1"), ("opt2", "value2")]]], clear=True)
     assert config.as_tuple() == [
@@ -395,11 +379,11 @@ board = myboard
 
 def test_dump(tmpdir_factory):
     tmpdir = tmpdir_factory.mktemp("project")
-    tmpdir.join("platformio.ini").write(BASE_CONFIG)
+    tmpdir.join("link.ini").write(BASE_CONFIG)
     tmpdir.join("extra_envs.ini").write(EXTRA_ENVS_CONFIG)
     tmpdir.join("extra_debug.ini").write(EXTRA_DEBUG_CONFIG)
     config = ProjectConfig(
-        tmpdir.join("platformio.ini").strpath,
+        tmpdir.join("link.ini").strpath,
         parse_extra=False,
         expand_interpolations=False,
     )

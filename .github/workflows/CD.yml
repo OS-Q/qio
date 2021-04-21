@@ -47,11 +47,11 @@ jobs:
           path: T${{ matrix.platforms }}${{ matrix.templates }}
 
       - name: Install platforms
-        if: github.repository == 'OS-Q/S03'
+        if: github.repository == 'OS-Q/M03'
         working-directory: P${{ matrix.platforms }}
         run: |
           python -m pip install --upgrade pip
-          pip install -U https://github.com/OS-Q/S03/archive/master.zip
+          pip install -U https://github.com/OS-Q/M03/archive/master.zip
           qio platform install file://.
 
       - name: Build
@@ -134,7 +134,7 @@ jobs:
           echo ${GITHUB_REF/refs\/tags\//} >> log.txt
           echo -e "www.OS-Q.com\n" >> log.txt
           git log --stat -1 >> log.txt
-          zip -r S03.zip platformio scripts setup.py
+          zip -r M03.zip platformio scripts setup.py
           echo "FIRMWARE=$PWD" >> $GITHUB_ENV
           echo ${GITHUB_REF/refs\/tags\//} >> mail.md
           echo "::set-output name=status::success"
@@ -143,8 +143,8 @@ jobs:
         if: steps.package.outputs.status == 'success' && env.UPLOAD_BUILD
         uses: actions/upload-artifact@v2
         with:
-          name: S03
-          path: ${{ env.FIRMWARE }}/S03.zip
+          name: M03
+          path: ${{ env.FIRMWARE }}/M03.zip
 
       - name: Upload Release
         id: upload-release
@@ -155,7 +155,7 @@ jobs:
         with:
           tag_name: ${{ steps.tag.outputs.release_tag }}
           files: |
-            ${{ env.FIRMWARE }}/S03.zip
+            ${{ env.FIRMWARE }}/M03.zip
             ${{ env.FIRMWARE }}/log.txt
 
       - name: Setup OSS
@@ -168,7 +168,7 @@ jobs:
       - name: Upload To OSS
         id: OSS
         run: |
-          ossutil cp ${{ env.FIRMWARE }}/S03.zip ${{ secrets.OSS_S_BUCKET }} -rf
+          ossutil cp ${{ env.FIRMWARE }}/M03.zip ${{ secrets.OSS_S_BUCKET }} -rf
           echo "::set-output name=status::success"
 
       - name: Send Mail
@@ -259,7 +259,7 @@ jobs:
         working-directory: P${{ matrix.platforms }}
         run: |
           python -m pip install --upgrade pip
-          pip install -U https://github.com/OS-Q/S03/releases/latest/download/S03.zip
+          pip install -U https://github.com/OS-Q/M03/releases/latest/download/M03.zip
           qio platform install file://.
 
       - name: Build

@@ -76,7 +76,7 @@ EXPECTED_DEFECTS = EXPECTED_ERRORS + EXPECTED_WARNINGS + EXPECTED_STYLE
 @pytest.fixture(scope="module")
 def check_dir(tmpdir_factory):
     tmpdir = tmpdir_factory.mktemp("project")
-    tmpdir.join("platformio.ini").write(DEFAULT_CONFIG)
+    tmpdir.join("link.ini").write(DEFAULT_CONFIG)
     tmpdir.mkdir("src").join("main.cpp").write(TEST_CODE)
     return tmpdir
 
@@ -124,7 +124,7 @@ def test_check_tool_defines_passed(clirunner, check_dir):
 
 def test_check_language_standard_definition_passed(clirunner, tmpdir):
     config = DEFAULT_CONFIG + "\nbuild_flags = -std=c++17"
-    tmpdir.join("platformio.ini").write(config)
+    tmpdir.join("link.ini").write(config)
     tmpdir.mkdir("src").join("main.cpp").write(TEST_CODE)
     result = clirunner.invoke(cmd_check, ["--project-dir", str(tmpdir), "-v"])
 
@@ -172,7 +172,7 @@ def test_check_custom_pattern_absolute_path(
     clirunner, validate_cliresult, tmpdir_factory
 ):
     project_dir = tmpdir_factory.mktemp("project")
-    project_dir.join("platformio.ini").write(DEFAULT_CONFIG)
+    project_dir.join("link.ini").write(DEFAULT_CONFIG)
 
     check_dir = tmpdir_factory.mktemp("custom_src_dir")
     check_dir.join("main.cpp").write(TEST_CODE)
@@ -193,7 +193,7 @@ def test_check_custom_pattern_relative_path(
     clirunner, validate_cliresult, tmpdir_factory
 ):
     tmpdir = tmpdir_factory.mktemp("project")
-    tmpdir.join("platformio.ini").write(DEFAULT_CONFIG)
+    tmpdir.join("link.ini").write(DEFAULT_CONFIG)
 
     tmpdir.mkdir("app").join("main.cpp").write(TEST_CODE)
     tmpdir.mkdir("prj").join("test.cpp").write(TEST_CODE)
@@ -209,7 +209,7 @@ def test_check_custom_pattern_relative_path(
 
 
 def test_check_no_source_files(clirunner, tmpdir):
-    tmpdir.join("platformio.ini").write(DEFAULT_CONFIG)
+    tmpdir.join("link.ini").write(DEFAULT_CONFIG)
     tmpdir.mkdir("src")
 
     result = clirunner.invoke(cmd_check, ["--project-dir", str(tmpdir)])
@@ -236,7 +236,7 @@ def test_check_bad_flag_passed(clirunner, check_dir):
 
 
 def test_check_success_if_no_errors(clirunner, validate_cliresult, tmpdir):
-    tmpdir.join("platformio.ini").write(DEFAULT_CONFIG)
+    tmpdir.join("link.ini").write(DEFAULT_CONFIG)
     tmpdir.mkdir("src").join("main.c").write(
         """
 #include <stdlib.h>
@@ -271,7 +271,7 @@ def test_check_individual_flags_passed(clirunner, validate_cliresult, tmpdir):
     pvs-studio: --analysis-mode=4
 """
 
-    tmpdir.join("platformio.ini").write(config)
+    tmpdir.join("link.ini").write(config)
     tmpdir.mkdir("src").join("main.cpp").write(
         PVS_STUDIO_FREE_LICENSE_HEADER + TEST_CODE
     )
@@ -341,7 +341,7 @@ R21.4 text.
 
 def test_check_fails_on_defects_only_with_flag(clirunner, validate_cliresult, tmpdir):
     config = DEFAULT_CONFIG + "\ncheck_tool = cppcheck, clangtidy"
-    tmpdir.join("platformio.ini").write(config)
+    tmpdir.join("link.ini").write(config)
     tmpdir.mkdir("src").join("main.cpp").write(TEST_CODE)
 
     default_result = clirunner.invoke(cmd_check, ["--project-dir", str(tmpdir)])
@@ -358,7 +358,7 @@ def test_check_fails_on_defects_only_on_specified_level(
     clirunner, validate_cliresult, tmpdir
 ):
     config = DEFAULT_CONFIG + "\ncheck_tool = cppcheck, clangtidy"
-    tmpdir.join("platformio.ini").write(config)
+    tmpdir.join("link.ini").write(config)
     tmpdir.mkdir("src").join("main.c").write(
         """
 #include <stdlib.h>
@@ -395,7 +395,7 @@ framework = arduino
 check_tool = pvs-studio
 """
 
-    tmpdir.join("platformio.ini").write(config)
+    tmpdir.join("link.ini").write(config)
     tmpdir.mkdir("src").join("main.c").write(PVS_STUDIO_FREE_LICENSE_HEADER + TEST_CODE)
 
     result = clirunner.invoke(
@@ -413,7 +413,7 @@ check_tool = pvs-studio
 def test_check_pvs_studio_fails_without_license(clirunner, tmpdir):
     config = DEFAULT_CONFIG + "\ncheck_tool = pvs-studio"
 
-    tmpdir.join("platformio.ini").write(config)
+    tmpdir.join("link.ini").write(config)
     tmpdir.mkdir("src").join("main.c").write(TEST_CODE)
 
     default_result = clirunner.invoke(cmd_check, ["--project-dir", str(tmpdir)])
@@ -434,7 +434,7 @@ board = nucleo_f401re
 framework = %s
 check_tool = %s
 """
-    # tmpdir.join("platformio.ini").write(config)
+    # tmpdir.join("link.ini").write(config)
     tmpdir.mkdir("src").join("main.c").write(
         PVS_STUDIO_FREE_LICENSE_HEADER
         + """
@@ -458,7 +458,7 @@ int main() {
 
     for framework in frameworks:
         for tool in ("cppcheck", "clangtidy", "pvs-studio"):
-            tmpdir.join("platformio.ini").write(config % (framework, tool))
+            tmpdir.join("link.ini").write(config % (framework, tool))
             result = clirunner.invoke(cmd_check, ["--project-dir", str(tmpdir)])
             validate_cliresult(result)
             defects = sum(count_defects(result.output))
@@ -476,7 +476,7 @@ board = nrf52_dk
 framework = arduino
 """
 
-    tmpdir.join("platformio.ini").write(config)
+    tmpdir.join("link.ini").write(config)
     tmpdir.mkdir("src").join("main.c").write(TEST_CODE)
 
     result = clirunner.invoke(
@@ -495,7 +495,7 @@ framework = arduino
 
 def test_check_multiline_error(clirunner, tmpdir_factory):
     project_dir = tmpdir_factory.mktemp("project")
-    project_dir.join("platformio.ini").write(DEFAULT_CONFIG)
+    project_dir.join("link.ini").write(DEFAULT_CONFIG)
 
     project_dir.mkdir("include").join("main.h").write(
         """
@@ -526,7 +526,7 @@ int main() {}
 def test_check_handles_spaces_in_paths(clirunner, validate_cliresult, tmpdir_factory):
     tmpdir = tmpdir_factory.mktemp("project dir")
     config = DEFAULT_CONFIG + "\ncheck_tool = cppcheck, clangtidy, pvs-studio"
-    tmpdir.join("platformio.ini").write(config)
+    tmpdir.join("link.ini").write(config)
     tmpdir.mkdir("src").join("main.cpp").write(
         PVS_STUDIO_FREE_LICENSE_HEADER + TEST_CODE
     )
