@@ -1,5 +1,6 @@
 examples/
-# tests/
+tests/
+!/qio/tests/
 docs/
 dist
 build
@@ -14,15 +15,15 @@ htmlcov
 .pioenvs
 .tox
 *__pyc*
-*.vscode/
+*.vscode
 *.html
 *.rst
 *CONTRIBUTING*
 *readthedocs*
 LICENSE*
-**/*README*
+/**/*README*
+!README.md
 *.png
 *.jpg
-# !README.rst
 Makefile*
 MANIFEST*
