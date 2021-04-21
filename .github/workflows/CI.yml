@@ -27,6 +27,7 @@ jobs:
   #       python-root-list: "platformio"
 
   build:
+    name: tox
     strategy:
       fail-fast: false
       matrix:
@@ -56,12 +57,10 @@ jobs:
           PIO_INSTALL_DEVPLATFORMS_IGNORE: "ststm8,intel_mcs51"
         run: |
           sudo apt-get install libc6-i386
-          # Free space
           sudo apt clean
           docker rmi $(docker image ls -aq)
           df -h
-          # Run
-          tox -e testexamples
+          tox -e lint
 
       - name: Run on macOS
         working-directory: qio
@@ -71,7 +70,7 @@ jobs:
           PIO_INSTALL_DEVPLATFORMS_IGNORE: "ststm8,lattice_ice40,gd32v"
         run: |
           df -h
-          tox -e testexamples
+          tox -e testcore
 
       - name: Run on Windows
         working-directory: qio
@@ -129,7 +128,7 @@ jobs:
 
   build_fail:
     needs:
-      - build
+      - templete
     name: aftermath
     if: failure()
     runs-on: ubuntu-latest
