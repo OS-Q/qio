@@ -65,7 +65,7 @@ DEFAULT_ENV_OPTIONS = dict(
         "pioide",
         "piosize",
     ],
-    toolpath=[join(fs.get_source_dir(), "extend", "tools")],
+    toolpath=[join(fs.get_source_dir(), "builder", "tools")],
     variables=clivars,
     # Propagating External Environment
     ENV=environ,

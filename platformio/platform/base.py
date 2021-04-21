@@ -123,7 +123,7 @@ class PlatformBase(  # pylint: disable=too-many-instance-attributes,too-many-pub
         return os.path.dirname(self.manifest_path)
 
     def get_build_script(self):
-        main_script = os.path.join(self.get_dir(), "extend", "main.py")
+        main_script = os.path.join(self.get_dir(), "builder", "main.py")
         if os.path.isfile(main_script):
             return main_script
         raise NotImplementedError()
