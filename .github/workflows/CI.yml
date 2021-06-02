@@ -4,28 +4,11 @@ on:
   push:
     branches:
       - master
-    paths-ignore:
-      - '**.md'
-      # - '**.yml'
 
 env:
   UPLOAD_BUILD: false
 
 jobs:
-  # check:
-  #   name: check
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #   - name: Check out
-  #     uses: actions/checkout@v2
-  #     with:
-  #       submodules: "recursive"
-
-  #   - name: python lint
-  #     uses: ricardochaves/python-lint@master
-  #     with:
-  #       python-root-list: "platformio"
-
   build:
     name: tox
     strategy:
@@ -38,6 +21,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: "recursive"
+          fetch-depth: 1
 
       - name: Set up Python
         uses: actions/setup-python@v2
@@ -90,12 +74,12 @@ jobs:
       fail-fast: false
       matrix:
         platform:
-          # - "21"
-          - "51"
-          # - "52"
-        template:
-          - "A"
-          - "B"
+          - "211"
+          - "511"
+          - "111"
+        # template:
+        #   - "A"
+        #   - "B"
         os: [ubuntu-latest, windows-latest, macos-latest]
 
     runs-on: ${{ matrix.os }}
@@ -109,42 +93,42 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -U https://github.com/OS-Q/M03/archive/master.zip
-          pio platform install https://github.com/OS-Q/P${{ matrix.platform }}/releases/latest/download/P${{ matrix.platform }}.zip
+          pio platform install https://github.com/OS-Q/P${{ matrix.platform }}/archive/master.zip
 
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          repository: OS-Q/T${{ matrix.platform }}${{ matrix.template }}
-          token: ${{ secrets.OSQ_REPO_TOKEN }}
-          path: T${{ matrix.platform }}${{ matrix.template }}
+      # - name: Checkout
+      #   uses: actions/checkout@v2
+      #   with:
+      #     repository: OS-Q/T${{ matrix.platform }}${{ matrix.template }}
+      #     token: ${{ secrets.OSQ_REPO_TOKEN }}
+      #     path: T${{ matrix.platform }}${{ matrix.template }}
 
-      - name: Build
-        working-directory: T${{ matrix.platform }}${{ matrix.template }}
-        if: success()
-        id: build
-        run: |
-          pio run -d .
-          echo "::set-output name=status::success"
+      # - name: Build
+      #   working-directory: T${{ matrix.platform }}${{ matrix.template }}
+      #   if: success()
+      #   id: build
+      #   run: |
+      #     pio run -d .
+      #     echo "::set-output name=status::success"
 
-  build_fail:
-    needs:
-      - templete
-    name: aftermath
-    if: failure()
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          submodules: "recursive"
+  # build_fail:
+  #   needs:
+  #     - templete
+  #   name: aftermath
+  #   if: failure()
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
+  #       with:
+  #         submodules: "recursive"
 
-      - name: notification
-        uses: Qful/mqtt-action@master
-        with:
-          protocol: mqtt
-          host: ${{secrets.MQTT_SERVER}}
-          port: 1883
-          username: ${{secrets.MQTT_USERNAME}}
-          password: ${{secrets.MQTT_PASSWORD}}
-          topic: ${{github.repository}}/${{github.workflow}}
-          message: "build fail"
+  #     - name: notification
+  #       uses: Qful/mqtt-action@master
+  #       with:
+  #         protocol: mqtt
+  #         host: ${{secrets.MQTT_SERVER}}
+  #         port: 1883
+  #         username: ${{secrets.MQTT_USERNAME}}
+  #         password: ${{secrets.MQTT_PASSWORD}}
+  #         topic: ${{github.repository}}/${{github.workflow}}
+  #         message: "build fail"
