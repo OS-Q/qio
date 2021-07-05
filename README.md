@@ -13,77 +13,44 @@
 
 通过硬件索引完成对平台的推导，降低配置项目(明确的硬件版本，不适用于同步替换的设计逻辑)
 
+3-6-9种设计规格,融合板级文件，便于实现一些板级功能定义
+
 ### [QIO拓扑](https://github.com/M03)
 
-| Class 1 | platform 1 | platform 2 | platform 3 | platform 4 | platform 5 | platform 6 | platform 7 | platform 8 | platform 9 |
-| ------- | ------- | ------- | ------- | ------- | ------- | ------- | ------- | ------- | ------- |
-| hardware 1 | [AVR](https://github.com/OS-Q/P111) | [STC](https://github.com/OS-Q/P121) | [STM8S](https://github.com/OS-Q/P131) | [WCH](https://github.com/OS-Q/P141) | [LGT](https://github.com/OS-Q/P151) |    X    |    X    |    X    |    X    |
-| hardware 2 |     √   |    √    |    √    |    X    |     X   |    X    |
-| hardware 3 |     √   |    √    |    √    |    X    |     X   |    X    |
-| hardware 4 |     √   |    √    |    √    |    X    |     X   |    X    |
-| hardware 5 |     √   |    √    |    √    |    X    |     X   |    X    |
-| hardware 6 |     √   |    √    |    √    |    X    |     X   |    X    |
-| hardware 7 |     √   |    √    |    √    |    X    |     X   |    X    |
-| hardware 8 |     √   |    √    |    √    |    X    |     X   |    X    |
-| hardware 9 |     √   |    √    |    √    |    X    |     X   |    X    |
+| 低阶控制 | platform 1 | platform 2 | platform 3 | platform 4 | platform 5 | platform 6 |
+| ------- | ------- | ------- | ------- | ------- | ------- | ------- |
+| main | [328P](https://github.com/OS-Q/P111) | [STC8G](https://github.com/OS-Q/P121) | [STM8S](https://github.com/OS-Q/P131) | [CH55P](https://github.com/OS-Q/P141) | [LGT](https://github.com/OS-Q/P151) | [STM8L](https://github.com/OS-Q/P161) |
+| tiny | [TINY](https://github.com/OS-Q/P112) | [STC8H](https://github.com/OS-Q/P122) | [STM8S](https://github.com/OS-Q/P132) | [CH55L](https://github.com/OS-Q/P142) | [LGT](https://github.com/OS-Q/P152) | [STM8L](https://github.com/OS-Q/P162) |
+| huge | [2560](https://github.com/OS-Q/P113) | [STC12](https://github.com/OS-Q/P123) | [STM8S](https://github.com/OS-Q/P133) | [CH55Q](https://github.com/OS-Q/P143) | [LGT](https://github.com/OS-Q/P153) | [STM8L](https://github.com/OS-Q/P163) |
 
-| Class 2 | platform 1 | platform 2 | platform 3 | platform 4 | platform 5 | platform 6 | platform 7 | platform 8 | platform 9 |
-| ------- | ------- | ------- | ------- | ------- | ------- | ------- | ------- | ------- | ------- |
-| hardware 1 | [STM32](https://github.com/OS-Q/P211) | [GD32V](https://github.com/OS-Q/P221) | [PIC32](https://github.com/OS-Q/P231) |
-| hardware 2 |     √   |    √    |    √    |    X    |    X    |    X    |    X    |    X    |    X    |
-| hardware 3 |     √   |    √    |    √    |    X    |    X    |    X    |    X    |    X    |    X    |
-| hardware 4 |     √   |    √    |    √    |    X    |    X    |    X    |    X    |    X    |    X    |
-| hardware 5 |     √   |    √    |    √    |    X    |    X    |    X    |    X    |    X    |    X    |
-| hardware 6 |     √   |    √    |    √    |    X    |    X    |    X    |    X    |    X    |    X    |
-| hardware 7 |     √   |    √    |    √    |    X    |    X    |    X    |    X    |    X    |    X    |
-| hardware 8 |     √   |    √    |    √    |    X    |    X    |    X    |    X    |    X    |    X    |
-| hardware 9 |     √   |    √    |    √    |    X    |    X    |    X    |    X    |    X    |    X    |
 
-| Class 3 | platform 1 | platform 2 | platform 3 | platform 4 | platform 5 | platform 6 | platform 7 | platform 8 | platform 9 |
-| ------- | ------- | ------- | ------- | ------- | ------- | ------- | ------- | ------- | ------- |
-| hardware 1 | [RP2040](https://github.com/OS-Q/P311) | X | [STM32](https://github.com/OS-Q/P331) |    X    |    X    |    X    |    X    |    X    |    X    |
-| hardware 2 | [Pico](https://github.com/OS-Q/P312)  |    √    |    √    |    X    |     X   |    X    |
-| hardware 3 |     √   |    √    |    √    |    X    |     X   |    X    |
-| hardware 4 |     √   |    √    |    √    |    X    |     X   |    X    |
-| hardware 5 |     √   |    √    |    √    |    X    |     X   |    X    |
-| hardware 6 |     √   |    √    |    √    |    X    |     X   |    X    |
-| hardware 7 |     √   |    √    |    √    |    X    |     X   |    X    |
-| hardware 8 |     √   |    √    |    √    |    X    |     X   |    X    |
-| hardware 9 |     √   |    √    |    √    |    X    |     X   |    X    |
+| 通用控制 | platform 1 | platform 2 | platform 3 | platform 4 | platform 5 | platform 6 |
+| ------- | ------- | ------- | ------- | ------- | ------- | ------- |
+| main | [STM32](https://github.com/OS-Q/P211) | [GD32V](https://github.com/OS-Q/P221) | [PIC32](https://github.com/OS-Q/P231) | [GD32F](https://github.com/OS-Q/P211) | [SWM32](https://github.com/OS-Q/P221) | [CH32F](https://github.com/OS-Q/P231) |
+| tiny |     √   |    √    |    √    |    X    |    X    |    X    |    X    |    X    |    X    |
+| huge |     √   |    √    |    √    |    X    |    X    |    X    |    X    |    X    |    X    |
 
-| Class 4 | platform 1 | platform 2 | platform 3 | platform 4 | platform 5 | platform 6 | platform 7 | platform 8 | platform 9 |
-| ------- | ------- | ------- | ------- | ------- | ------- | ------- | ------- | ------- | ------- |
-| hardware 1 | [nRF52](https://github.com/OS-Q/P411) | [ASR6501](https://github.com/OS-Q/P421) | [CC1350](https://github.com/OS-Q/P431) |    X    |    X    |    X    |    X    |    X    |    X    |
-| hardware 2 |     √   |    √    |    √    |    X    |     X   |    X    |
-| hardware 3 |     √   |    √    |    √    |    X    |     X   |    X    |
-| hardware 4 |     √   |    √    |    √    |    X    |     X   |    X    |
-| hardware 5 |     √   |    √    |    √    |    X    |     X   |    X    |
-| hardware 6 |     √   |    √    |    √    |    X    |     X   |    X    |
-| hardware 7 |     √   |    √    |    √    |    X    |     X   |    X    |
-| hardware 8 |     √   |    √    |    √    |    X    |     X   |    X    |
-| hardware 9 |     √   |    √    |    √    |    X    |     X   |    X    |
+| 高阶控制 | platform 1 | platform 2 | platform 3 | platform 4 | platform 5 | platform 6 |
+| ------- | ------- | ------- | ------- | ------- | ------- | ------- |
+| main | [RP2040](https://github.com/OS-Q/P311) | X | [STM32](https://github.com/OS-Q/P331) |    X    |    X    |    X    |
+| tiny | [Pico](https://github.com/OS-Q/P312)  |    √    |    √    |    X    |     X   |    X    |
+| huge |     √   |    √    |    √    |    X    |     X   |    X    |
 
-| Class 5 | platform 1 | platform 2 | platform 3 | platform 4 | platform 5 | platform 6 | platform 7 | platform 8 | platform 9 |
-| ------- | ------- | ------- | ------- | ------- | ------- | ------- | ------- | ------- | ------- |
-| hardware 1 | [ESP32](https://github.com/OS-Q/P511) |    X    |    X    |    X    |    X    |    X    |    X    |
-| hardware 2 |    √    |    √    |    √    |    X    |     X   |    X    |
-| hardware 3 |    √    |    √    |    √    |    X    |     X   |    X    |
-| hardware 4 |    √    |    √    |    √    |    X    |     X   |    X    |
-| hardware 5 |    √    |    √    |    √    |    X    |     X   |    X    |
-| hardware 6 |    √    |    √    |    √    |    X    |     X   |    X    |
-| hardware 7 |    √    |    √    |    √    |    X    |     X   |    X    |
-| hardware 8 |    √    |    √    |    √    |    X    |     X   |    X    |
-| hardware 9 |    √    |    √    |    √    |    X    |     X   |    X    |
+| 无线私域 | platform 1 | platform 2 | platform 3 | platform 4 | platform 5 | platform 6 |
+| ------- | ------- | ------- | ------- | ------- | ------- | ------- |
+| main | [nRF52](https://github.com/OS-Q/P411) | [ASR6501](https://github.com/OS-Q/P421) | [CC1350](https://github.com/OS-Q/P431) |    X    |    X    |    X    |
+| tiny |     √   |    √    |    √    |    X    |     X   |    X    |
+| huge |     √   |    √    |    √    |    X    |     X   |    X    |
 
-| Class 6 | platform 1 | platform 2 | platform 3 | platform 4 | platform 5 | platform 6 | platform 7 | platform 8 | platform 9 |
-| ------- | ------- | ------- | ------- | ------- | ------- | ------- | ------- | ------- | ------- |
-| hardware 1 |    √    |    √    |    √    |    X    |     X   |    X    |    X    |     X   |    X    |
-| hardware 2 |    √    |    √    |    √    |    X    |     X   |    X    |
-| hardware 3 |    √    |    √    |    √    |    X    |     X   |    X    |
-| hardware 4 |    √    |    √    |    √    |    X    |     X   |    X    |
-| hardware 5 |    √    |    √    |    √    |    X    |     X   |    X    |
-| hardware 6 |    √    |    √    |    √    |    X    |     X   |    X    |
-| hardware 7 |    √    |    √    |    √    |    X    |     X   |    X    |
-| hardware 8 |    √    |    √    |    √    |    X    |     X   |    X    |
-| hardware 9 |    √    |    √    |    √    |    X    |     X   |    X    |
+| 无线局域 | platform 1 | platform 2 | platform 3 | platform 4 | platform 5 | platform 6 |
+| ------- | ------- | ------- | ------- | ------- | ------- | ------- |
+| main | [ESP32](https://github.com/OS-Q/P511) |    X    |    X    |    X    |
+| tiny |    √    |    √    |    √    |    X    |     X   |    X    |
+| huge |    √    |    √    |    √    |    X    |     X   |    X    |
+
+| 无线广域 | platform 1 | platform 2 | platform 3 | platform 4 | platform 5 | platform 6 |
+| ------- | ------- | ------- | ------- | ------- | ------- | ------- |
+| main |    √    |    √    |    √    |    X    |     X   |    X    |
+| tiny |    √    |    √    |    √    |    X    |     X   |    X    |
+| huge |    √    |    √    |    √    |    X    |     X   |    X    |
 
