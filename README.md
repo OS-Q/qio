@@ -1,13 +1,8 @@
-﻿### [协同开发](https://github.com/OS-Q)
-
-* [Q1研发现场](https://github.com/OS-Q/Q1)
-    * [M01硬件设计](https://github.com/OS-Q/M01)
-    * [M02原型验证](https://github.com/OS-Q/M02)
-    * [M03协同开发](https://github.com/OS-Q/M03)
+﻿### [协同开发](https://github.com/OS-Q/QIO)
 
 [![sites](http://182.61.61.133/link/resources/OSQ.png)](http://www.OS-Q.com)
 
-[M03协同开发](https://github.com/OS-Q/M03) 工程源自 [platformio](https://github.com/platformio/platformio-core)，通过改变组织方式，实现类似容器的嵌入式环境，便于工程的拆解组装标准化实现。
+[QIO协同开发](https://github.com/OS-Q/QIO) 工程源自 [platformio](https://github.com/platformio/platformio-core)，通过改变组织方式，实现类似容器的嵌入式环境，便于工程的拆解组装标准化实现。
 
 以目标为导向的标准模板组织方式：platform/hardware/framework，通过底层融合的设计思路将更多工具集成进来。
 
@@ -15,7 +10,7 @@
 
 3-6-9种设计规格便于实现一些板级功能定义，每个平台下具有数量不定的模板工程，通过获取模板可以直接获得起点工程，类arduino编程风格和相关接口定义。
 
-### [QIO拓扑](https://github.com/M03)
+### [QIO拓扑](https://github.com/QIO)
 
 | 低阶控制 | platform 1 | platform 2 | platform 3 | platform 4 | platform 5 | platform 6 |
 | ------- | ------- | ------- | ------- | ------- | ------- | ------- |

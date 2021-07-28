@@ -5,9 +5,6 @@ on:
     tags:
       - "v[0-9]+.[0-9]+.[0-9]+*"
 
-env:
-  UPLOAD_BUILD: false
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -15,7 +12,7 @@ jobs:
       fail-fast: true
       matrix:
         platforms:
-          - "51"
+          - "511"
           # - "52"
           # - "21"
         templates:
@@ -47,11 +44,11 @@ jobs:
           path: T${{ matrix.platforms }}${{ matrix.templates }}
 
       - name: Install platforms
-        if: github.repository == 'OS-Q/M03'
+        if: github.repository == 'OS-Q/QIO'
         working-directory: P${{ matrix.platforms }}
         run: |
           python -m pip install --upgrade pip
-          pip install -U https://github.com/OS-Q/M03/archive/master.zip
+          pip install -U https://github.com/OS-Q/QIO/archive/master.zip
           qio platform install file://.
 
       - name: Build
@@ -79,33 +76,6 @@ jobs:
           git tag -d ${GITHUB_REF/refs\/tags\//}
           git push origin :refs/tags/${GITHUB_REF/refs\/tags\//}
 
-  build_fail:
-    needs:
-      - build
-    if: failure() && startsWith(github.ref, 'refs/tags/')
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          submodules: "recursive"
-
-      - name: notification
-        uses: Qful/mqtt-action@master
-        with:
-          protocol: mqtt
-          host: ${{secrets.MQTT_SERVER}}
-          port: 1883
-          username: ${{secrets.MQTT_USERNAME}}
-          password: ${{secrets.MQTT_PASSWORD}}
-          topic: ${{github.repository}}/${{github.workflow}}/${GITHUB_REF/refs\/tags\//}
-          message: "build fail"
-
-      - name: Delet tag
-        run: |
-          git fetch
-          git tag -d ${GITHUB_REF/refs\/tags\//}
-          git push origin :refs/tags/${GITHUB_REF/refs\/tags\//}
 
   release:
     needs:
@@ -171,22 +141,6 @@ jobs:
           ossutil cp ${{ env.FIRMWARE }}/qio.zip ${{ secrets.OSS_S_BUCKET }} -rf
           echo "::set-output name=status::success"
 
-      - name: Send Mail
-        if: steps.OSS.outputs.status == 'success' && !cancelled()
-        uses: Qful/mail-action@master
-        with:
-          server_address:  smtp.gmail.com
-          server_port: 465
-          username: ${{secrets.MAIL_USERNAME}}
-          password: ${{secrets.MAIL_PASSWORD}}
-          subject: QIO released
-          to: ${{secrets.MAIL_TO}}
-          from: Qitas
-          cc: ${{github.event.pusher.email}}
-          content_type: text/html
-          convert_markdown: true
-          attachments: log.txt
-          body: file://./qio/mail.md
 
   release_fail:
     needs:
@@ -259,7 +213,7 @@ jobs:
         working-directory: P${{ matrix.platforms }}
         run: |
           python -m pip install --upgrade pip
-          pip install -U https://github.com/OS-Q/M03/releases/latest/download/qio.zip
+          pip install -U https://github.com/OS-Q/QIO/releases/latest/download/qio.zip
           qio platform install file://.
 
       - name: Build
