@@ -12,9 +12,11 @@
 * 在资源递进中前级会限定后级的范围
 
 
-| template | Q-1 | Q-2 | Q-3 | Q-4 |
+| templates | [applications](https://github.com/OS-Q/applications) | [libraries](https://github.com/OS-Q/libraries)  | [boards](https://github.com/OS-Q/boards) | [chips](https://github.com/OS-Q/chips) |
 | ----- | ---------- | ---------- | ---------- | ---------- |
-| [modbus](https://github.com/OS-Q/template-modbus) | 2 | 2 | 2 | 1 |
+| [Modbus](https://github.com/OS-Q/template-modbus) | 1 | 1 | 1 | 1 |
+| [MQTT](https://github.com/OS-Q/template-mqtt) | 0 | 0 | 0 | 0 |
+| [HMI](https://github.com/OS-Q/template-hmi) | 0 | 0 | 0 | 0 |
 
 
-项目目前仍在摸索阶段，欢迎加入
+
