@@ -1,3 +1,6 @@
 [submodule "docs"]
 	path = docs
 	url = https://github.com/OS-Q/docs
+[submodule "templates/modbus"]
+	path = templates/modbus
+	url = https://github.com/OS-Q/template-modbus

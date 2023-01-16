@@ -1113,7 +1113,7 @@ def update_project_examples():
                 )
             )
         url = campaign_url(
-            "https://doc.os-q.com/qio/latest/frameworks/%s.html#examples"
+            "https://doc.os-q.com/qio/frameworks/%s.html#examples"
             % framework["name"],
             source="github",
             medium="examples",
