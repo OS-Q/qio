@@ -1,29 +1,34 @@
-﻿数据统计
+﻿资源基线
 -----------------
 
 .. list-table::
     :header-rows:  1
 
     * - :ref:`templates`
-      - `applications <https://github.com/OS-Q/applications>`_
-      - `libraries <https://github.com/OS-Q/libraries>`_
-      - `boards <https://github.com/OS-Q/boards>`_
-      - `chips <https://github.com/OS-Q/chips>`_
+      - Fmax
+      - SRAM
+      - Flash
+      - GPIO
     * - :ref:`modbus`
-      - 1
-      - 1
-      - 1
-      - 1
+      - 16 MHz
+      - 20 KB
+      - 60 KB
+      - 6
+    * - :ref:`modbus_rtu`
+      - 8 MHz
+      - 1 KB
+      - 8 KB
+      - 4
     * - :ref:`mqtt`
-      - 0
-      - 0
-      - 0
-      - 0
+      - 32 MHz
+      - 20 KB
+      - 60 KB
+      - 2
     * - :ref:`hmi`
-      - 0
-      - 0
-      - 0
-      - 0
+      - 60 MHz
+      - 10 KB
+      - 40 KB
+      - 12
 
 
 
