@@ -10,3 +10,6 @@
 [submodule "templates/hmi"]
 	path = templates/hmi
 	url = https://github.com/OS-Q/template-hmi
+[submodule "templates/rtu"]
+	path = templates/rtu
+	url = https://github.com/OS-Q/template-rtu

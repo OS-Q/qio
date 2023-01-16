@@ -17,6 +17,6 @@
 | [Modbus](https://github.com/OS-Q/template-modbus) | 1 | 1 | 1 | 1 |
 | [MQTT](https://github.com/OS-Q/template-mqtt) | 0 | 0 | 0 | 0 |
 | [HMI](https://github.com/OS-Q/template-hmi) | 0 | 0 | 0 | 0 |
-
+| [RTU](https://github.com/OS-Q/template-rtu) | 0 | 0 | 0 | 0 |
 
 
