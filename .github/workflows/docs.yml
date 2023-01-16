@@ -69,9 +69,9 @@ jobs:
         id: get-destination-dir
         run: |
           if [[ ${{ env.RELEASE_BUILD }} == true ]]; then
-            echo "::set-output name=dst_dir::stable"
+            echo "::set-output name=dst_dir::/stable"
           else
-            echo "::set-output name=dst_dir::latest"
+            echo "::set-output name=dst_dir::/"
           fi
 
       - name: Checkout latest Docs
@@ -85,9 +85,9 @@ jobs:
       - name: Synchronize Docs
         run: |
           rm -rf ${{ env.DOCS_DIR }}/.git
-          rm -rf ${{ env.DOCS_DIR }}/qio/${{ steps.get-destination-dir.outputs.dst_dir }}
-          mkdir -p ${{ env.DOCS_DIR }}/qio/${{ steps.get-destination-dir.outputs.dst_dir }}
-          cp -rf ${{ env.LATEST_DOCS_DIR }}/html/* ${{ env.DOCS_DIR }}/qio/${{ steps.get-destination-dir.outputs.dst_dir }}
+          rm -rf ${{ env.DOCS_DIR }}/qio${{ steps.get-destination-dir.outputs.dst_dir }}
+          mkdir -p ${{ env.DOCS_DIR }}/qio${{ steps.get-destination-dir.outputs.dst_dir }}
+          cp -rf ${{ env.LATEST_DOCS_DIR }}/html/* ${{ env.DOCS_DIR }}/qio${{ steps.get-destination-dir.outputs.dst_dir }}
           if [[ ${{ env.RELEASE_BUILD }} == false ]]; then
             rm -rf ${{ env.DOCS_DIR }}/qio/page
             mkdir -p ${{ env.DOCS_DIR }}/qio/page
