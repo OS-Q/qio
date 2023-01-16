@@ -14,9 +14,6 @@
 
 | templates | [applications](https://github.com/OS-Q/applications) | [libraries](https://github.com/OS-Q/libraries)  | [boards](https://github.com/OS-Q/boards) | [chips](https://github.com/OS-Q/chips) |
 | ----- | ---------- | ---------- | ---------- | ---------- |
-| [Modbus](https://github.com/OS-Q/template-modbus) | 1 | 1 | 1 | 1 |
-| [MQTT](https://github.com/OS-Q/template-mqtt) | 0 | 0 | 0 | 0 |
-| [HMI](https://github.com/OS-Q/template-hmi) | 0 | 0 | 0 | 0 |
-| [RTU](https://github.com/OS-Q/template-rtu) | 0 | 0 | 0 | 0 |
-
-
+| [Modbus](https://doc.os-q.com/qio/modbus) | 1 | 1 | 1 | 1 |
+| [MQTT](https://doc.os-q.com/qio/mqtt) | 0 | 0 | 0 | 0 |
+| [HMI](https://doc.os-q.com/qio/hmi) | 0 | 0 | 0 | 0 |
