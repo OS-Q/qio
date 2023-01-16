@@ -4,3 +4,9 @@
 [submodule "templates/modbus"]
 	path = templates/modbus
 	url = https://github.com/OS-Q/template-modbus
+[submodule "templates/mqtt"]
+	path = templates/mqtt
+	url = https://github.com/OS-Q/template-mqtt
+[submodule "templates/hmi"]
+	path = templates/hmi
+	url = https://github.com/OS-Q/template-hmi
