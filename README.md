@@ -1,4 +1,4 @@
-﻿# [qio](https://doc.os-q.com)
+﻿# [qio](https://www.os-q.com/qio)
 
 [![Build Status](https://github.com/OS-Q/qio/workflows/docs/badge.svg)](https://github.com/OS-Q/docs/tree/qio)
 

@@ -63,7 +63,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     env:
-      DOCS_REPO: OS-Q/doc
+      DOCS_REPO: OS-Q/web
       DOCS_DIR: docs
       LATEST_DOCS_DIR: latest
       RELEASE_BUILD: ${{ startsWith(github.ref, 'refs/tags/v') }}
@@ -89,7 +89,7 @@ jobs:
         with:
           repository: ${{ env.DOCS_REPO }}
           path: ${{ env.DOCS_DIR }}
-          ref: gh-pages
+          ref: master
 
       - name: Synchronize Docs
         run: |
