@@ -1,80 +1,88 @@
 name: docs
 
 on:
+  schedule:
+    - cron: '30 6 * * *'
   push:
     branches:
       - main
-  schedule:
-    - cron: "30 3 * * *"
+    paths:
+      - 'docs/**'
+      - '**/docs.yml'
 
+env:
+  DOCS_FOR: qio
 
 jobs:
   build:
-    name: Build Docs
+    name: Build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Check out
+        uses: actions/checkout@v3
         with:
-          token: ${{ secrets.OSQ_REPO_TOKEN }}
           submodules: "recursive"
+          fetch-depth: 1
 
-      - name: Set up Python
+      - name: Checkout Docs
+        uses: actions/checkout@v3
+        with:
+          repository: OS-Q/docs
+          token: ${{ secrets.OSQ_REPO_TOKEN }}
+          ref: ${{ env.DOCS_FOR }}
+          fetch-depth: 1
+          path: www
+
+      - name: Setup Python
         uses: actions/setup-python@v4
         with:
           python-version: 3.9
 
       - name: Install dependencies
+        working-directory: www
         run: |
           python -m pip install --upgrade pip
           pip install tox
 
       - name: Build docs
+        working-directory: www
         run: |
           tox -e docs
 
       - name: Preserve Docs
-        if: ${{ github.event_name == 'push' }}
         run: |
-          tar -czvf docs.tar.gz -C docs/_build html rtdpage
+          tar -czvf docs.tar.gz -C www/_build html rtdpage
 
       - name: Save artifact
-        if: ${{ github.event_name == 'push' }}
         uses: actions/upload-artifact@v3
         with:
           name: docs
-          path: ./docs.tar.gz
+          path: docs.tar.gz
 
   deploy:
-    name: Deploy Docs
+    name: Deploy
     needs: build
     runs-on: ubuntu-latest
     env:
       DOCS_REPO: OS-Q/doc
       DOCS_DIR: docs
-      LATEST_DOCS_DIR: latest-docs
+      LATEST_DOCS_DIR: latest
       RELEASE_BUILD: ${{ startsWith(github.ref, 'refs/tags/v') }}
-    if: ${{ github.event_name == 'push' }}
     steps:
       - name: Download artifact
         uses: actions/download-artifact@v3
         with:
           name: docs
+
       - name: Unpack artifact
         run: |
           mkdir ./${{ env.LATEST_DOCS_DIR }}
           tar -xzf ./docs.tar.gz -C ./${{ env.LATEST_DOCS_DIR }}
+
       - name: Delete Artifact
-        uses: geekyeggo/delete-artifact@v1
+        uses: geekyeggo/delete-artifact@v2
         with:
           name: docs
-      - name: Select Docs type
-        id: get-destination-dir
-        run: |
-          if [[ ${{ env.RELEASE_BUILD }} == true ]]; then
-            echo "::set-output name=dst_dir::/stable"
-          else
-            echo "::set-output name=dst_dir::/"
-          fi
 
       - name: Checkout latest Docs
         continue-on-error: true
@@ -87,13 +95,13 @@ jobs:
       - name: Synchronize Docs
         run: |
           rm -rf ${{ env.DOCS_DIR }}/.git
-          rm -rf ${{ env.DOCS_DIR }}/qio${{ steps.get-destination-dir.outputs.dst_dir }}
-          mkdir -p ${{ env.DOCS_DIR }}/qio${{ steps.get-destination-dir.outputs.dst_dir }}
-          cp -rf ${{ env.LATEST_DOCS_DIR }}/html/* ${{ env.DOCS_DIR }}/qio${{ steps.get-destination-dir.outputs.dst_dir }}
+          rm -rf ${{ env.DOCS_DIR }}/${{ env.DOCS_FOR }}/
+          mkdir -p ${{ env.DOCS_DIR }}/${{ env.DOCS_FOR }}/
+          cp -rf ${{ env.LATEST_DOCS_DIR }}/html/* ${{ env.DOCS_DIR }}/${{ env.DOCS_FOR }}/
           if [[ ${{ env.RELEASE_BUILD }} == false ]]; then
-            rm -rf ${{ env.DOCS_DIR }}/qio/page
-            mkdir -p ${{ env.DOCS_DIR }}/qio/page
-            cp -rf ${{ env.LATEST_DOCS_DIR }}/rtdpage/* ${{ env.DOCS_DIR }}/qio/page
+            rm -rf ${{ env.DOCS_DIR }}/${{ env.DOCS_FOR }}/page
+            mkdir -p ${{ env.DOCS_DIR }}/${{ env.DOCS_FOR }}/page
+            cp -rf ${{ env.LATEST_DOCS_DIR }}/rtdpage/* ${{ env.DOCS_DIR }}/${{ env.DOCS_FOR }}/page
           fi
 
       - name: Validate Docs
@@ -102,6 +110,7 @@ jobs:
             echo "Docs folder is empty. Aborting!"
             exit 1
           fi
+
       - name: Deploy to Github Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
